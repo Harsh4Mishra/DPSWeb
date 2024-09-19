@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+	<siteMapNode url="" title="DPS"  description="DPS Page">
+		<siteMapNode url="MainApplication/Profile.aspx" title="Profile"  description="User Profile Page" />
+		<siteMapNode url="MainApplication/ResetPassword.aspx" title="Reset Password"  description="Reset Password Page" />
+		<siteMapNode url="MainApplication/IndexPage.aspx" title="DashBoard"  description="Index Page" />
+		<siteMapNode url="" title="Master"  description="BaMasters Page">
+			<siteMapNode url="SuperAdmin/ClientMaster.aspx" title="Client"  description="Client Page">
+				<siteMapNode url="SuperAdmin/AddClient.aspx" title="Add Client"  description="Add Client Page" />
+				<siteMapNode url="SuperAdmin/EditClient.aspx" title="Modify Client"  description="Modify Client Page" />
+			</siteMapNode>
+		</siteMapNode>
+	</siteMapNode>
+</siteMap>

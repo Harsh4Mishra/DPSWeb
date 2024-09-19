@@ -1,0 +1,58 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="OutlineMaster.master.cs" Inherits="DPS.Common.OutlineMaster" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>DPS</title>
+    <!-- plugins:css -->
+
+    <link rel="stylesheet" href="../StyleSheet/vendors/feather/feather.css">
+    <link rel="stylesheet" href="../StyleSheet/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../StyleSheet/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link href="../StyleSheet/css/vertical-layout-light/style.css" rel="stylesheet" />
+    <!-- endinject -->
+    <link rel="shortcut icon" type="image/x-icon" href="../Images/Icon/icon.png">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container-scroller">
+            <div class="container-fluid page-body-wrapper full-page-wrapper">
+                <div class="aiut-wrapper d-flex align-items-center auth px-0">
+                    <div class="row w-100 mx-0">
+                        <div class="col-lg-4 mx-auto">
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </div>
+                    </div>
+                </div>
+                <!-- content-wrapper ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+        </div>
+        <!-- container-scroller -->
+        <!-- plugins:js -->
+        <script src="../StyleSheet/vendors/js/vendor.bundle.base.js"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page -->
+        <!-- End plugin js for this page -->
+        <!-- inject:js -->
+        <script src="../StyleSheet/js/off-canvas.js"></script>
+        <script src="../StyleSheet/js/hoverable-collapse.js"></script>
+        <script src="../StyleSheet/js/template.js"></script>
+        <script src="../StyleSheet/js/settings.js"></script>
+        <script src="../StyleSheet/js/todolist.js"></script>
+        <!-- endinject -->
+        </div>
+    </form>
+</body>
+</html>
