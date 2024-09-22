@@ -1352,8 +1352,14 @@
     <Content Include="StyleSheet\vendors\x-editable\bootstrap-editable.css" />
     <Content Include="StyleSheet\vendors\x-editable\bootstrap-editable.min.js" />
     <Content Include="SuperAdmin\AddClient.aspx" />
+    <Content Include="SuperAdmin\AddPaymentConfiguration.aspx" />
+    <Content Include="SuperAdmin\AddSchoolDatabase.aspx" />
     <Content Include="SuperAdmin\ClientMaster.aspx" />
     <Content Include="SuperAdmin\EditClient.aspx" />
+    <Content Include="SuperAdmin\EditPaymentConfiguration.aspx" />
+    <Content Include="SuperAdmin\EditSchoolDatabase.aspx" />
+    <Content Include="SuperAdmin\PaymentConfigurationMaster.aspx" />
+    <Content Include="SuperAdmin\SchoolDatabaseMaster.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1403,6 +1409,20 @@
     <Compile Include="SuperAdmin\AddClient.aspx.designer.cs">
       <DependentUpon>AddClient.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SuperAdmin\AddPaymentConfiguration.aspx.cs">
+      <DependentUpon>AddPaymentConfiguration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SuperAdmin\AddPaymentConfiguration.aspx.designer.cs">
+      <DependentUpon>AddPaymentConfiguration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SuperAdmin\AddSchoolDatabase.aspx.cs">
+      <DependentUpon>AddSchoolDatabase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SuperAdmin\AddSchoolDatabase.aspx.designer.cs">
+      <DependentUpon>AddSchoolDatabase.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SuperAdmin\ClientMaster.aspx.cs">
       <DependentUpon>ClientMaster.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1417,9 +1437,42 @@
     <Compile Include="SuperAdmin\EditClient.aspx.designer.cs">
       <DependentUpon>EditClient.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SuperAdmin\EditPaymentConfiguration.aspx.cs">
+      <DependentUpon>EditPaymentConfiguration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SuperAdmin\EditPaymentConfiguration.aspx.designer.cs">
+      <DependentUpon>EditPaymentConfiguration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SuperAdmin\EditSchoolDatabase.aspx.cs">
+      <DependentUpon>EditSchoolDatabase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SuperAdmin\EditSchoolDatabase.aspx.designer.cs">
+      <DependentUpon>EditSchoolDatabase.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SuperAdmin\PaymentConfigurationClassFIle\SchoolPaymentConfiguration.cs" />
+    <Compile Include="SuperAdmin\PaymentConfigurationClassFIle\SchoolPaymentConfigurationBLL.cs" />
+    <Compile Include="SuperAdmin\PaymentConfigurationClassFIle\SchoolPaymentConfigurationDAL.cs" />
+    <Compile Include="SuperAdmin\PaymentConfigurationMaster.aspx.cs">
+      <DependentUpon>PaymentConfigurationMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SuperAdmin\PaymentConfigurationMaster.aspx.designer.cs">
+      <DependentUpon>PaymentConfigurationMaster.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SuperAdmin\SchoolClassFile\SchoolBLL.cs" />
     <Compile Include="SuperAdmin\SchoolClassFile\SchoolDAL.cs" />
     <Compile Include="SuperAdmin\SchoolClassFile\SchoolMaster.cs" />
+    <Compile Include="SuperAdmin\SchoolDatabaseClassFile\SchoolDatabaseDAL.cs" />
+    <Compile Include="SuperAdmin\SchoolDatabaseClassFile\SchoolDatabaseBLL.cs" />
+    <Compile Include="SuperAdmin\SchoolDatabaseMaster.aspx.cs">
+      <DependentUpon>SchoolDatabaseMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SuperAdmin\SchoolDatabaseMaster.aspx.designer.cs">
+      <DependentUpon>SchoolDatabaseMaster.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SuperAdmin\SuperAdminMaster.Master.cs">
       <DependentUpon>SuperAdminMaster.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

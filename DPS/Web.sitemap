@@ -5,9 +5,17 @@
 		<siteMapNode url="MainApplication/ResetPassword.aspx" title="Reset Password"  description="Reset Password Page" />
 		<siteMapNode url="MainApplication/IndexPage.aspx" title="DashBoard"  description="Index Page" />
 		<siteMapNode url="" title="Master"  description="BaMasters Page">
-			<siteMapNode url="SuperAdmin/ClientMaster.aspx" title="Client"  description="Client Page">
-				<siteMapNode url="SuperAdmin/AddClient.aspx" title="Add Client"  description="Add Client Page" />
-				<siteMapNode url="SuperAdmin/EditClient.aspx" title="Modify Client"  description="Modify Client Page" />
+			<siteMapNode url="SuperAdmin/ClientMaster.aspx" title="School"  description="Client Page">
+				<siteMapNode url="SuperAdmin/AddClient.aspx" title="Add School"  description="Add Client Page" />
+				<siteMapNode url="SuperAdmin/EditClient.aspx" title="Modify School"  description="Modify Client Page" />
+			</siteMapNode>
+			<siteMapNode url="SuperAdmin/SchoolDatabaseMaster.aspx" title="School Database"  description="Client Page">
+				<siteMapNode url="SuperAdmin/AddSchoolDatabase.aspx" title="Add School Database"  description="Add Client Page" />
+				<siteMapNode url="SuperAdmin/EditSchoolDatabase.aspx" title="Modify School Database"  description="Modify Client Page" />
+			</siteMapNode>
+			<siteMapNode url="SuperAdmin/PaymentConfigurationMaster.aspx" title="School Payment Configuration"  description="Client Page">
+				<siteMapNode url="SuperAdmin/AddPaymentConfiguration.aspx" title="Add Payment Configuration"  description="Add Client Page" />
+				<siteMapNode url="SuperAdmin/EditPaymentConfiguration.aspx" title="Modify Payment Configuration"  description="Modify Client Page" />
 			</siteMapNode>
 		</siteMapNode>
 	</siteMapNode>

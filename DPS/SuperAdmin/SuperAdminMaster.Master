@@ -98,8 +98,8 @@
                         <div class="collapse" id="ui-basic">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"><a class="nav-link" href="ClientMaster.aspx">Client</a></li>
-                                <li class="nav-item"><a class="nav-link" href="DatabaseMaster.aspx">Database</a></li>
-                                <li class="nav-item"><a class="nav-link" href="PaymentMaster.aspx">Payment</a></li>
+                                <li class="nav-item"><a class="nav-link" href="SchoolDatabaseMaster.aspx">Database</a></li>
+                                <li class="nav-item"><a class="nav-link" href="PaymentConfigurationMaster.aspx">Payment</a></li>
                             </ul>
                         </div>
                     </li>
