@@ -2,9 +2,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <!-- Include DHTMLX CSS -->
-<link rel="stylesheet" href="https://cdn.dhtmlx.com/suite/edge/suite.css">
-<!-- Include DHTMLX JS -->
-<script src="https://cdn.dhtmlx.com/suite/edge/suite.js"></script>
+    <link rel="stylesheet" href="https://cdn.dhtmlx.com/suite/edge/suite.css">
+    <!-- Include DHTMLX JS -->
+    <script src="https://cdn.dhtmlx.com/suite/edge/suite.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container-fluid">
@@ -28,7 +28,19 @@
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Provide School Name" ControlToValidate="txtName" ForeColor="Red" ValidationGroup="Employee" ToolTip="Provide School Name"></asp:RequiredFieldValidator>
                     </div>
                 </div>
-
+                <div class="col-md-4">
+                    <label>Academic Year</label><span style="color: red">*</span><br />
+                    <div class="form-group">
+                        <asp:DropDownList ID="ddlAcademicYear" runat="server" ValidationGroup="Employee" CssClass="form-control"></asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Please select state." ControlToValidate="ddlState" ForeColor="Red" ValidationGroup="Employee" InitialValue="0" ToolTip="Please select a state."></asp:RequiredFieldValidator>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label>Is In Used</label><br />
+                    <div class="form-group">
+                        <asp:CheckBox ID="chkisInUsed" runat="server" />
+                    </div>
+                </div>
                 <div class="col-md-4">
                     <label>Active</label><br />
                     <div class="form-group">

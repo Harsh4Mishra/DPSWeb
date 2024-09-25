@@ -106,6 +106,42 @@ namespace DPS.SuperAdmin.SchoolClassFile
             }
             return dt;
         }
+        public DataTable GetSchoolDetailsByEmail(string emailid)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("GetSchoolDetailsByEmail", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@EmailID", emailid);
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+            return dt;
+        }
+
+        public int UpdatePasswordAttemptsByEmail(string emailId, int passwordAttempts, string updatedBy)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("UpdatePasswordAttemptsByEmail", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@EmailID", emailId);
+                    command.Parameters.AddWithValue("@PasswordAttempts", passwordAttempts);
+                    command.Parameters.AddWithValue("@UpdatedBy", updatedBy);
+
+                    connection.Open();
+                    return command.ExecuteNonQuery();
+                }
+            }
+        }
 
         // Method to add a new school and return the number of rows affected
         public int AddSchool(SchoolMaster school)

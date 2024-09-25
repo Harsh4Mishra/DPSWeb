@@ -21,6 +21,34 @@ namespace DPS.SuperAdmin
                 string timestamp = DateTime.Now.ToString("ddMMyyyyHHmmss");
                 txtName.Text = timestamp;
                 BindSchools();
+                GenerateAcademicYears();
+            }
+        }
+        public void GenerateAcademicYears()
+        {
+            List<string> academicYears = new List<string>();
+
+            // Get the current year
+            int currentYear = DateTime.Now.Year;
+
+            // Determine the starting year of the current academic year
+            int academicYearStart = (DateTime.Now.Month >= 8) ? currentYear : currentYear - 1;
+
+            // Add the current academic year
+            academicYears.Add($"{academicYearStart}-{academicYearStart + 1}");
+
+            // Generate the next 5 academic years
+            for (int i = 1; i <= 5; i++)
+            {
+                academicYears.Add($"{academicYearStart + i}-{academicYearStart + i + 1}");
+            }
+
+            ddlAcademicYear.Items.Insert(0, new ListItem("Select Academic Year", "0"));
+            int count = 1;
+            foreach(var item in academicYears)
+            {
+                ddlAcademicYear.Items.Insert(count, new ListItem(item, item));
+                count++;
             }
         }
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -37,9 +65,6 @@ namespace DPS.SuperAdmin
 
                 // Clear existing items
                 ddlSchool.Items.Clear();
-
-                // Add the default item
-                
 
                 // Bind the DataTable to the DropDownList
                 ddlSchool.DataSource = dt;
@@ -62,7 +87,9 @@ namespace DPS.SuperAdmin
 
                 // Instantiate SchoolBLL and call the AddSchool method
                 SchoolDatabaseBLL schoolBLL = new SchoolDatabaseBLL();
-                int result = schoolBLL.AddSchoolDatabase(int.Parse(ddlSchool.SelectedValue.ToString()),txtName.Text,"Admin");
+                bool isinused = chkisInUsed.Checked == true ? true : false;
+
+                int result = schoolBLL.AddSchoolDatabase(int.Parse(ddlSchool.SelectedValue.ToString()),txtName.Text,"Admin",ddlAcademicYear.SelectedValue,isinused);
 
                 // Check if the school was added successfully
                 if (result > 0)

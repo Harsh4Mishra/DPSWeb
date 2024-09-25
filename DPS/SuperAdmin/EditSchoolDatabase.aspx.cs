@@ -1,6 +1,7 @@
 ﻿using DPS.SuperAdmin.SchoolClassFile;
 using DPS.SuperAdmin.SchoolDatabaseClassFile;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Web.UI.WebControls;
@@ -15,6 +16,7 @@ namespace DPS.SuperAdmin
             if (!IsPostBack)
             {
                 BindSchools();
+                GenerateAcademicYears();
                 int schoolID = int.Parse(Session["EditClientDatabaseID"].ToString());
                 DataTable dt = schoolDatabaseBLL.GetSchoolDatabaseById(schoolID);
                 if (dt.Rows.Count > 0)
@@ -22,6 +24,8 @@ namespace DPS.SuperAdmin
                     txtName.Text = dt.Rows[0]["DATABASE_NAME"].ToString();
                     ddlSchool.SelectedValue = dt.Rows[0]["CLIENT_ID"].ToString();
                     chkActive.Checked = Boolean.Parse(dt.Rows[0]["IS_ACTIVE"].ToString());
+                    ddlAcademicYear.SelectedValue = dt.Rows[0]["ACADEMIC_YEAR"].ToString();
+                    chkisInUsed.Checked = Boolean.Parse(dt.Rows[0]["IS_IN_USED"].ToString());
                 }
             }
         }
@@ -51,6 +55,33 @@ namespace DPS.SuperAdmin
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('An error occurred while retrieving the data.');", true);
             }
         }
+        public void GenerateAcademicYears()
+        {
+            List<string> academicYears = new List<string>();
+
+            // Get the current year
+            int currentYear = DateTime.Now.Year;
+
+            // Determine the starting year of the current academic year
+            int academicYearStart = (DateTime.Now.Month >= 8) ? currentYear : currentYear - 1;
+
+            // Add the current academic year
+            academicYears.Add($"{academicYearStart}-{academicYearStart + 1}");
+
+            // Generate the next 5 academic years
+            for (int i = 1; i <= 5; i++)
+            {
+                academicYears.Add($"{academicYearStart + i}-{academicYearStart + i + 1}");
+            }
+
+            ddlAcademicYear.Items.Insert(0, new ListItem("Select Academic Year", "0"));
+            int count = 1;
+            foreach (var item in academicYears)
+            {
+                ddlAcademicYear.Items.Insert(count, new ListItem(item, item));
+                count++;
+            }
+        }
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             txtName.Text = "";
@@ -67,7 +98,8 @@ namespace DPS.SuperAdmin
 
                 // Instantiate SchoolBLL and call the UpdateSchool method
                 SchoolDatabaseBLL schoolBLL = new SchoolDatabaseBLL();
-                int result = schoolBLL.UpdateSchoolDatabase(schoolDatabaseID,int.Parse(ddlSchool.SelectedValue.ToString()),txtName.Text, ischecked,"Admin");
+                bool isinused = chkisInUsed.Checked == true ? true : false;
+                int result = schoolBLL.UpdateSchoolDatabase(schoolDatabaseID,int.Parse(ddlSchool.SelectedValue.ToString()),txtName.Text, ischecked,"Admin",ddlAcademicYear.SelectedValue, isinused);
 
                 // Check if the school was updated successfully
                 if (result > 0)

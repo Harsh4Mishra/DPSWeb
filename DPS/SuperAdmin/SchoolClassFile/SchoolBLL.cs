@@ -82,6 +82,38 @@ namespace DPS.SuperAdmin.SchoolClassFile
                 throw new ApplicationException($"An error occurred while retrieving the school with ID {id}.", ex);
             }
         }
+        public DataTable GetSchoolDetailsByEmail(string emailid)
+        {
+            try
+            {
+                // Instantiate SchoolDAL and call the method
+                SchoolDAL schoolDAL = new SchoolDAL();
+                DataTable result = schoolDAL.GetSchoolDetailsByEmail(emailid);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (logging mechanism not shown here)
+                // LogException(ex);
+                throw new ApplicationException($"An error occurred while retrieving the school with emailID {emailid}.", ex);
+            }
+        }
+        public int UpdatePasswordAttemptsByEmail(string emailId, int passwordAttempts, string updatedBy)
+        {
+            try
+            {
+                // Instantiate SchoolDAL and call the method
+                SchoolDAL schoolDAL = new SchoolDAL();
+                int result = schoolDAL.UpdatePasswordAttemptsByEmail(emailId, passwordAttempts, updatedBy);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (logging mechanism not shown here)
+                // LogException(ex);
+                throw new ApplicationException($"An error occurred while updating password attempts.{ex.Message}", ex);
+            }
+        }
 
         // Method to add a new school
         public int AddSchool(SchoolMaster school)

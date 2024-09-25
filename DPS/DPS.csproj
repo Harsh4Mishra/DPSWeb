@@ -1398,6 +1398,7 @@
     <Compile Include="Common\SetNewPassword.aspx.designer.cs">
       <DependentUpon>SetNewPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Encryption\AesService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

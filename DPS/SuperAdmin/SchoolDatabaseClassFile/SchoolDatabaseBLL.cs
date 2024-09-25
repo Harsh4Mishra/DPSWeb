@@ -43,13 +43,13 @@ namespace DPS.SuperAdmin.SchoolDatabaseClassFile
         }
 
         // Method to add a new school
-        public int AddSchoolDatabase(int clientId, string databaseName, string createdBy)
+        public int AddSchoolDatabase(int clientId, string databaseName, string createdBy, string academicYear, bool isinused)
         {
             try
             {
                 // Instantiate SchoolDAL and call the method
                 SchoolDatabaseDAL schoolDatabaseDAL = new SchoolDatabaseDAL();
-                int result = schoolDatabaseDAL.AddSchoolDatabase(clientId, databaseName, createdBy);
+                int result = schoolDatabaseDAL.AddSchoolDatabase(clientId, databaseName, createdBy, academicYear,isinused);
                 return result;
             }
             catch (Exception ex)
@@ -61,13 +61,13 @@ namespace DPS.SuperAdmin.SchoolDatabaseClassFile
         }
 
         // Method to update an existing school
-        public int UpdateSchoolDatabase(int id, int clientId, string databaseName, bool isActive, string updatedBy)
+        public int UpdateSchoolDatabase(int id, int clientId, string databaseName, bool isActive, string updatedBy, string academicYear, bool isinused)
         {
             try
             {
                 // Instantiate SchoolDAL and call the method
                 SchoolDatabaseDAL schoolDatabaseDAL = new SchoolDatabaseDAL();
-                int result = schoolDatabaseDAL.UpdateSchoolDatabase(id, clientId, databaseName, isActive, updatedBy);
+                int result = schoolDatabaseDAL.UpdateSchoolDatabase(id, clientId, databaseName, isActive, updatedBy,academicYear,isinused);
                 return result;
             }
             catch (Exception ex)

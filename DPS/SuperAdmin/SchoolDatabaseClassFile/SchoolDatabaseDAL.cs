@@ -58,7 +58,7 @@ namespace DPS.SuperAdmin.SchoolDatabaseClassFile
         }
 
         // Method to add a new school Database and return the number of rows affected
-        public int AddSchoolDatabase(int clientId, string databaseName, string createdBy)
+        public int AddSchoolDatabase(int clientId, string databaseName, string createdBy,string academicYear,bool isinused)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -69,6 +69,8 @@ namespace DPS.SuperAdmin.SchoolDatabaseClassFile
                     command.Parameters.AddWithValue("@CLIENT_ID", clientId);
                     command.Parameters.AddWithValue("@DATABASE_NAME", databaseName);
                     command.Parameters.AddWithValue("@CREATED_BY", createdBy);
+                    command.Parameters.AddWithValue("@ACADEMIC_YEAR", academicYear);
+                    command.Parameters.AddWithValue("@IS_IN_USED", isinused);
 
                     connection.Open();
                     return command.ExecuteNonQuery();
@@ -77,7 +79,7 @@ namespace DPS.SuperAdmin.SchoolDatabaseClassFile
         }
 
         // Method to update an existing school Database and return the number of rows affected
-        public int UpdateSchoolDatabase(int id, int clientId, string databaseName, bool isActive, string updatedBy)
+        public int UpdateSchoolDatabase(int id, int clientId, string databaseName, bool isActive, string updatedBy, string academicYear, bool isinused)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -90,6 +92,8 @@ namespace DPS.SuperAdmin.SchoolDatabaseClassFile
                     command.Parameters.AddWithValue("@DATABASE_NAME", databaseName);
                     command.Parameters.AddWithValue("@IS_ACTIVE", isActive);
                     command.Parameters.AddWithValue("@UPDATED_BY", updatedBy);
+                    command.Parameters.AddWithValue("@ACADEMIC_YEAR", academicYear);
+                    command.Parameters.AddWithValue("@IS_IN_USED", isinused);
 
                     connection.Open();
                     return command.ExecuteNonQuery();
