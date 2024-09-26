@@ -15,13 +15,13 @@ namespace DPS.Common
     {
 
         /// <summary>
-        /// exampleInputEmail1 control.
+        /// txtexampleInputEmail1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox exampleInputEmail1;
+        protected global::System.Web.UI.WebControls.TextBox txtexampleInputEmail1;
 
         /// <summary>
         /// RequiredFieldValidator1 control.

@@ -1358,6 +1358,7 @@
     <Content Include="SuperAdmin\EditClient.aspx" />
     <Content Include="SuperAdmin\EditPaymentConfiguration.aspx" />
     <Content Include="SuperAdmin\EditSchoolDatabase.aspx" />
+    <Content Include="SuperAdmin\IndexPage.aspx" />
     <Content Include="SuperAdmin\PaymentConfigurationMaster.aspx" />
     <Content Include="SuperAdmin\SchoolDatabaseMaster.aspx" />
     <Content Include="Web.config" />
@@ -1399,6 +1400,8 @@
       <DependentUpon>SetNewPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="Encryption\AesService.cs" />
+    <Compile Include="Encryption\MailService.cs" />
+    <Compile Include="Encryption\UTFService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1451,6 +1454,13 @@
     </Compile>
     <Compile Include="SuperAdmin\EditSchoolDatabase.aspx.designer.cs">
       <DependentUpon>EditSchoolDatabase.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SuperAdmin\IndexPage.aspx.cs">
+      <DependentUpon>IndexPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SuperAdmin\IndexPage.aspx.designer.cs">
+      <DependentUpon>IndexPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="SuperAdmin\PaymentConfigurationClassFIle\SchoolPaymentConfiguration.cs" />
     <Compile Include="SuperAdmin\PaymentConfigurationClassFIle\SchoolPaymentConfigurationBLL.cs" />

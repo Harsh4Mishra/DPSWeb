@@ -5,6 +5,7 @@
 		<siteMapNode url="MainApplication/ResetPassword.aspx" title="Reset Password"  description="Reset Password Page" />
 		<siteMapNode url="MainApplication/IndexPage.aspx" title="DashBoard"  description="Index Page" />
 		<siteMapNode url="" title="Master"  description="BaMasters Page">
+			<siteMapNode url="SuperAdmin/IndexPage.aspx" title="School"  description="Index Page Page" />
 			<siteMapNode url="SuperAdmin/ClientMaster.aspx" title="School"  description="Client Page">
 				<siteMapNode url="SuperAdmin/AddClient.aspx" title="Add School"  description="Add Client Page" />
 				<siteMapNode url="SuperAdmin/EditClient.aspx" title="Modify School"  description="Modify Client Page" />

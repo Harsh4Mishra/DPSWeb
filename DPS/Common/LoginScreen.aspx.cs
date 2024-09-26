@@ -1,12 +1,7 @@
 ﻿using DPS.Encryption;
 using DPS.SuperAdmin.SchoolClassFile;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace DPS.Common
 {
@@ -34,8 +29,28 @@ namespace DPS.Common
                         var UpdatedHashKey = aesCryptoService.EncryptString(saltKey, txtexampleInputPassword1.Text);
                         if (UpdatedHashKey == hashKey)
                         {
+                            string clientID= dt.Rows[0]["ID"].ToString();
+                            string schoolName = dt.Rows[0]["NAME"].ToString();
+                            string emailId = dt.Rows[0]["EMAIL_ID"].ToString();
+                            string logo = dt.Rows[0]["LOGO"].ToString();
+                            string databaseName = dt.Rows[0]["ID_DATABASE"].ToString();
+                            string academicYear = dt.Rows[0]["ACADEMIC_YEAR"].ToString();
 
+                            Session["schoolName"] = schoolName;
+                            Session["emailId"] = emailId;
+                            Session["logo"]= logo;
+                            Session["databaseName"] = databaseName;
+                            Session["academicYear"] = academicYear;
+                            Session["ClientID"] = clientID;
 
+                            if(schoolName == "DPS")
+                            {
+                                Response.Redirect("../SuperAdmin/IndexPage.aspx");
+                            }
+                            else
+                            {
+
+                            }
 
                         }
                         else

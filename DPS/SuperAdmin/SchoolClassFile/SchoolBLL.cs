@@ -115,6 +115,23 @@ namespace DPS.SuperAdmin.SchoolClassFile
             }
         }
 
+        public int UpdatePasswordLinkVisitedByEmail(string emailId, bool passwordlinkVisited, string updatedBy)
+        {
+            try
+            {
+                // Instantiate SchoolDAL and call the method
+                SchoolDAL schoolDAL = new SchoolDAL();
+                int result = schoolDAL.UpdatePasswordLinkVisitedByEmail(emailId, passwordlinkVisited, updatedBy);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (logging mechanism not shown here)
+                // LogException(ex);
+                throw new ApplicationException($"An error occurred while updating password attempts.{ex.Message}", ex);
+            }
+        }
+
         // Method to add a new school
         public int AddSchool(SchoolMaster school)
         {
