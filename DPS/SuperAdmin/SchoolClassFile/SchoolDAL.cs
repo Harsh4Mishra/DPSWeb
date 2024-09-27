@@ -155,7 +155,9 @@ namespace DPS.SuperAdmin.SchoolClassFile
                     command.Parameters.AddWithValue("@UpdatedBy", updatedBy);
 
                     connection.Open();
-                    return command.ExecuteNonQuery();
+                    
+                    int rowaffected = command.ExecuteNonQuery();
+                    return rowaffected;
                 }
             }
         }

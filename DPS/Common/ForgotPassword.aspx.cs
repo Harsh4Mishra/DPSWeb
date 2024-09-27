@@ -1,15 +1,8 @@
 ﻿using DPS.Encryption;
 using DPS.SuperAdmin.SchoolClassFile;
-using Org.BouncyCastle.Asn1.Ocsp;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Linq;
-using System.Threading;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace DPS.Common
 {
