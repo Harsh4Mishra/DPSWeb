@@ -20,7 +20,7 @@
     </div>
     <div class="mt-3">
         <%--<a  class="btn btn-block btn-aiut btn-lg font-weight-medium auth-form-btn"  href="../../index.html">SIGN IN</a>--%>
-        <asp:Button ID="Button1" class="btn btn-block btn-aiut btn-lg font-weight-medium auth-form-btn" runat="server" ValidationGroup="login" Text="SIGN IN"  />
+        <asp:Button ID="Button1" class="btn btn-block btn-aiut btn-lg font-weight-medium auth-form-btn" runat="server" ValidationGroup="login" Text="SIGN IN" OnClick="Button1_Click"  />
     </div>
     <div class="my-2 d-flex justify-content-between align-items-center">
         <a href="LoginScreen.aspx" class="auth-link text-black">Sign In</a>

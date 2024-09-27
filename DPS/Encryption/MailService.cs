@@ -12,10 +12,10 @@ namespace DPS.Encryption
     {
         public void SendMail(string subject, string body, string to, string cc = null, string bcc = null, Dictionary<string, byte[]> attachments = null)
         {
-            string _smtpServer = ConfigurationManager.AppSettings["MailConfig:SMTPServer"].ToString();
-            int _smtpPort = int.Parse(ConfigurationManager.AppSettings["MailConfig:SMTPPort"].ToString());
-            string _smtpUser = ConfigurationManager.AppSettings["MailConfig:SMTPUser"].ToString();
-            string _smtpPass = ConfigurationManager.AppSettings["MailConfig:SMTPPass"].ToString();
+            string _smtpServer = ConfigurationManager.AppSettings["SMTPServer"].ToString();
+            int _smtpPort = int.Parse(ConfigurationManager.AppSettings["SMTPPort"].ToString());
+            string _smtpUser = ConfigurationManager.AppSettings["SMTPUser"].ToString();
+            string _smtpPass = ConfigurationManager.AppSettings["SMTPPass"].ToString();
 
             using (var message = new MailMessage())
             {

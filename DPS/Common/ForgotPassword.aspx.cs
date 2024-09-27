@@ -42,7 +42,8 @@ namespace DPS.Common
                         string subject = "Reset Your Account Password...";
                         string body = MailBody(schoolName, setPasswordURL);
                         string emailid = txtexampleInputEmail1.Text;
-                        _mailService.SendMail(subject, body, emailid);
+                        MailService mailService = new MailService();
+                        mailService.SendMail(subject, body, emailid);
                     }
                     else
                     {

@@ -159,6 +159,24 @@ namespace DPS.SuperAdmin.SchoolClassFile
                 }
             }
         }
+        public int UpdateNewPassword(string emailId, string passwordHashKey,string passwordSaltKey, string updatedBy)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("UpdateNewPassword", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@emailId", emailId);
+                    command.Parameters.AddWithValue("@passwordHashKey", passwordHashKey);
+                    command.Parameters.AddWithValue("@passwordSaltKey", passwordSaltKey);
+                    command.Parameters.AddWithValue("@updatedBy", updatedBy);
+
+                    connection.Open();
+                    return command.ExecuteNonQuery();
+                }
+            }
+        }
 
         // Method to add a new school and return the number of rows affected
         public int AddSchool(SchoolMaster school)
