@@ -15,6 +15,9 @@ namespace DPS.SuperAdmin
             {
                 string currentPageUrl = Request.Url.AbsolutePath;
 
+                
+                lblName.Text = Session["schoolName"].ToString();
+
                 // Highlight the menu item corresponding to the current page
                 HighlightMenuItem(currentPageUrl);
             }

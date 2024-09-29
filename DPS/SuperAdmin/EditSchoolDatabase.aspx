@@ -32,7 +32,7 @@
                     <label>Academic Year</label><span style="color: red">*</span><br />
                     <div class="form-group">
                         <asp:DropDownList ID="ddlAcademicYear" runat="server" ValidationGroup="Employee" CssClass="form-control"></asp:DropDownList>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Please select state." ControlToValidate="ddlState" ForeColor="Red" ValidationGroup="Employee" InitialValue="0" ToolTip="Please select a state."></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Please select state." ControlToValidate="ddlAcademicYear" ForeColor="Red" ValidationGroup="Employee" InitialValue="0" ToolTip="Please select a state."></asp:RequiredFieldValidator>
                     </div>
                 </div>
                 <div class="col-md-4">

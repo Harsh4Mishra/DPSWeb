@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SchoolMaster.master.cs" Inherits="DPS.SchoolAdmin.SchoolMaster" %>
+﻿n<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SchoolMaster.master.cs" Inherits="DPS.SchoolAdmin.SchoolMaster" %>
 
 <!DOCTYPE html>
 
@@ -126,7 +126,7 @@
                                 </div>
                             </li>
                             <li class="nav-item" runat="server" id="Li1">
-                                <a class="nav-link" href="LoginScreen.aspx">
+                                <a class="nav-link" href="../Common/LoginScreen.aspx">
                                     <i class="icon-grid menu-icon"></i>
                                     <span class="menu-title">Sign Out</span>
                                 </a>

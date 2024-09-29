@@ -137,7 +137,7 @@
                                     <ItemTemplate>
                                         <asp:CheckBox ID="chkIsUsed" runat="server" Checked='<%# Eval("IS_IN_USED") %>' Enabled="true" />
                                     </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" Width="20%" />
+                                    <ItemStyle HorizontalAlign="Center" Width="10%" />
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Academic Year" SortExpression="ACADEMIC_YEAR">
                                     <ItemTemplate>
@@ -149,7 +149,7 @@
                                     <ItemTemplate>
                                         <asp:CheckBox ID="chkIsActive" runat="server" Checked='<%# Eval("IS_ACTIVE") %>' Enabled="true" />
                                     </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" Width="20%" />
+                                    <ItemStyle HorizontalAlign="Center" Width="10%" />
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Action">
                                     <ItemTemplate>

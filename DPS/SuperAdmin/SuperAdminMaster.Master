@@ -55,7 +55,8 @@
                 </button>
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item nav-profile dropdown">
-                        <b>XYZ MNO</b>
+                        <b>
+                            <asp:Label ID="lblName" runat="server" Text="Label"></asp:Label></b>
                     </li>
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
@@ -117,7 +118,7 @@
                         </div>
                     </li>
                     <li class="nav-item" runat="server" id="Li1">
-                        <a class="nav-link" href="LoginScreen.aspx">
+                        <a class="nav-link" href="../Common/LoginScreen.aspx">
                             <i class="icon-grid menu-icon"></i>
                             <span class="menu-title">Sign Out</span>
                         </a>

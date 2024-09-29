@@ -1934,6 +1934,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="SchoolAdmin\Databases\" />
     <Folder Include="SchoolLogo\" />
   </ItemGroup>
   <ItemGroup>
