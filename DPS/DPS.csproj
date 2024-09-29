@@ -82,6 +82,15 @@
     <Content Include="Global.asax" />
     <Content Include="Images\Icon\icon.png" />
     <Content Include="Images\Logo\logo.png" />
+    <Content Include="SchoolAdmin\BothTransaction.aspx" />
+    <Content Include="SchoolAdmin\FeeSync.aspx" />
+    <Content Include="SchoolAdmin\InitialSync.aspx" />
+    <Content Include="SchoolAdmin\OfflineTransaction.aspx" />
+    <Content Include="SchoolAdmin\OnlineTransaction.aspx" />
+    <Content Include="SchoolAdmin\Profile.aspx" />
+    <Content Include="SchoolAdmin\ResetPassword.aspx" />
+    <Content Include="SchoolAdmin\SchoolDashboard.aspx" />
+    <Content Include="SchoolAdmin\StudentSync.aspx" />
     <Content Include="StyleSheet\css\vertical-layout-light\style.css" />
     <Content Include="StyleSheet\font-awesome.min.css" />
     <Content Include="StyleSheet\js\ace.js" />
@@ -1360,6 +1369,8 @@
     <Content Include="SuperAdmin\EditSchoolDatabase.aspx" />
     <Content Include="SuperAdmin\IndexPage.aspx" />
     <Content Include="SuperAdmin\PaymentConfigurationMaster.aspx" />
+    <Content Include="SuperAdmin\Profile.aspx" />
+    <Content Include="SuperAdmin\ResetPassword.aspx" />
     <Content Include="SuperAdmin\SchoolDatabaseMaster.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -1406,12 +1417,75 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SchoolAdmin\BothTransaction.aspx.cs">
+      <DependentUpon>BothTransaction.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SchoolAdmin\BothTransaction.aspx.designer.cs">
+      <DependentUpon>BothTransaction.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SchoolAdmin\FeeSync.aspx.cs">
+      <DependentUpon>FeeSync.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SchoolAdmin\FeeSync.aspx.designer.cs">
+      <DependentUpon>FeeSync.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SchoolAdmin\InitialSync.aspx.cs">
+      <DependentUpon>InitialSync.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SchoolAdmin\InitialSync.aspx.designer.cs">
+      <DependentUpon>InitialSync.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SchoolAdmin\OfflineTransaction.aspx.cs">
+      <DependentUpon>OfflineTransaction.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SchoolAdmin\OfflineTransaction.aspx.designer.cs">
+      <DependentUpon>OfflineTransaction.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SchoolAdmin\OnlineTransaction.aspx.cs">
+      <DependentUpon>OnlineTransaction.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SchoolAdmin\OnlineTransaction.aspx.designer.cs">
+      <DependentUpon>OnlineTransaction.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SchoolAdmin\Profile.aspx.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SchoolAdmin\Profile.aspx.designer.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SchoolAdmin\ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SchoolAdmin\ResetPassword.aspx.designer.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SchoolAdmin\SchoolDashboard.aspx.cs">
+      <DependentUpon>SchoolDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SchoolAdmin\SchoolDashboard.aspx.designer.cs">
+      <DependentUpon>SchoolDashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SchoolAdmin\SchoolMaster.Master.cs">
       <DependentUpon>SchoolMaster.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SchoolAdmin\SchoolMaster.Master.designer.cs">
       <DependentUpon>SchoolMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="SchoolAdmin\StudentSync.aspx.cs">
+      <DependentUpon>StudentSync.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SchoolAdmin\StudentSync.aspx.designer.cs">
+      <DependentUpon>StudentSync.aspx</DependentUpon>
     </Compile>
     <Compile Include="SuperAdmin\AddClient.aspx.cs">
       <DependentUpon>AddClient.aspx</DependentUpon>
@@ -1478,6 +1552,20 @@
     </Compile>
     <Compile Include="SuperAdmin\PaymentConfigurationMaster.aspx.designer.cs">
       <DependentUpon>PaymentConfigurationMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SuperAdmin\Profile.aspx.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SuperAdmin\Profile.aspx.designer.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SuperAdmin\ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SuperAdmin\ResetPassword.aspx.designer.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="SuperAdmin\SchoolClassFile\SchoolBLL.cs" />
     <Compile Include="SuperAdmin\SchoolClassFile\SchoolDAL.cs" />

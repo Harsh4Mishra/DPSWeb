@@ -32,22 +32,33 @@ namespace DPS.Common
                 dt = schoolBLL.GetSchoolDetailsByEmail(emailID);
                 if (dt.Rows.Count > 0)
                 {
-                    AesService aesService = new AesService();
-                    var chipperText = aesService.GenerateRandomKey();
-                    var UpdatedHashKey = aesService.EncryptString(chipperText, txtexampleInputEmail1.Text);
-
-                    string schoolName = dt.Rows[0]["NAME"].ToString();
-
-                    var result = schoolBLL.UpdateNewPassword(emailID, UpdatedHashKey, chipperText, schoolName);
-                    //await _unitOfWork.CommitTransactionAsync(cancellationToken);
-
-                    if (result != null)
+                    bool isprevisited = bool.Parse(dt.Rows[0]["PASSWORD_LINK_VISITED"].ToString());
+                    if (!isprevisited)
                     {
-                        Response.Redirect("LoginScreen.aspx");
+                        AesService aesService = new AesService();
+                        var chipperText = aesService.GenerateRandomKey();
+                        var UpdatedHashKey = aesService.EncryptString(chipperText, txtexampleInputEmail1.Text);
+
+                        string schoolName = dt.Rows[0]["NAME"].ToString();
+
+                        var result = schoolBLL.UpdateNewPassword(emailID, UpdatedHashKey, chipperText, schoolName);
+                        //await _unitOfWork.CommitTransactionAsync(cancellationToken);
+
+                        if (result > 0)
+                        {
+                            string errorScript = $"alert('Password Updated successfully. Please visit on Login Screen.');";
+                            ClientScript.RegisterStartupScript(this.GetType(), "ErrorAlert", errorScript, true);
+                           // Response.Redirect("LoginScreen.aspx");
+                        }
+                        else
+                        {
+                            string errorScript = $"alert('Password Not Updated');";
+                            ClientScript.RegisterStartupScript(this.GetType(), "ErrorAlert", errorScript, true);
+                        }
                     }
                     else
                     {
-                        string errorScript = $"alert('Password Not Updated');";
+                        string errorScript = $"alert('Link is blocked please request it again.');";
                         ClientScript.RegisterStartupScript(this.GetType(), "ErrorAlert", errorScript, true);
                     }
 

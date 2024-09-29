@@ -37,6 +37,9 @@ namespace DPS.Common
                         string emailid = txtexampleInputEmail1.Text;
                         MailService mailService = new MailService();
                         mailService.SendMail(subject, body, emailid);
+
+                        string errorScript = $"alert('Set Password Link has been sent on a registered Mail ID');";
+                        ClientScript.RegisterStartupScript(this.GetType(), "ErrorAlert", errorScript, true);
                     }
                     else
                     {

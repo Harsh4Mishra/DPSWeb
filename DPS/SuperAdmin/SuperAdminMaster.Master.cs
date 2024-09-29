@@ -22,7 +22,7 @@ namespace DPS.SuperAdmin
         private void HighlightMenuItem(string currentPageUrl)
         {
             // Determine which menu item corresponds to the current page and highlight its <li> element
-            if (currentPageUrl.EndsWith("Page1.aspx"))
+            if (currentPageUrl.EndsWith("IndexPage.aspx"))
             {
                 dashboard.Attributes["class"] = "nav-item active";
             }

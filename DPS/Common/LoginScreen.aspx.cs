@@ -49,7 +49,7 @@ namespace DPS.Common
                             }
                             else
                             {
-
+                                Response.Redirect("../SchoolAdmin/SchoolDashboard.aspx");
                             }
 
                         }

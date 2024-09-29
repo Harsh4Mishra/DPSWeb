@@ -4,15 +4,193 @@
 
 <html>
 <head runat="server">
-    <title></title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>DPS</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/StyleSheet/vendors/feather/feather.css">
+    <link rel="stylesheet" href="~/StyleSheet/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="~/StyleSheet/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/StyleSheet/vendors/mdi/css/materialdesignicons.min.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="~/StyleSheet/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="~/StyleSheet/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/StyleSheet/js/select.dataTables.min.css">
+    <link href="../StyleSheet/font-awesome.min.css" rel="stylesheet" />
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="~/StyleSheet/css/vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" type="image/x-icon" href="../Images/Icon/icon.png">
+    <style>
+        /* Define styles for the SiteMapPath control */
+        #SiteMapPath1 a {
+            color: white; /* Set text color to white */
+            text-decoration: none; /* Remove text decoration */
+        }
+    </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
+            <div class="container-scroller">
+                <!-- partial:partials/_navbar.html -->
+                <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+                    <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                        <a class="navbar-brand brand-logo mr-5" href="IndexPage.aspx">
+                            <%--<img src="images/logo.svg" class="mr-2" alt="logo" />
+                            <img src="../Images/Logo/logo.png" class="mr-2" alt="logo" />--%>
+
+                            <asp:Label ID="lblSchoolName" runat="server" ></asp:Label>
+                        </a>
+                        
+                        <%--<img src="../Images/Logo/Logo.jpg" />--%>
+                        <a class="navbar-brand brand-logo-mini" href="IndexPage.aspx">
+                            <%--<img src="images/logo-mini.svg" alt="logo" />
+                            <img src="../Images/Icon/icon.png" alt="logo" />--%>
+
+                            <asp:Label ID="lblLogoText" runat="server" ></asp:Label>
+                        </a>
+                        
+                    </div>
+                    <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                            <span class="icon-menu"></span>
+                        </button>
+                        <ul class="navbar-nav navbar-nav-right">
+                            <li class="nav-item nav-profile dropdown">
+                                <b>XYZ MNO</b>
+                            </li>
+                            <li class="nav-item nav-profile dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+                                    <i class="fa fa-user" style="font-size: x-large"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                                    <a class="dropdown-item" href="Profile.aspx">
+                                        <i class="fa fa-user text-info"></i>
+                                        Profile</a>
+                                    <a class="dropdown-item" href="ResetPassword.aspx">
+                                        <i class="fa fa-lock text-info"></i>
+                                        Reset Password</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                            <span class="icon-menu"></span>
+                        </button>
+                    </div>
+                </nav>
+                <!-- partial -->
+                <div class="container-fluid page-body-wrapper">
+
+                    <!-- partial -->
+                    <!-- partial:partials/_sidebar.html -->
+                    <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                        <ul class="nav">
+                            <li class="nav-item" runat="server" id="dashboard">
+                                <a class="nav-link" href="SchoolDashboard.aspx">
+                                    <i class="icon-grid menu-icon"></i>
+                                    <span class="menu-title">Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" runat="server" id="master">
+                                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                                    <i class="icon-layout menu-icon"></i>
+                                    <span class="menu-title">Syncronize</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                                <div class="collapse" id="ui-basic">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item"><a class="nav-link" href="InitialSync.aspx">Initial</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="StudentSync.aspx">Student</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="FeeSync.aspx">Fee</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item" runat="server" id="activity">
+                                <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+                                    <i class="icon-columns menu-icon"></i>
+                                    <span class="menu-title">Transaction</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                                <div class="collapse" id="form-elements">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item"><a class="nav-link" href="OnlineTransaction.aspx">Online</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="OfflineTransaction.aspx">Offline</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="BothTransaction.aspx">Both</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item" runat="server" id="Li1">
+                                <a class="nav-link" href="LoginScreen.aspx">
+                                    <i class="icon-grid menu-icon"></i>
+                                    <span class="menu-title">Sign Out</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- partial -->
+                    <div class="main-panel">
+                        <div class="form-wrapper">
+                            <div class="row">
+                                <div class="col-md-12 breadcrumb">
+                                    <%--<asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" ShowStartingNode="false" />--%>
+                                    <asp:SiteMapPath ID="SiteMapPath1" runat="server"></asp:SiteMapPath>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                    </asp:ContentPlaceHolder>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- content-wrapper ends -->
+                        <!-- partial:partials/_footer.html -->
+                        <footer class="footer">
+                            <%-- <div class="d-sm-flex justify-content-center justify-content-sm-between">
+    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
+    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
+</div>
+<div class="d-sm-flex justify-content-center justify-content-sm-between">
+    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Distributed by <a href="https://www.themewagon.com/" target="_blank">Themewagon</a></span>
+</div>--%>
+                        </footer>
+                        <!-- partial -->
+                    </div>
+                    <!-- main-panel ends -->
+                </div>
+                <!-- page-body-wrapper ends -->
+            </div>
+            <!-- container-scroller -->
+
+            <!-- plugins:js -->
+            <script src="../StyleSheet/vendors/js/vendor.bundle.base.js"></script>
+            <!-- endinject -->
+            <!-- Plugin js for this page -->
+            <script src="../StyleSheet/vendors/chart.js/Chart.min.js"></script>
+            <script src="../StyleSheet/vendors/datatables.net/jquery.dataTables.js"></script>
+            <script src="../StyleSheet/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+            <script src="../StyleSheet/js/dataTables.select.min.js"></script>
+
+            <!-- End plugin js for this page -->
+            <!-- inject:js -->
+            <script src="../StyleSheet/js/off-canvas.js"></script>
+            <script src="../StyleSheet/js/hoverable-collapse.js"></script>
+            <script src="../StyleSheet/js/template.js"></script>
+            <script src="../StyleSheet/js/settings.js"></script>
+            <script src="../StyleSheet/js/todolist.js"></script>
+            <!-- endinject -->
+            <!-- Custom js for this page-->
+            <script src="../StyleSheet/js/dashboard.js"></script>
+            <script src="../StyleSheet/js/Chart.roundedBarCharts.js"></script>
+            <!-- End custom js for this page-->
+
         </div>
     </form>
 </body>
