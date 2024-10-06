@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
+using DPS.Encryption;
 
 namespace DPS.SchoolAdmin
 {
@@ -20,9 +21,9 @@ namespace DPS.SchoolAdmin
 
             }
         }
-        protected async void btnsave_Click(object sender, EventArgs e)
+        protected void btnsave_Click(object sender, EventArgs e)
         {
-           
+
             try
             {
                 // Step 4: Check if a file is uploaded and save it
@@ -66,7 +67,9 @@ namespace DPS.SchoolAdmin
                         // Optionally inform the user that the upload was successful
                         //string successScript = "alert('Database uploaded successfully.');";
                         //ClientScript.RegisterStartupScript(this.GetType(), "SuccessAlert", successScript, true);
-                        TransferData(mdfFilePath,database);
+                        TransferData(mdfFilePath, database);
+                        string successScript = "alert('Database Syncronized Successfully');";
+                        ClientScript.RegisterStartupScript(this.GetType(), "SuccessAlert", successScript, true);
                     }
                     else
                     {
@@ -82,12 +85,12 @@ namespace DPS.SchoolAdmin
                 ClientScript.RegisterStartupScript(this.GetType(), "SuccessAlert", successScript, true);
             }
         }
-        private void TransferData(string mdfFilePath,string databaseName)
+        private void TransferData(string mdfFilePath, string databaseName)
         {
             string accessConnectionString = $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={mdfFilePath};";
 
             //string accessConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=your_access_file.accdb;";
-            string sqlServerConnectionString = @"Data Source=DESKTOP-MB1QN8B\SQLEXPRESS;Initial Catalog="+databaseName+";Integrated Security=True";
+            string sqlServerConnectionString = @"Data Source=DESKTOP-MB1QN8B\SQLEXPRESS;Initial Catalog=" + databaseName + ";Integrated Security=True";
 
             using (OleDbConnection accessConnection = new OleDbConnection(accessConnectionString))
             using (SqlConnection sqlConnection = new SqlConnection(sqlServerConnectionString))
@@ -95,26 +98,94 @@ namespace DPS.SchoolAdmin
                 accessConnection.Open();
                 sqlConnection.Open();
 
-                DataTable tables = accessConnection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+                // Create the DatabaseDetail table if it doesn't exist
+                CreateDatabaseDetailTable(accessConnection);
 
-                foreach (DataRow row in tables.Rows)
+                // Insert a record into the DatabaseDetail table
+                InsertDatabaseDetail(accessConnection, databaseName);
+
+                // Add OnlineReceiptNumber column to FeeReceiptPrint table
+                AddColumnToFeeReceiptPrint(accessConnection);
+
+                List<string> tablesName = new List<string>();
+
+                tablesName.Add("AreaMaster");
+                tablesName.Add("ClassMaster");
+                tablesName.Add("ClassSectionAllotment");
+                tablesName.Add("FeeGroup");
+                tablesName.Add("FeeMonth");
+                tablesName.Add("FeeNameMaster");
+                tablesName.Add("FeeParameter");
+                tablesName.Add("FeeReceiptPrint");
+                tablesName.Add("FeeStructure");
+                tablesName.Add("FeeTransaction");
+                tablesName.Add("FeeTransDetail");
+                tablesName.Add("FeeTypeMaster");
+                tablesName.Add("StudentConveyanceEntry");
+                tablesName.Add("StudentFeeType");
+                tablesName.Add("StudentFeeWriteOff");
+                tablesName.Add("StudentMaster");
+                tablesName.Add("studentstatus");
+
+                //DataTable tables = accessConnection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+
+                foreach (string row in tablesName)
                 {
-                    string tableName = row["TABLE_NAME"].ToString();
-                    DataTable schemaTable = accessConnection.GetOleDbSchemaTable(OleDbSchemaGuid.Columns, new object[] { null, null, tableName, null });
-
-                    CreateSqlServerTable(sqlConnection, schemaTable, tableName);
-                    BulkInsertDataIntoSqlServer(accessConnection, sqlConnection, tableName);
-
-                    if(tableName=="FeeReceiptPrint"|| tableName=="FeeTransaction" || tableName=="FeeTransDetail")
+                    string tableName = row.ToString();
+                    if (tableName != "MSysAccessObjects" || tableName != "MSysAccessXML")
                     {
-                        string newTableName = tableName + "Online";
-                        CreateSqlServerTable(sqlConnection, schemaTable, newTableName);
 
+                        DataTable schemaTable = accessConnection.GetOleDbSchemaTable(OleDbSchemaGuid.Columns, new object[] { null, null, tableName, null });
+
+                        CreateSqlServerTable(sqlConnection, schemaTable, tableName);
+                        BulkInsertDataIntoSqlServer(accessConnection, sqlConnection, tableName);
+
+                        if (tableName == "FeeReceiptPrint" || tableName == "FeeTransaction" || tableName == "FeeTransDetail")
+                        {
+                            string newTableName = tableName + "Online";
+                            CreateSqlServerTable(sqlConnection, schemaTable, newTableName);
+
+                        }
+                    }
+                }
+                // Insert data from SyncMaster after all tables have been processed
+                InsertSelectedData(sqlConnection);
+            }
+        }
+        private void CreateDatabaseDetailTable(OleDbConnection accessConnection)
+        {
+            string createTableQuery = "CREATE TABLE DatabaseDetail (DatabaseName TEXT(255))";
+
+            using (OleDbCommand createTableCommand = new OleDbCommand(createTableQuery, accessConnection))
+            {
+                try
+                {
+                    createTableCommand.ExecuteNonQuery();
+                }
+                catch (OleDbException ex)
+                {
+                    // Handle error if the table already exists or another error occurs
+                    if (ex.ErrorCode != -2146828218) // Error code for "Table already exists"
+                    {
+                        throw; // Rethrow the exception for further handling
                     }
                 }
             }
         }
+        private void InsertDatabaseDetail(OleDbConnection accessConnection, string databaseName)
+        {
 
+            UTFService utfService = new UTFService();
+            string encValue = utfService.Encrypt(databaseName);
+
+            string insertQuery = "INSERT INTO DatabaseDetail (DatabaseName) VALUES (@DatabaseName)";
+
+            using (OleDbCommand insertCommand = new OleDbCommand(insertQuery, accessConnection))
+            {
+                insertCommand.Parameters.AddWithValue("@DatabaseName", encValue);
+                insertCommand.ExecuteNonQuery();
+            }
+        }
         private void CreateSqlServerTable(SqlConnection sqlConnection, DataTable schemaTable, string tableName)
         {
             string createTableQuery = $"CREATE TABLE [{tableName}] (";
@@ -126,7 +197,7 @@ namespace DPS.SchoolAdmin
                 string sqlDataType = GetSqlDataType(column["COLUMN_NAME"].ToString());
                 if (tableName == "FeeReceiptPrintOnline" && columnName == "ReceiptNo")
                 {
-                    createTableQuery += $"[{columnName}] {sqlDataType} IDENTITY(50000, 1) PRIMARY KEY , ";
+                    createTableQuery += $"[{columnName}] INT IDENTITY(50000, 1) PRIMARY KEY , ";
                 }
                 else
                 {
@@ -141,7 +212,6 @@ namespace DPS.SchoolAdmin
                 createTableCommand.ExecuteNonQuery();
             }
         }
-
         private string GetSqlDataType(string accessDataType)
         {
             if (accessDataType == "Short Text")
@@ -173,7 +243,6 @@ namespace DPS.SchoolAdmin
                 return "NVARCHAR(255)"; // Default type
             }
         }
-
         private void BulkInsertDataIntoSqlServer(OleDbConnection accessConnection, SqlConnection sqlConnection, string tableName)
         {
             string selectQuery = $"SELECT * FROM [{tableName}]";
@@ -199,5 +268,58 @@ namespace DPS.SchoolAdmin
                 }
             }
         }
+        private void InsertSelectedData(SqlConnection sqlConnection)
+        {
+            string insertQuery = @"INSERT INTO [SyncMaster] (InitialSyncOn) values(getdate())";
+
+            using (SqlCommand insertCommand = new SqlCommand(insertQuery, sqlConnection))
+            {
+                insertCommand.ExecuteNonQuery();
+            }
+        }
+        private void AddColumnToFeeReceiptPrint(OleDbConnection accessConnection)
+        {
+            string alterTableQuery = "ALTER TABLE FeeReceiptPrint ADD COLUMN OnlineReceiptNumber NUMBER";
+
+            using (OleDbCommand alterTableCommand = new OleDbCommand(alterTableQuery, accessConnection))
+            {
+                try
+                {
+                    alterTableCommand.ExecuteNonQuery();
+                }
+                catch (OleDbException ex)
+                {
+                    // Handle error if the column already exists or another error occurs
+                    if (ex.ErrorCode != -2147217904) // Error code for "Column already exists"
+                    {
+                        throw; // Rethrow the exception for further handling
+                    }
+                }
+            }
+        }
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            string database = Session["databaseName"].ToString();
+            // Define the main directory and subdirectory
+            string mainDir = Server.MapPath("~/Databases");
+            string subDir = Path.Combine(mainDir, database); // Subdirectory name
+            string fileName = "DpsSms.mdb"; // Set your actual file name here
+            string mdbFilePath = Path.Combine(subDir, fileName);
+
+            if (File.Exists(mdbFilePath))
+            {
+                Response.Clear();
+                Response.ContentType = "application/octet-stream"; // Set content type for binary file
+                Response.AppendHeader("Content-Disposition", $"attachment; filename={fileName}");
+                Response.TransmitFile(mdbFilePath);
+                Response.End();
+            }
+            else
+            {
+                // Handle the case where the file does not exist
+                Response.Write("File not found.");
+            }
+        }
+
     }
 }
