@@ -94,6 +94,8 @@
     <Content Include="SchoolAdmin\ResetPassword.aspx" />
     <Content Include="SchoolAdmin\SchoolDashboard.aspx" />
     <Content Include="SchoolAdmin\StudentSync.aspx" />
+    <Content Include="Student\FeeDetailList.aspx" />
+    <Content Include="Student\SchoolWithState.aspx" />
     <Content Include="StyleSheet\css\vertical-layout-light\style.css" />
     <Content Include="StyleSheet\font-awesome.min.css" />
     <Content Include="StyleSheet\js\ace.js" />
@@ -1493,6 +1495,22 @@
     <Compile Include="SchoolAdmin\TransactionClassFile\TransactionBLL.cs" />
     <Compile Include="SchoolAdmin\TransactionClassFile\TransactionConnection.cs" />
     <Compile Include="SchoolAdmin\TransactionClassFile\TransactionDAL.cs" />
+    <Compile Include="Student\FeeClassFile\FeesBLL.cs" />
+    <Compile Include="Student\FeeClassFile\FeesDAL.cs" />
+    <Compile Include="Student\FeeDetailList.aspx.cs">
+      <DependentUpon>FeeDetailList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student\FeeDetailList.aspx.designer.cs">
+      <DependentUpon>FeeDetailList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Student\SchoolWithState.aspx.cs">
+      <DependentUpon>SchoolWithState.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student\SchoolWithState.aspx.designer.cs">
+      <DependentUpon>SchoolWithState.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SuperAdmin\AddClient.aspx.cs">
       <DependentUpon>AddClient.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

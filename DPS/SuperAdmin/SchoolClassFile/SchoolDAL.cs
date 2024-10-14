@@ -106,6 +106,25 @@ namespace DPS.SuperAdmin.SchoolClassFile
             }
             return dt;
         }
+
+        public DataTable GetSchoolByStateId(int id)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("GET_SCHOOL_BY_STATE_ID", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Id", id);
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+            return dt;
+        }
         public DataTable GetSchoolDetailsByEmail(string emailid)
         {
             DataTable dt = new DataTable();

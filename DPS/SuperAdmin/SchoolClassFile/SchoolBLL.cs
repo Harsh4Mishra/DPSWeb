@@ -82,6 +82,22 @@ namespace DPS.SuperAdmin.SchoolClassFile
                 throw new ApplicationException($"An error occurred while retrieving the school with ID {id}.", ex);
             }
         }
+        public DataTable GetSchoolByStateId(int id)
+        {
+            try
+            {
+                // Instantiate SchoolDAL and call the method
+                SchoolDAL schoolDAL = new SchoolDAL();
+                DataTable result = schoolDAL.GetSchoolByStateId(id);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (logging mechanism not shown here)
+                // LogException(ex);
+                throw new ApplicationException($"An error occurred while retrieving the school with ID {id}.", ex);
+            }
+        }
         public DataTable GetSchoolDetailsByEmail(string emailid)
         {
             try
