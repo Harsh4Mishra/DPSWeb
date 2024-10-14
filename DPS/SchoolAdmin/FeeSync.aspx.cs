@@ -108,8 +108,8 @@ namespace DPS.SchoolAdmin
 
                     using (OleDbCommand insertCommand = new OleDbCommand(insertSql, accessConnection))
                     {
-                        insertCommand.Parameters.AddWithValue("?", onlineReceiptNumber);
-                        insertCommand.Parameters.AddWithValue("?", receiptDt);
+                        insertCommand.Parameters.AddWithValue("?", int.Parse(onlineReceiptNumber));
+                        insertCommand.Parameters.AddWithValue("?", DateTime.Parse(receiptDt));
                         insertCommand.Parameters.AddWithValue("?", incrementedReceiptNo);
                         insertCommand.Parameters.AddWithValue("?", scholarNo);
                         insertCommand.ExecuteNonQuery();
@@ -204,7 +204,7 @@ namespace DPS.SchoolAdmin
 
         private string GetLastTransactionIDSync(SqlConnection sqlConnection)
         {
-            string query = "SELECT TOP 1 LastTransactionIDSync FROM [22092024170811].[dbo].[SyncMaster] ORDER BY ID DESC";
+            string query = "SELECT TOP 1 LastTransactionIDSync FROM [SyncMaster] ORDER BY ID DESC";
             using (SqlCommand command = new SqlCommand(query, sqlConnection))
             {
                 object result = command.ExecuteScalar();

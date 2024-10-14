@@ -9,6 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
 using DPS.Encryption;
+using System.Web.DynamicData;
 
 namespace DPS.SchoolAdmin
 {
@@ -135,15 +136,17 @@ namespace DPS.SchoolAdmin
                     if (tableName != "MSysAccessObjects" || tableName != "MSysAccessXML")
                     {
 
-                        DataTable schemaTable = accessConnection.GetOleDbSchemaTable(OleDbSchemaGuid.Columns, new object[] { null, null, tableName, null });
+                        //DataTable schemaTable = accessConnection.GetOleDbSchemaTable(OleDbSchemaGuid.Columns, new object[] { null, null, tableName, null });
+                        DataTable datadt = new DataTable();
+                        datadt = GetDataFromTable(accessConnection, tableName);
 
-                        CreateSqlServerTable(sqlConnection, schemaTable, tableName);
-                        BulkInsertDataIntoSqlServer(accessConnection, sqlConnection, tableName);
+                        CreateSqlServerTable(sqlConnection, datadt, tableName);
+                        BulkInsertDataIntoSqlServer(accessConnection, sqlConnection, tableName, datadt);
 
                         if (tableName == "FeeReceiptPrint" || tableName == "FeeTransaction" || tableName == "FeeTransDetail")
                         {
                             string newTableName = tableName + "Online";
-                            CreateSqlServerTable(sqlConnection, schemaTable, newTableName);
+                            CreateSqlServerTable(sqlConnection, datadt, newTableName);
 
                         }
                     }
@@ -190,11 +193,13 @@ namespace DPS.SchoolAdmin
         {
             string createTableQuery = $"CREATE TABLE [{tableName}] (";
 
-            foreach (DataRow column in schemaTable.Rows)
+
+            foreach (DataColumn column in schemaTable.Columns)
             {
-                string columnName = column["COLUMN_NAME"].ToString();
-                string dataType = column["DATA_TYPE"].ToString();
-                string sqlDataType = GetSqlDataType(column["COLUMN_NAME"].ToString());
+                string columnName = column.ColumnName;//column["COLUMN_NAME"].ToString();
+                string dataType = column.DataType.Name;
+               
+                string sqlDataType = GetSqlDataType(dataType);
                 if (tableName == "FeeReceiptPrintOnline" && columnName == "ReceiptNo")
                 {
                     createTableQuery += $"[{columnName}] INT IDENTITY(50000, 1) PRIMARY KEY , ";
@@ -214,23 +219,28 @@ namespace DPS.SchoolAdmin
         }
         private string GetSqlDataType(string accessDataType)
         {
-            if (accessDataType == "Short Text")
+
+            if (accessDataType == "String")
             {
                 return "VARCHAR(MAX)";
             }
-            else if (accessDataType == "Date/Time")
+            else if (accessDataType == "Double")
+            {
+                return "Decimal(10,2)";
+            }
+            else if (accessDataType == "DateTime")
             {
                 return "DATETIME";
             }
-            else if (accessDataType == "Yes/No")
+            else if (accessDataType == "Boolean")
             {
                 return "BIT";
             }
-            else if (accessDataType == "Number")
+            else if (accessDataType == "Int32" || accessDataType == "Int16")
             {
                 return "INT";
             }
-            else if (accessDataType == "OLE Object")
+            else if (accessDataType == "Byte[]")
             {
                 return "VARCHAR(MAX)";
             }
@@ -243,7 +253,34 @@ namespace DPS.SchoolAdmin
                 return "NVARCHAR(255)"; // Default type
             }
         }
-        private void BulkInsertDataIntoSqlServer(OleDbConnection accessConnection, SqlConnection sqlConnection, string tableName)
+        private void BulkInsertDataIntoSqlServer(OleDbConnection accessConnection, SqlConnection sqlConnection, string tableName, DataTable dataTable)
+        {
+
+            using (SqlBulkCopy bulkCopy = new SqlBulkCopy(sqlConnection))
+            {
+                bulkCopy.DestinationTableName = tableName;
+
+                // Map columns if necessary
+                foreach (DataColumn column in dataTable.Columns)
+                {
+                    bulkCopy.ColumnMappings.Add(column.ColumnName, column.ColumnName);
+                }
+
+                // Perform bulk insert
+                bulkCopy.WriteToServer(dataTable);
+            }
+            //string selectQuery = $"SELECT * FROM [{tableName}]";
+
+            //using (OleDbCommand selectCommand = new OleDbCommand(selectQuery, accessConnection))
+            //using (OleDbDataAdapter adapter = new OleDbDataAdapter(selectCommand))
+            //using (DataTable dataTable = new DataTable())
+            //{
+            //    adapter.Fill(dataTable); // Fill the DataTable with Access data
+
+
+            //}
+        }
+        private DataTable GetDataFromTable(OleDbConnection accessConnection, string tableName)
         {
             string selectQuery = $"SELECT * FROM [{tableName}]";
 
@@ -252,20 +289,8 @@ namespace DPS.SchoolAdmin
             using (DataTable dataTable = new DataTable())
             {
                 adapter.Fill(dataTable); // Fill the DataTable with Access data
+                return dataTable;
 
-                using (SqlBulkCopy bulkCopy = new SqlBulkCopy(sqlConnection))
-                {
-                    bulkCopy.DestinationTableName = tableName;
-
-                    // Map columns if necessary
-                    foreach (DataColumn column in dataTable.Columns)
-                    {
-                        bulkCopy.ColumnMappings.Add(column.ColumnName, column.ColumnName);
-                    }
-
-                    // Perform bulk insert
-                    bulkCopy.WriteToServer(dataTable);
-                }
             }
         }
         private void InsertSelectedData(SqlConnection sqlConnection)
@@ -279,7 +304,7 @@ namespace DPS.SchoolAdmin
         }
         private void AddColumnToFeeReceiptPrint(OleDbConnection accessConnection)
         {
-            string alterTableQuery = "ALTER TABLE FeeReceiptPrint ADD COLUMN OnlineReceiptNumber NUMBER";
+            string alterTableQuery = "ALTER TABLE FeeReceiptPrint ADD COLUMN OnlineReceiptNumber Int";
 
             using (OleDbCommand alterTableCommand = new OleDbCommand(alterTableQuery, accessConnection))
             {
