@@ -10,9 +10,9 @@
     <title>DPS</title>
     <!-- plugins:css -->
 
-    <link rel="stylesheet" href="../StyleSheet/vendors/feather/feather.css">
-    <link rel="stylesheet" href="../StyleSheet/vendors/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="../StyleSheet/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../StyleSheet/vendors/feather/feather.css" />
+    <link rel="stylesheet" href="../StyleSheet/vendors/ti-icons/css/themify-icons.css" />
+    <link rel="stylesheet" href="../StyleSheet/vendors/css/vendor.bundle.base.css" />
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->

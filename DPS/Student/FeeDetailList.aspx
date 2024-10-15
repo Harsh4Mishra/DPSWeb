@@ -20,24 +20,26 @@
     <link href="../StyleSheet/css/vertical-layout-light/style.css" rel="stylesheet" />
     <!-- endinject -->
     <link rel="shortcut icon" type="image/x-icon" href="../Images/Icon/icon.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 <body>
     <form id="form1" runat="server">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-12" style="text-align: center; justify-items: center;">
-                    <table>
+                <div class="col-sm-12" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+                    <table style="margin: auto;">
                         <tr>
                             <td>
                                 <asp:Image ID="Image1" runat="server" Height="100px" Width="100px" /></td>
                             <td>
-                                <br />
                                 <asp:Label ID="lblName" runat="server" Font-Bold="true"></asp:Label><br />
                                 <asp:Label ID="lbladdress" runat="server" Font-Bold="false"></asp:Label><br />
-                                Email Id :
-                                <asp:Label ID="lblEmailID" runat="server" Font-Bold="true"></asp:Label>&nbsp;&nbsp;&nbsp;                                
-                                Contact No. :
-                                <asp:Label ID="lblContact" runat="server" Font-Bold="true"></asp:Label>
+                                <i class="fa fa-envelope"></i>:
+                                <asp:Label ID="lblEmailID" runat="server" Font-Bold="false"></asp:Label><br />
+                                <i class="fa fa-phone"></i>:
+                                <asp:Label ID="lblContact" runat="server" Font-Bold="false"></asp:Label>
 
 
                             </td>
@@ -59,6 +61,50 @@
                 <div class="col-md-flex">
                     <asp:Button ID="btnsave" Style="border-radius: 5px" class="btn btn-block btn-save font-weight-medium auth-form-btn" runat="server" ValidationGroup="Employee" Text="Search" OnClick="btnsave_Click" />
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                    <div class="table-responsive">
+                        <asp:GridView ID="GridView1" runat="server" AllowSorting="True" Width="100%" BackColor="White" BorderColor="#dbdade"
+                             BorderStyle="None" BorderWidth="1px" CellPadding="3" AutoGenerateColumns="false"
+                             EmptyDataText="No data found." ShowHeaderWhenEmpty="true">
+                            <Columns>
+                                <asp:TemplateField HeaderText="Select Fees">
+                                    <ItemTemplate>
+                                        <asp:CheckBox ID="chkIsActive" runat="server"  Enabled="true" />
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" Width="33%" />
+                                </asp:TemplateField>
+
+                                <asp:TemplateField HeaderText="Fee Month">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblIdDatabase" runat="server" Text='<%# Eval("FeeMonth") %>' />
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" Width="33%" />
+                                </asp:TemplateField>
+
+                                <asp:TemplateField HeaderText="TotalFee">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblName" runat="server" Text='<%# Eval("TotalFee") %>' />
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" Width="33%" />
+                                </asp:TemplateField>
+                            </Columns>
+                            <FooterStyle BackColor="White" ForeColor="#000066" />
+                            <HeaderStyle BackColor="#028dce" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Height="45px" />
+
+                            <PagerStyle HorizontalAlign="left" CssClass="paging" />
+                            <RowStyle ForeColor="black" Font-Size="small" Height="45px" />
+                            <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                            <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                            <SortedAscendingHeaderStyle BackColor="#007DBB" />
+                            <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                            <SortedDescendingHeaderStyle BackColor="#00547E" />
+                        </asp:GridView>
+                    </div>
+                </div>
+                <div class="col-sm-3"></div>
             </div>
         </div>
         <script src="../StyleSheet/vendors/js/vendor.bundle.base.js"></script>

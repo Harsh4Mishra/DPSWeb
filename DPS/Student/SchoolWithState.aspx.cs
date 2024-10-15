@@ -27,13 +27,14 @@ namespace DPS.Student
                 ddlState.Items.Clear();
 
                 // Add the default item
-                ddlState.Items.Insert(0, new ListItem("Select State", "0"));
+                
 
                 // Bind the DataTable to the DropDownList
                 ddlState.DataSource = dt;
                 ddlState.DataTextField = "Name";  // Field to display in the dropdown
                 ddlState.DataValueField = "ID";   // Field to use for postback
                 ddlState.DataBind();
+                ddlState.Items.Insert(0, new ListItem("Select State", "0"));
             }
             catch (Exception ex)
             {
@@ -53,13 +54,14 @@ namespace DPS.Student
                 ddlSchool.Items.Clear();
 
                 // Add the default item
-                ddlSchool.Items.Insert(0, new ListItem("Select School", "0"));
+                
 
                 // Bind the DataTable to the DropDownList
                 ddlSchool.DataSource = dt;
                 ddlSchool.DataTextField = "Name";  // Field to display in the dropdown
                 ddlSchool.DataValueField = "ID";   // Field to use for postback
                 ddlSchool.DataBind();
+                ddlSchool.Items.Insert(0, new ListItem("Select School", "0"));
             }
             catch (Exception ex)
             {

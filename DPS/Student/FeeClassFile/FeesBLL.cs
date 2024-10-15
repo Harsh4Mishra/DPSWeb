@@ -9,7 +9,7 @@ namespace DPS.Student.FeeClassFile
 {
     public class FeesBLL
     {
-        public DataTable GetFeeTransactionSummaryOffLine(string scholarNo)
+        public DataTable GetStudentDetailByScholarNo(string scholarNo)
         {
             try
             {
