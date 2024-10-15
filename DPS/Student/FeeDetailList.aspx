@@ -48,6 +48,10 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-sm-12 align-center justify-content-center text-center">
+                    <br />
+                    <h3>Fee List</h3>
+                </div>
                 <div class="col-md-4">
                     <label>Scholar Number</label><span style="color: red">*</span><br />
                     <div class="form-group">
@@ -59,6 +63,7 @@
                     &nbsp;&nbsp;&nbsp;
                 </div>
                 <div class="col-md-flex">
+                    <br />
                     <asp:Button ID="btnsave" Style="border-radius: 5px" class="btn btn-block btn-save font-weight-medium auth-form-btn" runat="server" ValidationGroup="Employee" Text="Search" OnClick="btnsave_Click" />
                 </div>
             </div>
@@ -105,6 +110,12 @@
                     </div>
                 </div>
                 <div class="col-sm-3"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 align-center justify-content-center text-center">
+                    <asp:Button ID="Button1" Style="border-radius: 5px" class="btn btn-block btn-save font-weight-medium auth-form-btn" runat="server" Text="Proceed" OnClick="Button1_Click" />
+                    <br /><br />
+                </div>
             </div>
         </div>
         <script src="../StyleSheet/vendors/js/vendor.bundle.base.js"></script>

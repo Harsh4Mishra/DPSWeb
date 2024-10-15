@@ -25,7 +25,7 @@ namespace DPS.Student.FeeClassFile
                 throw new ApplicationException($"An error occurred  {ex.Message}.", ex);
             }
         }
-        public (DataTable FeeDetails, DataTable MonthlyFees) StudentFeeParameterDetail(string scholarNo)
+        public DataSet StudentFeeParameterDetail(string scholarNo)
         {
             try
             {

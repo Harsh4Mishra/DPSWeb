@@ -37,10 +37,9 @@ namespace DPS.Student.FeeClassFile
 
             return dt;
         }
-        public (DataTable FeeDetails, DataTable MonthlyFees) StudentFeeParameterDetail(string scholarNo)
+        public DataSet StudentFeeParameterDetail(string scholarNo)
         {
-            DataTable feeDetailsTable = new DataTable();
-            DataTable monthlyFeesTable = new DataTable();
+            DataSet dataSet = new DataSet();
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -52,22 +51,13 @@ namespace DPS.Student.FeeClassFile
                     command.Parameters.AddWithValue("@ScholarNo", scholarNo);
 
                     connection.Open();
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        // First result set: #FeeDetails
-                        feeDetailsTable.Load(reader);
-
-                        // Check if there is a second result set
-                        if (reader.NextResult())
-                        {
-                            // Second result set: Monthly Fees
-                            monthlyFeesTable.Load(reader);
-                        }
-                    }
+                    
+                    SqlDataAdapter sda = new SqlDataAdapter(command);
+                    sda.Fill(dataSet);
                 }
             }
 
-            return (feeDetailsTable, monthlyFeesTable);
+            return dataSet;
         }
 
     }
