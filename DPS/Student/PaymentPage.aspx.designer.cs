@@ -96,6 +96,33 @@ namespace DPS.Student
         protected global::System.Web.UI.WebControls.TextBox txtSection;
 
         /// <summary>
+        /// txtFeeAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFeeAmount;
+
+        /// <summary>
+        /// txtFineAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFineAmount;
+
+        /// <summary>
+        /// txtfinalAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtfinalAmount;
+
+        /// <summary>
         /// GridView1 control.
         /// </summary>
         /// <remarks>

@@ -1,6 +1,8 @@
 ﻿using DPS.Student.FeeClassFile;
 using System;
 using System.Data;
+using System.Linq;
+using System.Web.DynamicData;
 
 namespace DPS.Student
 {
@@ -34,7 +36,36 @@ namespace DPS.Student
                         txtSection.Text = dt.Rows[0]["SectionName"].ToString();
                     }
 
-                    GridView1.DataSource = feedt;
+                    // Filter the DataTable based on monthsArray
+                    var filteredRows = feedt.AsEnumerable()
+                        .Where(row => monthsArray.Contains(row.Field<string>("FeeType")));
+
+                    // Create a new DataTable for the filtered results
+                    DataTable filteredDataTable = filteredRows.CopyToDataTable();
+
+                    // Calculate the sum of FeeAmount where FeeName != "Fine"
+                    decimal sumNotFine = filteredDataTable.AsEnumerable()
+                        .Where(row => row.Field<string>("FeeName") != "Fine")
+                        .Sum(row => row.Field<decimal>("FeeAmount"));
+
+                    // Calculate the sum of FeeAmount where FeeName = "Fine"
+                    decimal sumFine = filteredDataTable.AsEnumerable()
+                        .Where(row => row.Field<string>("FeeName") == "Fine")
+                        .Sum(row => row.Field<decimal>("FeeAmount"));
+
+                    int sumFeeValue = Convert.ToInt32(sumNotFine);
+                    int sumFineValue = Convert.ToInt32(sumFine);
+
+
+                    txtFeeAmount.Text = sumFeeValue.ToString();
+                    txtFineAmount.Text = sumFineValue.ToString();
+
+                    int FinalAmount = txtFeeAmount.Text == "" ? 0 : int.Parse(txtFeeAmount.Text) + txtFineAmount.Text == "" ? 0 : int.Parse(txtFineAmount.Text);
+
+                    txtfinalAmount.Text = FinalAmount.ToString();
+                   
+
+                    GridView1.DataSource = filteredDataTable;
                     GridView1.DataBind();
                 }
             }

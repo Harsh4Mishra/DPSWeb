@@ -38,78 +38,100 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <div class="section-header">Personal Details</div>
-            <div>
-                <label>Scholar No:</label>
-                <asp:TextBox ID="txtScholarNo" runat="server" CssClass="readonly-field" ReadOnly="true" />
-            </div>
-            <div>
-                <label>Student Name:</label>
-                <asp:TextBox ID="txtStudentName" runat="server" CssClass="readonly-field" ReadOnly="true" />
-            </div>
-            <div>
-                <label>Date of Birth:</label>
-                <asp:TextBox ID="txtDOB" runat="server" CssClass="readonly-field" ReadOnly="true" />
-            </div>
-            <div>
-                <label>Sex:</label>
-                <asp:TextBox ID="txtSex" runat="server" CssClass="readonly-field" ReadOnly="true" />
-            </div>
-            <div>
-                <label>Father's Name:</label>
-                <asp:TextBox ID="txtFatherName" runat="server" CssClass="readonly-field" ReadOnly="true" />
-            </div>
-            <div>
-                <label>Father's Phone:</label>
-                <asp:TextBox ID="txtFatherPhone" runat="server" CssClass="readonly-field" ReadOnly="true" />
-            </div>
-            <div>
-                <label>Class:</label>
-                <asp:TextBox ID="txtClass" runat="server" CssClass="readonly-field" ReadOnly="true" />
-            </div>
-            <div>
-                <label>Section:</label>
-                <asp:TextBox ID="txtSection" runat="server" CssClass="readonly-field" ReadOnly="true" />
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="section-header col-sm-12">Personal Details</div>
+                        <div class="col-sm-6">
+                            <label>Scholar No:</label>
+                            <asp:TextBox ID="txtScholarNo" runat="server" CssClass=" form-control readonly-field" ReadOnly="true" />
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Student Name:</label>
+                            <asp:TextBox ID="txtStudentName" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Date of Birth:</label>
+                            <asp:TextBox ID="txtDOB" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Sex:</label>
+                            <asp:TextBox ID="txtSex" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Father's Name:</label>
+                            <asp:TextBox ID="txtFatherName" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Father's Phone:</label>
+                            <asp:TextBox ID="txtFatherPhone" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Class:</label>
+                            <asp:TextBox ID="txtClass" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Section:</label>
+                            <asp:TextBox ID="txtSection" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Total Fee Amount:</label>
+                            <asp:TextBox ID="txtFeeAmount" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Fine Amount:</label>
+                            <asp:TextBox ID="txtFineAmount" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Final Amount:</label>
+                            <asp:TextBox ID="txtfinalAmount" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="section-header">Fees Details</div>
+                    <asp:GridView ID="GridView1" runat="server" AllowSorting="True" Width="100%" BackColor="White" BorderColor="#dbdade"
+                        BorderStyle="None" BorderWidth="1px" CellPadding="3" AutoGenerateColumns="false"
+                        EmptyDataText="No data found." ShowHeaderWhenEmpty="true">
+                        <Columns>
+                            <asp:TemplateField HeaderText="Name">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblFeeName" runat="server" Text='<%# Eval("FeeName") %>' />
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center" Width="33%" />
+                            </asp:TemplateField>
+
+                            <asp:TemplateField HeaderText="Type">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblFeeType" runat="server" Text='<%# Eval("FeeType") %>' />
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center" Width="33%" />
+                            </asp:TemplateField>
+
+                            <asp:TemplateField HeaderText="Amount">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblName" runat="server" Text='<%# Eval("FeeAmount") %>' />
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center" Width="33%" />
+                            </asp:TemplateField>
+                        </Columns>
+                        <FooterStyle BackColor="White" ForeColor="#000066" />
+                        <HeaderStyle BackColor="#028dce" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Height="45px" />
+
+                        <PagerStyle HorizontalAlign="left" CssClass="paging" />
+                        <RowStyle ForeColor="black" Font-Size="small" Height="45px" />
+                        <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                        <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                        <SortedAscendingHeaderStyle BackColor="#007DBB" />
+                        <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                        <SortedDescendingHeaderStyle BackColor="#00547E" />
+                    </asp:GridView>
+                </div>
             </div>
 
-            <div class="section-header">Fees Details</div>
-            <asp:GridView ID="GridView1" runat="server" AllowSorting="True" Width="100%" BackColor="White" BorderColor="#dbdade"
-                BorderStyle="None" BorderWidth="1px" CellPadding="3" AutoGenerateColumns="false"
-                EmptyDataText="No data found." ShowHeaderWhenEmpty="true">
-                <Columns>
-                    <asp:TemplateField HeaderText="Name">
-                        <ItemTemplate>
-                            <asp:Label ID="lblFeeName" runat="server" Text='<%# Eval("FeeName") %>' />
-                        </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Center" Width="33%" />
-                    </asp:TemplateField>
 
-                    <asp:TemplateField HeaderText="Type">
-                        <ItemTemplate>
-                            <asp:Label ID="lblFeeType" runat="server" Text='<%# Eval("FeeType") %>' />
-                        </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Center" Width="33%" />
-                    </asp:TemplateField>
 
-                    <asp:TemplateField HeaderText="Amount">
-                        <ItemTemplate>
-                            <asp:Label ID="lblName" runat="server" Text='<%# Eval("FeeAmount") %>' />
-                        </ItemTemplate>
-                        <ItemStyle HorizontalAlign="Center" Width="33%" />
-                    </asp:TemplateField>
-                </Columns>
-                <FooterStyle BackColor="White" ForeColor="#000066" />
-                <HeaderStyle BackColor="#028dce" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Height="45px" />
-
-                <PagerStyle HorizontalAlign="left" CssClass="paging" />
-                <RowStyle ForeColor="black" Font-Size="small" Height="45px" />
-                <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
-                <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                <SortedAscendingHeaderStyle BackColor="#007DBB" />
-                <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                <SortedDescendingHeaderStyle BackColor="#00547E" />
-            </asp:GridView>
         </div>
         <script src="../StyleSheet/vendors/js/vendor.bundle.base.js"></script>
         <!-- endinject -->
