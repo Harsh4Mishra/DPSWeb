@@ -54,6 +54,24 @@ namespace DPS.SuperAdmin.PaymentConfigurationClassFIle
             }
             return dt;
         }
+        public DataTable GetSchoolPaymentConfigurationByClientId(int id)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("GET_SCHOOL_PAYMENT_CONFIGURATION_BY_CLIENT_ID", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Id", id);
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+            return dt;
+        }
 
         // Method to add a new school payment configuration
         public int AddSchoolPaymentConfiguration(SchoolPaymentConfiguration config)

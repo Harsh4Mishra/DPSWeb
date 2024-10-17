@@ -40,6 +40,11 @@
     <form id="form1" runat="server">
         <div class="container-fluid">
             <div class="row">
+                <div class="col-sm-12 justify-content-center text-center align-center">
+                    <br />
+                    <h3>Payment Details</h3>
+                    <br />
+                </div>
                 <div class="col-sm-6">
                     <div class="row">
                         <div class="section-header col-sm-12">Personal Details</div>
@@ -56,7 +61,7 @@
                             <asp:TextBox ID="txtDOB" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
                         </div>
                         <div class="col-sm-6">
-                            <label>Sex:</label>
+                            <label>Gender:</label>
                             <asp:TextBox ID="txtSex" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
                         </div>
                         <div class="col-sm-6">
@@ -86,6 +91,9 @@
                         <div class="col-sm-6">
                             <label>Final Amount:</label>
                             <asp:TextBox ID="txtfinalAmount" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
+                        </div>
+                        <div class="col-sm-6">
+                            <asp:Button ID="Button1" Style="border-radius: 5px" Visible="false" class="btn btn-block btn-save font-weight-medium auth-form-btn" runat="server" Text="Pay" OnClick="Button1_Click" />
                         </div>
                     </div>
                 </div>

@@ -1498,6 +1498,8 @@
     <Compile Include="SchoolAdmin\TransactionClassFile\TransactionDAL.cs" />
     <Compile Include="Student\FeeClassFile\FeesBLL.cs" />
     <Compile Include="Student\FeeClassFile\FeesDAL.cs" />
+    <Compile Include="Student\FeeClassFile\Payrequest.cs" />
+    <Compile Include="Student\FeeClassFile\Payverify.cs" />
     <Compile Include="Student\FeeDetailList.aspx.cs">
       <DependentUpon>FeeDetailList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

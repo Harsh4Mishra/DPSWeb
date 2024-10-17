@@ -41,6 +41,22 @@ namespace DPS.SuperAdmin.PaymentConfigurationClassFIle
                 throw new ApplicationException($"An error occurred while retrieving the school payment configuration with ID {id}.", ex);
             }
         }
+        public DataTable GetSchoolPaymentConfigurationByClientId(int id)
+        {
+            try
+            {
+                // Instantiate SchoolPaymentConfigurationDAL and call the method
+                SchoolPaymentConfigurationDAL dal = new SchoolPaymentConfigurationDAL();
+                DataTable result = dal.GetSchoolPaymentConfigurationByClientId(id);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (logging mechanism not shown here)
+                // LogException(ex);
+                throw new ApplicationException($"An error occurred while retrieving the school payment configuration with ID {id}.", ex);
+            }
+        }
 
         // Method to add a new school payment configuration
         public int AddSchoolPaymentConfiguration(SchoolPaymentConfiguration config)

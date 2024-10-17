@@ -30,6 +30,7 @@ namespace DPS.Student
                         string imagepath = "../"+dt.Rows[0]["LOGO"].ToString();
                         Image1.ImageUrl=imagepath;
                         Session["databaseName"] = dt.Rows[0]["ID_DATABASE"].ToString();
+                        Session["SchoolName"] = school;
                     }
                 }
             }
@@ -47,6 +48,7 @@ namespace DPS.Student
                 Session["MyDataTable"] = ds.Tables[0];
                 GridView1.DataSource = ds.Tables[1];
                 GridView1.DataBind();
+                Button1.Visible = true;
                 
             }
             catch (ApplicationException ex)
@@ -64,7 +66,7 @@ namespace DPS.Student
         protected void Button1_Click(object sender, EventArgs e)
         {
             List<string> selectedFeeMonths = new List<string>();
-
+            
             foreach (GridViewRow row in GridView1.Rows)
             {
                 CheckBox chkIsActive = (CheckBox)row.FindControl("chkIsActive");
@@ -80,7 +82,7 @@ namespace DPS.Student
             // For demonstration, let's show a message with selected FeeMonths
             if (selectedFeeMonths.Count > 0)
             {
-                string selectedMonths = string.Join(", ", selectedFeeMonths);
+                string selectedMonths = string.Join(",", selectedFeeMonths);
                 // Redirect to the target page with the selected months as a query string
                 Response.Redirect($"PaymentPage.aspx?selectedMonths={Server.UrlEncode(selectedMonths)}");
             }
