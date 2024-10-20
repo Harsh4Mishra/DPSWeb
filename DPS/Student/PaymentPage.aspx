@@ -93,7 +93,7 @@
                             <asp:TextBox ID="txtfinalAmount" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
                         </div>
                         <div class="col-sm-6">
-                            <asp:Button ID="Button1" Style="border-radius: 5px" Visible="false" class="btn btn-block btn-save font-weight-medium auth-form-btn" runat="server" Text="Pay" OnClick="Button1_Click" />
+                            <asp:Button ID="Button1" Style="border-radius: 5px" class="btn btn-block btn-save font-weight-medium auth-form-btn" runat="server" Text="Pay" OnClick="Button1_Click" />
                         </div>
                     </div>
                 </div>

@@ -23,7 +23,7 @@ namespace DPS.Student
         FeesBLL fees = new FeesBLL();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            if (!IsPostBack)
             {
                 string selectedMonths = Request.QueryString["selectedMonths"];
 
@@ -33,9 +33,9 @@ namespace DPS.Student
                     // Split the selected months into an array
                     string[] monthsArray = selectedMonths.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                     DataTable dt = new DataTable();
-                    string scholarno=Session["StudentPayFee"].ToString();
+                    string scholarno = Session["StudentPayFee"].ToString();
                     dt = fees.GetStudentDetailByScholarNo(scholarno);
-                    if(dt.Rows.Count>0)
+                    if (dt.Rows.Count > 0)
                     {
                         // Example personal details
                         txtScholarNo.Text = dt.Rows[0]["Scholarno"].ToString();
@@ -79,7 +79,7 @@ namespace DPS.Student
                     int FinalAmount = sumFeeValue + sumFineValue;
 
                     txtfinalAmount.Text = FinalAmount.ToString();
-                   
+
 
                     GridView1.DataSource = noFineDt;
                     GridView1.DataBind();
@@ -89,8 +89,7 @@ namespace DPS.Student
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            
-
+            MakePaymentThroughNTTDATA();
         }
         public void MakePaymentThroughNTTDATA()
         {
@@ -103,12 +102,13 @@ namespace DPS.Student
             DataTable dt = new DataTable();
             int schoolID = int.Parse(Session["SchoolName"].ToString());
             dt = dal.GetSchoolPaymentConfigurationByClientId(schoolID);
-            
+            string databaseName = Session["databaseName"].ToString();
+
             if (dt.Rows.Count > 0)
             {
                 //string q = "";
                 string payInstrument = "";
-                
+
                 try
                 {
                     int requestTransactionresult = 0;
@@ -146,8 +146,8 @@ namespace DPS.Student
 
                     ex.udf1 = requestTransactionresult.ToString();
                     ex.udf2 = txtScholarNo.Text;
-                    ex.udf3 = "";
-                    ex.udf4 = "";
+                    ex.udf3 = schoolID.ToString();
+                    ex.udf4 = databaseName;
                     ex.udf5 = "";
 
                     pr.headDetails = hd;
@@ -213,8 +213,8 @@ namespace DPS.Student
 
                     string encData = query.Get("encData");
                     // string  encData="5500FEA2F09DA7EF128CFE7D2D01F2533B8D8211ACDCEEE850A7943CF46D4A18FF153971B83983A1EBF8B48F36315222E33FED142A05BE8FD890492ED759983B173801C801A79B390C17E01354CA0752087CF1E71316E5F442FADA985C46B06DB8462928DB18BC8E7714EC6128340CB8690A185F590E47658C293FA2E73ADC77899D6E7B119E17005E625CF2258A6A74363EAA59A43FF785505A77D163DA232B1D2250C4A1A1C755E10D5991A2DB5B3C";
-                    string passphrase1 = ConfigurationManager.AppSettings["ResAESKey"].ToString();
-                    string salt1 = ConfigurationManager.AppSettings["ResAESKey"].ToString();
+                    string passphrase1 = dt.Rows[0]["RESPONSE_AES_KEY"].ToString();//ConfigurationManager.AppSettings["ResAESKey"].ToString();
+                    string salt1 = dt.Rows[0]["RESPONSE_AES_KEY"].ToString();//ConfigurationManager.AppSettings["ResAESKey"].ToString();
                     string Decryptval = decrypt(encData, passphrase1, salt1, iv, iterations);
                     //{ "atomTokenId":15000000085830,"responseDetails":{ "txnStatusCode":"OTS0000","txnMessage":"SUCCESS","txnDescription":"ATOM TOKEN ID HAS BEEN GENERATED SUCCESSFULLY"} }
                     Payverify.Payverify objectres = new Payverify.Payverify();
@@ -225,18 +225,38 @@ namespace DPS.Student
 
                     DateTime now = DateTime.Now;
                     // string TranTrackid = Convert.ToDateTime(DateTime.Now).ToString("yyyyMMddhhmmss");
-                    TransactionDetailModel transactionDetailModel = new TransactionDetailModel();
-                    transactionDetailModel.Amount = int.Parse(separatedValues[5].ToString());
-                    transactionDetailModel.AppReferenceID = separatedValues[4].ToString();
-                    transactionDetailModel.DSN = separatedValues[0].ToString();
-                    transactionDetailModel.TransactionId = TranTrackid;
-                    transactionDetailModel.TransactionDate = DateTime.Parse(separatedValues[6].ToString());
-                    transactionDetailModel.CreatedBy = separatedValues[0].ToString();
-                    transactionDetailModel.TokenID = Tok_id;
+                    FeeTransactionRequest ftr = new FeeTransactionRequest();
+                    ftr.ScholarNumber = txtScholarNo.Text;
+                    ftr.StudentName = txtStudentName.Text;
+                    ftr.Amount = int.Parse(txtfinalAmount.Text);
+                    ftr.TransactionID = md.merchTxnId;
+                    ftr.TransactionDate = DateTime.Now;
+                    ftr.AtomId = Tok_id;
+                    ftr.T1 = t1;
+                    ftr.T2 = t2;
+                    ftr.T3 = t3;
+                    ftr.T4 = t4;
+                    ftr.T5 = t5;
+                    ftr.T6 = t6;
+                    ftr.T7 = t7;
+                    ftr.T8 = t8;
+                    ftr.T9 = t9;
+                    ftr.T10 = t10;
+                    ftr.T11 = t11;
+                    ftr.T12 = t12;
+                    ftr.T13 = t13;
+                    ftr.T14 = t14;
+                    ftr.T15 = t15;
+                    ftr.T16 = t16;
+                    ftr.T17 = t17;
+                    ftr.T18 = t18;
+                    ftr.T19 = t19;
+                    ftr.T20 = t20;
+                    ftr.CreatedBy = txtScholarNo.Text;
 
-                    
-                    int tempResult = paymentBLL.InsertRequestedPaymentTempAsync(transactionDetailModel);
-                    
+                    FeesBLL feesBLL = new FeesBLL();
+                    int tempResult = feesBLL.AddFeeTransactionRequest(ftr);
+
                     if (tempResult > 0 && tempResult != 0)
                     {
                         ex.udf1 = tempResult.ToString();
@@ -246,7 +266,7 @@ namespace DPS.Student
                         //string returnUrl = ConfigurationManager.AppSettings["ResponseURL"].ToString() + "?id={" + tempResult +"}&q={"+encrypted+"}";
                         //string returnUrl = $"{ConfigurationManager.AppSettings["ResponseURL"].ToString()}?id={Uri.EscapeDataString(tempResult.ToString())}&q={Uri.EscapeDataString(encrypted)}";
 
-                        string queryString = $"?id={Uri.EscapeDataString(tempResult.ToString())}QWERTY={Uri.EscapeDataString(qValue)}";
+                        string queryString = $"?id={Uri.EscapeDataString(tempResult.ToString())}";
                         string baseUrl = ConfigurationManager.AppSettings["ResponseURL"].ToString();
                         // Combine base URL with query string
                         string returnUrl = baseUrl + queryString;
@@ -262,7 +282,7 @@ namespace DPS.Student
                 }};
                 let atom = new AtomPaynetz(options, 'uat');
             ";
-                        paymentBLL.InsertRequestedPaymentURLDetailsAsync(json, Encryptval);
+                        feesBLL.AddFeeTransactionValue(json, Encryptval);
                         ClientScript.RegisterStartupScript(this.GetType(), "openPay", script, true);
                         // return script;
                     }

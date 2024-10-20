@@ -95,6 +95,7 @@
     <Content Include="SchoolAdmin\SchoolDashboard.aspx" />
     <Content Include="SchoolAdmin\StudentSync.aspx" />
     <Content Include="Student\FeeDetailList.aspx" />
+    <Content Include="Student\FundTransferSuccess.aspx" />
     <Content Include="Student\PaymentPage.aspx" />
     <Content Include="Student\SchoolWithState.aspx" />
     <Content Include="StyleSheet\css\vertical-layout-light\style.css" />
@@ -1498,7 +1499,11 @@
     <Compile Include="SchoolAdmin\TransactionClassFile\TransactionDAL.cs" />
     <Compile Include="Student\FeeClassFile\FeesBLL.cs" />
     <Compile Include="Student\FeeClassFile\FeesDAL.cs" />
+    <Compile Include="Student\FeeClassFile\FeeTransactionModel.cs" />
+    <Compile Include="Student\FeeClassFile\FeeTransactionRequest.cs" />
+    <Compile Include="Student\FeeClassFile\FeeTransDetailOnline.cs" />
     <Compile Include="Student\FeeClassFile\Payrequest.cs" />
+    <Compile Include="Student\FeeClassFile\Payresponse.cs" />
     <Compile Include="Student\FeeClassFile\Payverify.cs" />
     <Compile Include="Student\FeeDetailList.aspx.cs">
       <DependentUpon>FeeDetailList.aspx</DependentUpon>
@@ -1506,6 +1511,13 @@
     </Compile>
     <Compile Include="Student\FeeDetailList.aspx.designer.cs">
       <DependentUpon>FeeDetailList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Student\FundTransferSuccess.aspx.cs">
+      <DependentUpon>FundTransferSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student\FundTransferSuccess.aspx.designer.cs">
+      <DependentUpon>FundTransferSuccess.aspx</DependentUpon>
     </Compile>
     <Compile Include="Student\PaymentPage.aspx.cs">
       <DependentUpon>PaymentPage.aspx</DependentUpon>
