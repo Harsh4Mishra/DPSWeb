@@ -47,6 +47,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="row">
+                        <div id="personalDetail" runat="server" visible="false">
                         <div class="section-header col-sm-12">Personal Details</div>
                         <div class="col-sm-6">
                             <label>Scholar No:</label>
@@ -80,6 +81,8 @@
                             <label>Section:</label>
                             <asp:TextBox ID="txtSection" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
                         </div>
+                            </div>
+                        <div class="section-header col-sm-12">Fee Amount</div>
                         <div class="col-sm-6">
                             <label>Total Fee Amount:</label>
                             <asp:TextBox ID="txtFeeAmount" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
@@ -92,7 +95,7 @@
                             <label>Final Amount:</label>
                             <asp:TextBox ID="txtfinalAmount" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-6"><br />
                             <asp:Button ID="Button1" Style="border-radius: 5px" class="btn btn-block btn-save font-weight-medium auth-form-btn" runat="server" Text="Pay" OnClick="Button1_Click" />
                         </div>
                     </div>

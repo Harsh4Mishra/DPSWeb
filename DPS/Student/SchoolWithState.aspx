@@ -35,11 +35,12 @@
                                     <%--<h4><b></b></h4>--%>
                                 </div>
 
-                                <h6 class="font-weight-light">Sign in to continue.</h6>
+                                <h6 class="font-weight-light">Select State</h6>
                                 <div class="form-group">
                                     <asp:DropDownList ID="ddlState" runat="server" ValidationGroup="Employee" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlState_SelectedIndexChanged" ></asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please select state." ControlToValidate="ddlState" ForeColor="Red" ValidationGroup="Employee" InitialValue="0" ToolTip="Please select a state."></asp:RequiredFieldValidator>
                                 </div>
+                                <h6 class="font-weight-light">Select School</h6>
                                 <div class="form-group">
                                     <asp:DropDownList ID="ddlSchool" runat="server" ValidationGroup="Employee" CssClass="form-control"></asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Please select state." ControlToValidate="ddlSchool" ForeColor="Red" ValidationGroup="Employee" InitialValue="0" ToolTip="Please select a state."></asp:RequiredFieldValidator>

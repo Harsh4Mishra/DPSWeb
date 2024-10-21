@@ -38,28 +38,21 @@ namespace DPS.Student
 
         protected void btnsave_Click(object sender, EventArgs e)
         {
-            try
+            FeesBLL fees = new FeesBLL();
+            DataTable dt = new DataTable();
+            string scholarno = txtScholarNo.Text;
+            dt = fees.GetStudentDetailByScholarNo(scholarno);
+            if (dt.Rows.Count > 0)
             {
-                Session["StudentPayFee"] = txtScholarNo.Text;
-                FeesBLL fees = new FeesBLL();
-                // Call the method to get the FeeDetails and MonthlyFees
-                DataSet ds = fees.StudentFeeParameterDetail(txtScholarNo.Text);
-
-                Session["MyDataTable"] = ds.Tables[0];
-                GridView1.DataSource = ds.Tables[1];
-                GridView1.DataBind();
-                Button1.Visible = true;
-                
-            }
-            catch (ApplicationException ex)
-            {
-                // Handle the application exception
-                Console.WriteLine(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                // Handle any other exceptions
-                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+                // Example personal details
+                TextBox1.Text = dt.Rows[0]["Scholarno"].ToString();
+                txtStudentName.Text = dt.Rows[0]["StudentName"].ToString();
+                txtDOB.Text = dt.Rows[0]["DOB"].ToString();
+                txtSex.Text = dt.Rows[0]["Sex"].ToString();
+                txtFatherName.Text = dt.Rows[0]["FatherName"].ToString();
+                txtFatherPhone.Text = dt.Rows[0]["FatherPhone"].ToString();
+                txtClass.Text = dt.Rows[0]["ClassName"].ToString();
+                txtSection.Text = dt.Rows[0]["SectionName"].ToString();
             }
         }
 
@@ -90,6 +83,34 @@ namespace DPS.Student
             {
                 string failureScript = "alert('Please select feemonth');";
                 ClientScript.RegisterStartupScript(this.GetType(), "FailureAlert", failureScript, true);
+            }
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Session["StudentPayFee"] = txtScholarNo.Text;
+                FeesBLL fees = new FeesBLL();
+                // Call the method to get the FeeDetails and MonthlyFees
+                DataSet ds = fees.StudentFeeParameterDetail(txtScholarNo.Text);
+
+                Session["MyDataTable"] = ds.Tables[0];
+                GridView1.DataSource = ds.Tables[1];
+                GridView1.DataBind();
+                Button1.Visible = true;
+                feelist.Visible = true;
+                proceedbutton.Visible = true;
+            }
+            catch (ApplicationException ex)
+            {
+                // Handle the application exception
+                Console.WriteLine(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                // Handle any other exceptions
+                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
             }
         }
     }

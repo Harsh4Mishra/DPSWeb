@@ -20,9 +20,8 @@
     <link href="../StyleSheet/css/vertical-layout-light/style.css" rel="stylesheet" />
     <!-- endinject -->
     <link rel="shortcut icon" type="image/x-icon" href="../Images/Icon/icon.png">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <form id="form1" runat="server">
@@ -50,7 +49,7 @@
             <div class="row">
                 <div class="col-sm-12 align-center justify-content-center text-center">
                     <br />
-                    <h3>Fee List</h3>
+                    <h3>Fee List</h3><br />
                 </div>
                 <div class="col-md-4">
                     <label>Scholar Number</label><span style="color: red">*</span><br />
@@ -59,25 +58,64 @@
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Provide Scholar Number" ControlToValidate="txtScholarNo" ForeColor="Red" ValidationGroup="Employee" ToolTip="Provide Scholar Number"></asp:RequiredFieldValidator>
                     </div>
                 </div>
-                <div class="col-md-flex">
-                    &nbsp;&nbsp;&nbsp;
-                </div>
-                <div class="col-md-flex">
+                <div class="col-sm-4">
                     <br />
                     <asp:Button ID="btnsave" Style="border-radius: 5px" class="btn btn-block btn-save font-weight-medium auth-form-btn" runat="server" ValidationGroup="Employee" Text="Search" OnClick="btnsave_Click" />
                 </div>
             </div>
             <div class="row">
+                <div class="section-header col-sm-12"><b>Personal Details</b></div>
+                <div class="col-sm-4">
+                    <label>Scholar No:</label>
+                    <asp:TextBox ID="TextBox1" runat="server" CssClass=" form-control readonly-field" ReadOnly="true" />
+                </div>
+                <div class="col-sm-4">
+                    <label>Student Name:</label>
+                    <asp:TextBox ID="txtStudentName" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
+                </div>
+                <div class="col-sm-4">
+                    <label>Date of Birth:</label>
+                    <asp:TextBox ID="txtDOB" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
+                </div>
+                <div class="col-sm-4">
+                    <label>Gender:</label>
+                    <asp:TextBox ID="txtSex" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
+                </div>
+                <div class="col-sm-4">
+                    <label>Father's Name:</label>
+                    <asp:TextBox ID="txtFatherName" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
+                </div>
+                <div class="col-sm-4">
+                    <label>Father's Phone:</label>
+                    <asp:TextBox ID="txtFatherPhone" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
+                </div>
+                <div class="col-sm-4">
+                    <label>Class:</label>
+                    <asp:TextBox ID="txtClass" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
+                </div>
+                <div class="col-sm-4">
+                    <label>Section:</label>
+                    <asp:TextBox ID="txtSection" runat="server" CssClass="form-control readonly-field" ReadOnly="true" />
+                </div>
+                <div class="col-sm-4">
+                    <br />
+                    <asp:Button ID="Button2" Style="border-radius: 5px" class="btn btn-block btn-save font-weight-medium auth-form-btn" runat="server" Text="Continue" OnClick="Button2_Click" />
+                </div>
+            </div>
+            <div class="row" id="feelist" runat="server" visible="false">
                 <div class="col-sm-3"></div>
                 <div class="col-sm-6">
                     <div class="table-responsive">
+                        <br />
+                        <br />
+                        <center><br /><b>Fees List</b></center><br />
                         <asp:GridView ID="GridView1" runat="server" AllowSorting="True" Width="100%" BackColor="White" BorderColor="#dbdade"
-                             BorderStyle="None" BorderWidth="1px" CellPadding="3" AutoGenerateColumns="false"
-                             EmptyDataText="No data found." ShowHeaderWhenEmpty="true">
+                            BorderStyle="None" BorderWidth="1px" CellPadding="3" AutoGenerateColumns="false"
+                            EmptyDataText="No data found." ShowHeaderWhenEmpty="true">
                             <Columns>
                                 <asp:TemplateField HeaderText="Select Fees">
                                     <ItemTemplate>
-                                        <asp:CheckBox ID="chkIsActive" runat="server"  Enabled="true" />
+                                        <asp:CheckBox ID="chkIsActive" runat="server" Enabled="true" />
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="33%" />
                                 </asp:TemplateField>
@@ -111,12 +149,14 @@
                 </div>
                 <div class="col-sm-3"></div>
             </div>
-            <div class="row">
+            <div class="row" id="proceedbutton" runat="server" visible="false">
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4 align-center justify-content-center text-center">
-                    <br /><br />
+                    <br />
+                    <br />
                     <asp:Button ID="Button1" Style="border-radius: 5px" Visible="false" class="btn btn-block btn-save font-weight-medium auth-form-btn" runat="server" Text="Proceed" OnClick="Button1_Click" />
-                    <br /><br />
+                    <br />
+                    <br />
                 </div>
                 <div class="col-sm-4"></div>
             </div>
