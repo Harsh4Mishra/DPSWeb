@@ -96,7 +96,6 @@ namespace DPS.Student.FeeClassFile
                     command.Parameters.AddWithValue("@Amount", feeTransaction.Amount);
                     command.Parameters.AddWithValue("@TransactionID", feeTransaction.TransactionID);
                     command.Parameters.AddWithValue("@TransactionDate", feeTransaction.TransactionDate);
-                    command.Parameters.AddWithValue("@TransactionDate", feeTransaction.TransactionDate);
                     command.Parameters.AddWithValue("@AtomID", feeTransaction.TransactionDate);
                     command.Parameters.AddWithValue("@T1", feeTransaction.T1);
                     command.Parameters.AddWithValue("@T2", feeTransaction.T2);
