@@ -208,7 +208,7 @@ namespace DPS.Student.FeeClassFile
                     command.Parameters.AddWithValue("@TransactionID", model.TransactionID);
                     command.Parameters.AddWithValue("@TransactionDate", model.TransactionDate);
                     command.Parameters.AddWithValue("@IsReverified", model.IsReverified);
-                    command.Parameters.AddWithValue("@CreatedBy", model.CreatedBy);
+                    command.Parameters.AddWithValue("@CreatedBy", model.ScholarNo);
                     command.Parameters.AddWithValue("@BankName", model.BankName);
                     command.Parameters.AddWithValue("@BankTransaction", model.BankTransaction);
                     command.Parameters.AddWithValue("@AtomID", model.AtomID);

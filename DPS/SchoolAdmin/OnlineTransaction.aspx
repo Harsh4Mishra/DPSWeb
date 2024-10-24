@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div class="container-fluid">
         <div class="form-wrapper">
             <div class="row" style="background-color: transparent">
@@ -121,14 +121,12 @@
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="10%" />
                                 </asp:TemplateField>
-
-                                <asp:TemplateField HeaderText="Online Ref No." SortExpression="OnlineRefNo">
+                                <asp:TemplateField HeaderText="Fee Amt" SortExpression="TotFeeAmt">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblOnlineRefNo" runat="server" Text='<%# Eval("OnlineRefNo") %>' />
+                                        <asp:Label ID="lblTotFeeAmt" runat="server" Text='<%# Eval("TotFeeAmt") %>' />
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="10%" />
                                 </asp:TemplateField>
-
                                 <asp:TemplateField HeaderText="Fine Amt" SortExpression="FineAmt">
                                     <ItemTemplate>
                                         <asp:Label ID="lblFineAmt" runat="server" Text='<%# Eval("FineAmt") %>' />
@@ -142,22 +140,23 @@
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="10%" />
                                 </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Recived Amt" SortExpression="TotRecAmt">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblTotRecAmt" runat="server" Text='<%# Eval("TotRecAmt") %>' />
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" Width="10%" />
+                                </asp:TemplateField>
+
+                                <asp:TemplateField HeaderText="Online Ref No." SortExpression="OnlineRefNo">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblOnlineRefNo" runat="server" Text='<%# Eval("OnlineRefNo") %>' />
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" Width="10%" />
+                                </asp:TemplateField>
 
                                 <asp:TemplateField HeaderText="Online Amt" SortExpression="OnlineAmt">
                                     <ItemTemplate>
                                         <asp:Label ID="lblOnlineAmt" runat="server" Text='<%# Eval("OnlineAmt") %>' />
-                                    </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" Width="10%" />
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Fee Amt" SortExpression="TotFeeAmt">
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblTotFeeAmt" runat="server" Text='<%# Eval("TotFeeAmt") %>' />
-                                    </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" Width="10%" />
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Recived Amt" SortExpression="TotRecAmt">
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblTotRecAmt" runat="server" Text='<%# Eval("TotRecAmt") %>' />
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="10%" />
                                 </asp:TemplateField>

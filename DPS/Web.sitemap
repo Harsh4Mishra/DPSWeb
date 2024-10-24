@@ -26,9 +26,9 @@
 			<siteMapNode url="SchoolAdmin/FeeSync.aspx" title="Fee"  description="Fee Page" />
 		</siteMapNode>
 		<siteMapNode url="" title="Transaction"  description="DPS Page">
-			<siteMapNode url="SchoolAdmin/OnlineTransaction.aspx" title="Initial"  description="Initial Page" />
-			<siteMapNode url="SchoolAdmin/OfflineTransaction.aspx" title="Student"  description="Student Page" />
-			<siteMapNode url="SchoolAdmin/BothTransaction.aspx" title="Fee"  description="Fee Page" />
+			<siteMapNode url="SchoolAdmin/OnlineTransaction.aspx" title="Online Transaction"  description="Initial Page" />
+			<siteMapNode url="SchoolAdmin/OfflineTransaction.aspx" title="Offline Transaction"  description="Student Page" />
+			<siteMapNode url="SchoolAdmin/BothTransaction.aspx" title="Both Transaction"  description="Fee Page" />
 		</siteMapNode>
 		<siteMapNode url="SchoolAdmin/Profile.aspx" title="Profile"  description="Profile Page" />
 		<siteMapNode url="SchoolAdmin/ResetPassword.aspx" title="Reset Password"  description="Reset Password Page" />

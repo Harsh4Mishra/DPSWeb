@@ -11,6 +11,7 @@ using System.Text;
 using System.Web;
 using System.Web.DynamicData;
 using System.Web.Script.Serialization;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DPS.Student
 {
@@ -264,7 +265,6 @@ namespace DPS.Student
 
 
                     var query = HttpUtility.ParseQueryString(uri.Query);
-
                     string encData = query.Get("encData");
                     // string  encData="5500FEA2F09DA7EF128CFE7D2D01F2533B8D8211ACDCEEE850A7943CF46D4A18FF153971B83983A1EBF8B48F36315222E33FED142A05BE8FD890492ED759983B173801C801A79B390C17E01354CA0752087CF1E71316E5F442FADA985C46B06DB8462928DB18BC8E7714EC6128340CB8690A185F590E47658C293FA2E73ADC77899D6E7B119E17005E625CF2258A6A74363EAA59A43FF785505A77D163DA232B1D2250C4A1A1C755E10D5991A2DB5B3C";
                     string passphrase1 = dt.Rows[0]["RESPONSE_AES_KEY"].ToString();//ConfigurationManager.AppSettings["ResAESKey"].ToString();
@@ -395,8 +395,9 @@ namespace DPS.Student
                         string custMobile = txtFatherPhone.Text;
                         //string returnUrl = ConfigurationManager.AppSettings["ResponseURL"].ToString() + "?id={" + tempResult +"}&q={"+encrypted+"}";
                         //string returnUrl = $"{ConfigurationManager.AppSettings["ResponseURL"].ToString()}?id={Uri.EscapeDataString(tempResult.ToString())}&q={Uri.EscapeDataString(encrypted)}";
-
-                        string queryString = $"?id={Uri.EscapeDataString(tempResult.ToString())}";
+                        string valueenc = tempResult.ToString() + "^" + schoolID.ToString();
+                        string encryptedValueenc = EncryptDecrypt(valueenc);
+                        string queryString = $"?id={encryptedValueenc}";
                         string baseUrl = ConfigurationManager.AppSettings["ResponseURL"].ToString();
                         // Combine base URL with query string
                         string returnUrl = baseUrl + queryString;
@@ -444,6 +445,18 @@ namespace DPS.Student
                 Response.Redirect(errorUrl);
             }
         }
+
+        public static string EncryptDecrypt(string text)
+        {
+            char key = 'K';
+            char[] output = new char[text.Length];
+            for (int i = 0; i < text.Length; i++)
+            {
+                output[i] = (char)(text[i] ^ key); // XOR operation
+            }
+            return new string(output);
+        }
+
         #region EncryptTransaction
 
         public String Encrypt(String plainText, String passphrase, String salt, Byte[] iv, int iterations)

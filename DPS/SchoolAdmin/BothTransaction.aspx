@@ -121,14 +121,12 @@
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="8%" />
                                 </asp:TemplateField>
-
-                                <asp:TemplateField HeaderText="Online Ref No." SortExpression="OnlineRefNo">
+                                <asp:TemplateField HeaderText="Fee Amt" SortExpression="TotFeeAmt">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblOnlineRefNo" runat="server" Text='<%# Eval("OnlineRefNo") %>' />
+                                        <asp:Label ID="lblTotFeeAmt" runat="server" Text='<%# Eval("TotFeeAmt") %>' />
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="8%" />
                                 </asp:TemplateField>
-
                                 <asp:TemplateField HeaderText="Fine Amt" SortExpression="FineAmt">
                                     <ItemTemplate>
                                         <asp:Label ID="lblFineAmt" runat="server" Text='<%# Eval("FineAmt") %>' />
@@ -139,6 +137,12 @@
                                 <asp:TemplateField HeaderText="Discount Amt" SortExpression="TotDisAmt">
                                     <ItemTemplate>
                                         <asp:Label ID="lblTotDisAmt" runat="server" Text='<%# Eval("TotDisAmt") %>' />
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" Width="8%" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Recived Amt" SortExpression="TotRecAmt">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblTotRecAmt" runat="server" Text='<%# Eval("TotRecAmt") %>' />
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="8%" />
                                 </asp:TemplateField>
@@ -161,15 +165,9 @@
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="8%" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Fee Amt" SortExpression="TotFeeAmt">
+                                <asp:TemplateField HeaderText="Online Ref No." SortExpression="OnlineRefNo">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblTotFeeAmt" runat="server" Text='<%# Eval("TotFeeAmt") %>' />
-                                    </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" Width="8%" />
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Recived Amt" SortExpression="TotRecAmt">
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblTotRecAmt" runat="server" Text='<%# Eval("TotRecAmt") %>' />
+                                        <asp:Label ID="lblOnlineRefNo" runat="server" Text='<%# Eval("OnlineRefNo") %>' />
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="8%" />
                                 </asp:TemplateField>

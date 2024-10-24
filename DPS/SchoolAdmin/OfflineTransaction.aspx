@@ -122,43 +122,39 @@
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="10%" />
                                 </asp:TemplateField>
-
-                                <asp:TemplateField HeaderText="Cheque Amt" SortExpression="ChequeAmt">
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblChequeAmt" runat="server" Text='<%# Eval("ChequeAmt") %>' />
-                                    </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" Width="10%" />
-                                </asp:TemplateField>
-
-                                <asp:TemplateField HeaderText="Fine Amt" SortExpression="FineAmt">
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblFineAmt" runat="server" Text='<%# Eval("FineAmt") %>' />
-                                    </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" Width="10%" />
-                                </asp:TemplateField>
-
-                                <asp:TemplateField HeaderText="Discount Amt" SortExpression="TotDisAmt">
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblTotDisAmt" runat="server" Text='<%# Eval("TotDisAmt") %>' />
-                                    </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" Width="10%" />
-                                </asp:TemplateField>
-
-                                <asp:TemplateField HeaderText="Cash Amt" SortExpression="CashRecAmt">
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblCashRecAmt" runat="server" Text='<%# Eval("CashRecAmt") %>' />
-                                    </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" Width="10%" />
-                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Fee Amt" SortExpression="TotFeeAmt">
                                     <ItemTemplate>
                                         <asp:Label ID="lblTotFeeAmt" runat="server" Text='<%# Eval("TotFeeAmt") %>' />
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="10%" />
                                 </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Fine Amt" SortExpression="FineAmt">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblFineAmt" runat="server" Text='<%# Eval("FineAmt") %>' />
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" Width="10%" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Discount Amt" SortExpression="TotDisAmt">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblTotDisAmt" runat="server" Text='<%# Eval("TotDisAmt") %>' />
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" Width="10%" />
+                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Recived Amt" SortExpression="TotRecAmt">
                                     <ItemTemplate>
                                         <asp:Label ID="lblTotRecAmt" runat="server" Text='<%# Eval("TotRecAmt") %>' />
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" Width="10%" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Cheque Amt" SortExpression="ChequeAmt">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblChequeAmt" runat="server" Text='<%# Eval("ChequeAmt") %>' />
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" Width="10%" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Cash Amt" SortExpression="CashRecAmt">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblCashRecAmt" runat="server" Text='<%# Eval("CashRecAmt") %>' />
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="10%" />
                                 </asp:TemplateField>

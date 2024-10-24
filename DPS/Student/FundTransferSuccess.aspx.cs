@@ -1,4 +1,5 @@
 ﻿using DPS.Student.FeeClassFile;
+using DPS.SuperAdmin.PaymentConfigurationClassFIle;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -19,15 +20,27 @@ namespace DPS.Student
             {
                 try
                 {
+                    SchoolPaymentConfigurationDAL dal = new SchoolPaymentConfigurationDAL();
+
+
+                    string querystringData = Request.QueryString["id"].ToString();
+                    string decriptedData = EncryptDecrypt(querystringData);
+                    string[] arrValue = decriptedData.Split('^');
+
+                    int schoolId = int.Parse(arrValue[1].ToString());
+                    DataTable dt = new DataTable();
+                    dt = dal.GetSchoolPaymentConfigurationByClientId(schoolId);
+
+
                     NameValueCollection nvc = Request.Form;
                     byte[] iv = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
                     int iterations = 65536;
                     int keysize = 256;
                     // string plaintext = "{\"payInstrument\":{\"headDetails\":{\"version\":\"OTSv1.1\",\"payMode\":\"SL\",\"channel\":\"ECOMM\",\"api\":\"SALE\",\"stage\":1,\"platform\":\"WEB\"},\"merchDetails\":{\"merchId\":8952,\"userId\":\"\",\"password\":\"Test@123\",\"merchTxnId\":\"1234567890\",\"merchType\":\"R\",\"mccCode\":562,\"merchTxnDate\":\"2019-12-24 20:46:00\"},\"payDetails\":{\"prodDetails\":[{\"prodName\": \"NSE\",\"prodAmount\": 10.00}],\"amount\":10.00,\"surchargeAmount\":0.00,\"totalAmount\":10.00,\"custAccNo\":null,\"custAccIfsc\":null,\"clientCode\":\"12345\",\"txnCurrency\":\"INR\",\"remarks\":null,\"signature\":\"7c643bbd9418c23e972f5468377821d9f0486601e1749930816c409fddbc7beb5d2943d832b6382d3d4a8bd7755e914922fb85aa8c234210bf2993566686a46a\"},\"responseUrls\":{\"returnUrl\":\"http://172.21.21.136:9001/payment/ots/v1/merchresp\",\"cancelUrl\":null,\"notificationUrl\":null},\"payModeSpecificData\":{\"subChannel\":[\"BQ\"],\"bankDetails\":null,\"emiDetails\":null,\"multiProdDetails\":null,\"cardDetails\":null},\"extras\":{\"udf1\":null,\"udf2\":null,\"udf3\":null,\"udf4\":null,\"udf5\":null},\"custDetails\":{\"custFirstName\":null,\"custLastName\":null,\"custEmail\":\"test@gm.com\",\"custMobile\":null,\"billingInfo\":null}}} ";
-                    string hashAlgorithm = ConfigurationManager.AppSettings["HashAlgorithm"].ToString();
+                    string hashAlgorithm = dt.Rows[0]["HASH_ALGORITHM"].ToString(); //Session["HASH_ALGORITHM"].ToString();//ConfigurationManager.AppSettings["HashAlgorithm"].ToString();
                     string encdata = nvc["encdata"];
-                    string passphrase1 = ConfigurationManager.AppSettings["ResAESKey"].ToString();
-                    string salt1 = ConfigurationManager.AppSettings["ResAESKey"].ToString();
+                    string passphrase1 = dt.Rows[0]["RESPONSE_AES_KEY"].ToString();
+                    string salt1 = dt.Rows[0]["RESPONSE_AES_KEY"].ToString();
                     string Decryptval = decrypt(encdata, passphrase1, salt1, iv, iterations);
 
                     //   Decryptval = "{\"merchDetails\":{\"merchId\":8952,\"merchTxnId\":\"test000123\",\"merchTxnDate\":\"2021-12-03T15:24:35\"},\"payDetails\":{\"atomTxnId\":11000000174314,\"prodDetails\":[{\"prodName\":\"NSE\",\"prodAmount\":100.0}],\"amount\":100.00,\"surchargeAmount\":1.18,\"totalAmount\":101.18,\"custAccNo\":\"213232323\",\"clientCode\":\"1234\",\"txnCurrency\":\"INR\",\"signature\":\"2b12c8bfc0e3a8268eddb6f406bf4187d4d0a0064d0355446986511453922c27e38367a97fff85863d48c147a8218e9e2d5003ab121f6f61ce3914030c60caac\",\"txnInitDate\":\"2021-12-03 15:24:36\",\"txnCompleteDate\":\"2021-12-03 15:24:40\"},\"payModeSpecificData\":{\"subChannel\":[\"NB\"],\"bankDetails\":{\"otsBankId\":2001,\"bankTxnId\":\"qjUiPQ2bMQhjPXmzE1on\",\"otsBankName\":\"Atom Bank\"}},\"extras\":{\"udf1\":\"\",\"udf2\":\"\",\"udf3\":\"\",\"udf4\":\"\",\"udf5\":\"\"},\"custDetails\":{\"custEmail\":\"sagar.gopale@atomtech.in\",\"custMobile\":\"8976286911\",\"billingInfo\":{}},\"responseDetails\":{\"statusCode\":\"OTS0000\",\"message\":\"SUCCESS\",\"description\":\"TRANSACTION IS SUCCESSFUL.\"}}";
@@ -56,8 +69,8 @@ namespace DPS.Student
                         FeesBLL feeBLL = new FeesBLL();
                         DataTable dt2 = new DataTable();
                         //clientid = Resudf3;
-                        string querystringData = Request.QueryString["id"].ToString();
-                        int idValue = int.Parse(querystringData);
+                        
+                        int idValue = int.Parse(arrValue[0].ToString());
 
                         dt2 = feeBLL.GetFeeTransactionRequestById(idValue);
                         if (dt2 != null)
@@ -324,7 +337,16 @@ namespace DPS.Student
             }
         }
         #region EncryptionMethod
-
+        public static string EncryptDecrypt(string text)
+        {
+            char key = 'K';
+            char[] output = new char[text.Length];
+            for (int i = 0; i < text.Length; i++)
+            {
+                output[i] = (char)(text[i] ^ key); // XOR operation
+            }
+            return new string(output);
+        }
         public String Encrypt(String plainText, String passphrase, String salt, Byte[] iv, int iterations)
         {
             var plainBytes = Encoding.UTF8.GetBytes(plainText);
