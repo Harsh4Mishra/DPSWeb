@@ -235,10 +235,17 @@ namespace DPS.Student.FeeClassFile
                     command.Parameters.AddWithValue("@T18", model.T18);
                     command.Parameters.AddWithValue("@T19", model.T19);
                     command.Parameters.AddWithValue("@T20", model.T20);
+                    // Add output parameter
+                    SqlParameter outputParam = new SqlParameter("@RowsAffected", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    command.Parameters.Add(outputParam);
 
                     connection.Open();
-                    // Execute the command
-                    return command.ExecuteNonQuery(); // Returns the number of rows affected
+                    command.ExecuteNonQuery();
+
+                    return (int)outputParam.Value; // Returns the number of rows affected
                 }
             }
         }
@@ -266,8 +273,14 @@ namespace DPS.Student.FeeClassFile
                         command.Parameters.AddWithValue("@FeeTypeSeqNo", detail.FeeTypeSeqNo);
                         command.Parameters.AddWithValue("@FeeHeadSeqNo", detail.FeeHeadSeqNo);
 
-                        // Execute the command and accumulate the number of affected rows
-                        totalRowsAffected += command.ExecuteNonQuery();
+                        SqlParameter outputParam = new SqlParameter("@RowsAffected", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(outputParam);
+
+                        command.ExecuteNonQuery();
+                        totalRowsAffected += (int)outputParam.Value;
                     }
                 }
             }

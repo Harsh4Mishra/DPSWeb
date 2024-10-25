@@ -212,9 +212,12 @@ namespace DPS.Student
                                 }
                             }
 
+                            Session["NoFineDataTable"] = noFineDt;
+
                             int receiptNo = feeBLL.AddFeeReceiptPrintOnline(DateTime.Now, ftr.ScholarNumber);
                             if (receiptNo > 0)
                             {
+                                Session["ReceiptNo"] = receiptNo.ToString();
                                 decimal amountDecimaln = Convert.ToDecimal(amount);
                                 int amountIntn = Convert.ToInt32(amountDecimaln);
                                 var amountInwords = "Rupees " + ConvertNumbertoWords(amountIntn) + " Only.";
