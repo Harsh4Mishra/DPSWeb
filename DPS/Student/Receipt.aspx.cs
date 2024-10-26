@@ -12,20 +12,6 @@ namespace DPS.Student
 {
     public partial class Receipt : System.Web.UI.Page
     {
-        public string LogoPath { get; set; }
-        protected string SchoolName { get; set; }
-        protected string SchoolAddress { get; set; }
-        protected string SchoolPhone { get; set; }
-        protected string SchoolEmail { get; set; }
-        protected string ReceiptNo { get; set; }
-        protected string ScholarNo { get; set; }
-        protected string StudentName { get; set; }
-        protected string FatherName { get; set; }
-        protected string FeeCategory { get; set; }
-        protected string StudentClass { get; set; }
-        protected string StudentSection { get; set; }
-        protected string StudentStream { get; set; }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -37,12 +23,12 @@ namespace DPS.Student
                 dt = schoolBLL.GetSchoolById(schoolID);
                 if (dt.Rows.Count > 0)
                 {
-                    SchoolName = dt.Rows[0]["NAME"].ToString();
-                    SchoolAddress = dt.Rows[0]["ADDRESS"].ToString();
-                    SchoolEmail = dt.Rows[0]["EMAIL_ID"].ToString();
-                    SchoolPhone = dt.Rows[0]["PHONE_NUMBER"].ToString();
+                    lblSchoolName.Text = dt.Rows[0]["NAME"].ToString();
+                    lblSchoolAddress.Text = dt.Rows[0]["ADDRESS"].ToString();
+                    lblSchoolEmail.Text = dt.Rows[0]["EMAIL_ID"].ToString();
+                    lblSchoolPhone.Text = dt.Rows[0]["PHONE_NUMBER"].ToString();
                     string imagepath = "../" + dt.Rows[0]["LOGO"].ToString();
-                    LogoPath = imagepath;
+                    Image1.ImageUrl = imagepath;
                     Session["databaseName"] = dt.Rows[0]["ID_DATABASE"].ToString();
                    
                 }
@@ -50,19 +36,19 @@ namespace DPS.Student
                 FeesBLL fees = new FeesBLL();
                 DataTable dt2 = new DataTable();
                 dt2 = fees.GetStudentDetailByScholarNo(scholarNo);
-                if (dt.Rows.Count > 0)
+                if (dt2.Rows.Count > 0)
                 {
                     // Example personal details
-                    ScholarNo = dt.Rows[0]["Scholarno"].ToString();
-                    StudentName = dt.Rows[0]["StudentName"].ToString();
-                    FeeCategory = dt.Rows[0]["Caste"].ToString();
-                    StudentStream = dt.Rows[0]["AppliedStream"].ToString();
-                    FatherName = dt.Rows[0]["FatherName"].ToString();
-                    StudentClass = dt.Rows[0]["ClassName"].ToString();
-                    StudentSection = dt.Rows[0]["SectionName"].ToString();
+                    lblScholarNo.Text = dt2.Rows[0]["Scholarno"].ToString();
+                    lblStudentName.Text = dt2.Rows[0]["StudentName"].ToString();
+                    lblfeecategory.Text = dt2.Rows[0]["Caste"].ToString();
+                    lblStudentStream.Text = dt2.Rows[0]["AppliedStream"].ToString();
+                    lblFatherName.Text = dt2.Rows[0]["FatherName"].ToString();
+                    lblstudentclass.Text = dt2.Rows[0]["ClassName"].ToString();
+                    lblstudentsection.Text = dt2.Rows[0]["SectionName"].ToString();
                 }
-                ReceiptNo = Session["ReceiptNo"].ToString();
-
+                lblreceiptNo.Text = Session["ReceiptNo"].ToString();
+                
 
                 DataTable feedt = (DataTable)Session["NoFineDataTable"];
 

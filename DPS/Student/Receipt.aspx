@@ -49,20 +49,21 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <br /><br /><br /><br /><br /><br />
         <div class="container">
             <header class="header" style="display: flex; align-items: center; justify-content: space-between;">
-                <img src="<%= LogoPath %>" alt="School Logo" style="max-width: 100px; margin-right: 20px;">
+                <asp:Image ID="Image1" runat="server" style="max-width: 100px; margin-right: 20px;" />
                 <div style="text-align: center; flex-grow: 1; min-width: 200px;">
-                    <h1><%= SchoolName %></h1>
-                    <p><%= SchoolAddress %></p>
-                    <p>Phone: <%= SchoolPhone %> | Email: <%= SchoolEmail %></p>
+                    <h1><asp:Label ID="lblSchoolName" runat="server" Text="Label"></asp:Label></h1>
+                    <p><asp:Label ID="lblSchoolAddress" runat="server" Text="Label"></asp:Label></p>
+                    <p>Phone: <asp:Label ID="lblSchoolPhone" runat="server" Text="Label"></asp:Label> | Email: <asp:Label ID="lblSchoolEmail" runat="server" Text="Label"></asp:Label></p>
                 </div>
             </header>
             
             <hr style="border: 1px solid #007bff; margin: 0 0 20px;">
 
             <div style="text-align: right; margin-bottom: 15px;">
-                <p><strong>Receipt No:</strong> <%= ReceiptNo %></p>
+                <p><strong>Receipt No:</strong> <asp:Label ID="lblreceiptNo" runat="server" Text="Label"></asp:Label></p>
                 <p><strong>Date:</strong> <span id="date"><%= DateTime.Now.ToString("yyyy-MM-dd") %></span></p>
             </div>
 
@@ -70,26 +71,26 @@
                 <h2>Student Details</h2>
                 <div style="display: flex; justify-content: space-between;">
                     <div style="width: 48%; display: flex; flex-direction: column;">
-                        <p><strong>Scholar No:</strong> <%= ScholarNo %></p>
-                        <p><strong>Name:</strong> <%= StudentName %></p>
-                        <p><strong>Father Name:</strong> <%= FatherName %></p>
-                        <p><strong>Fee Category:</strong> <%= FeeCategory %></p>
+                        <p><strong>Scholar No:</strong> <asp:Label ID="lblScholarNo" runat="server" Text="Label"></asp:Label></p>
+                        <p><strong>Name:</strong> <asp:Label ID="lblStudentName" runat="server" Text="Label"></asp:Label></p>
+                        <p><strong>Father Name:</strong> <asp:Label ID="lblFatherName" runat="server" Text="Label"></asp:Label></p>
+                        <p><strong>Fee Category:</strong><asp:Label ID="lblfeecategory" runat="server" Text="Label"></asp:Label></p>
                     </div>
                     <div style="width: 48%; display: flex; flex-direction: column;">
-                        <p><strong>Class:</strong> <%= StudentClass %></p>
-                        <p><strong>Section:</strong> <%= StudentSection %></p>
-                        <p><strong>Stream:</strong> <%= StudentStream %></p>
+                        <p><strong>Class:</strong> <asp:Label ID="lblstudentclass" runat="server" Text="Label"></asp:Label></p>
+                        <p><strong>Section:</strong> <asp:Label ID="lblstudentsection" runat="server" Text="Label"></asp:Label></p>
+                        <p><strong>Stream:</strong> <asp:Label ID="lblStudentStream" runat="server" Text="Label"></asp:Label></p>
                     </div>
                 </div>
             </div>
 
             <div class="details">
                 <h2>Fee Details</h2>
-                <asp:GridView ID="GridViewFeeDetails" runat="server" AutoGenerateColumns="False">
+                <asp:GridView ID="GridViewFeeDetails" runat="server" AutoGenerateColumns="False" Width="100%">
                     <Columns>
                         <asp:BoundField DataField="FeeType" HeaderText="Fee Type" />
-                        <asp:BoundField DataField="Description" HeaderText="Description" />
-                        <asp:BoundField DataField="Amount" HeaderText="Amount" />
+                        <asp:BoundField DataField="FeeName" HeaderText="Fee Name" />
+                        <asp:BoundField DataField="FeeAmount" HeaderText="Fee Amount" />
                     </Columns>
                 </asp:GridView>
             </div>
