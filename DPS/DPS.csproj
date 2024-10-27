@@ -94,6 +94,7 @@
     <Content Include="SchoolAdmin\ResetPassword.aspx" />
     <Content Include="SchoolAdmin\SchoolDashboard.aspx" />
     <Content Include="SchoolAdmin\StudentSync.aspx" />
+    <Content Include="Script\School.sql" />
     <Content Include="Student\FeeDetailList.aspx" />
     <Content Include="Student\FundTransferSuccess.aspx" />
     <Content Include="Student\PaymentPage.aspx" />

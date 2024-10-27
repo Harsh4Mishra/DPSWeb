@@ -98,6 +98,25 @@ namespace DPS.SuperAdmin.SchoolDatabaseClassFile
                 throw new ApplicationException($"An error occurred while deleting the school with ID {id}.", ex);
             }
         }
+        public int DeleteCurrentSchoolDatabase(int id, string deletedBy)
+        {
+            if (string.IsNullOrWhiteSpace(deletedBy))
+                throw new ArgumentException("DeletedBy cannot be null or empty", nameof(deletedBy));
+
+            try
+            {
+                // Instantiate SchoolDAL and call the method
+                SchoolDatabaseDAL schoolDatabaseDAL = new SchoolDatabaseDAL();
+                int result = schoolDatabaseDAL.DeleteCurrentSchoolDatabase(id, deletedBy);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (logging mechanism not shown here)
+                // LogException(ex);
+                throw new ApplicationException($"An error occurred while deleting the school with ID {id}.", ex);
+            }
+        }
 
         // Method to update active status for a list of school IDs
         public int UpdateSchoolDatabaseActive(List<int> ids, List<bool> isActive, string updatedBy)

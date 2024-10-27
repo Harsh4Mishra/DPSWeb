@@ -185,6 +185,7 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Action">
                                     <ItemTemplate>
+                                        <asp:LinkButton ID="LinkButton3" runat="server" Style="background-color: #ffab15; border: 0px solid black; border-radius: 5px" CommandName="SyncCommand" CommandArgument='<%# Eval("ID") %>' OnClick="LinkButtonSync_Click"><i class="fa fa-exchange" style="color:white;font-size:small;padding:5px"></i></asp:LinkButton>
                                         <asp:LinkButton ID="LinkButton1" runat="server" Style="background-color: #028dce; border: 0px solid black; border-radius: 5px" CommandName="EditCommand" CommandArgument='<%# Eval("ID") %>' OnClick="LinkButtonEdit_Click"><i class="fa fa-pencil" style="color:white;font-size:small;padding:5px"></i></asp:LinkButton>
                                         <asp:LinkButton ID="LinkButton2" runat="server" Style="background-color: red; border: 0px solid black; border-radius: 5px" CommandName="DeleteCommand" CommandArgument='<%# Eval("ID") %>' OnClick="LinkButtonDelete_Click"><i class="fa fa-trash" style="color:white;font-size:small;padding:5px"></i></asp:LinkButton>
                                     </ItemTemplate>

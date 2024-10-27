@@ -118,6 +118,22 @@ namespace DPS.SuperAdmin.SchoolDatabaseClassFile
                 }
             }
         }
+        public int DeleteCurrentSchoolDatabase(int id, string deletedBy)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("DELETE_CURRENT_SCHOOL_DATABASE_MASTER", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@Id", id);
+                    command.Parameters.AddWithValue("@DELETED_BY", deletedBy);
+
+                    connection.Open();
+                    return command.ExecuteNonQuery();
+                }
+            }
+        }
 
         // Method to update active status for a school Database
         public int UpdateSchoolDatabaseActive(int id, bool isActive, string updatedBy)

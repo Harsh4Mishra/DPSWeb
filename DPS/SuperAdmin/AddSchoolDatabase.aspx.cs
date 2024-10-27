@@ -19,7 +19,7 @@ namespace DPS.SuperAdmin
             {
                 // Generate a unique file name based on the current timestamp
                 string timestamp = DateTime.Now.ToString("ddMMyyyyHHmmss");
-                txtName.Text = timestamp;
+                txtName.Text = "CID"+timestamp;
                 BindSchools();
                 GenerateAcademicYears();
             }

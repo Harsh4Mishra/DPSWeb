@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DPS.SchoolAdmin
 {
@@ -15,11 +16,32 @@ namespace DPS.SchoolAdmin
             {
                 string currentPageUrl = Request.Url.AbsolutePath;
                 string schoolName=Session["schoolName"].ToString();
-                lblSchoolName.Text=schoolName;
+
+                lblSchoolName.Text = GetInitials(schoolName);
+                lblMainSchoolName.Text = schoolName;
                 lblLogoText.Text=schoolName[0].ToString();
                 // Highlight the menu item corresponding to the current page
                 HighlightMenuItem(currentPageUrl);
             }
+        }
+        public string GetInitials(string input)
+        {
+            // Split the input string by spaces
+            string[] words = input.Split(' ');
+
+            // Initialize a result string
+            string result = "";
+
+            // Loop through each word and take the first letter
+            foreach (string word in words)
+            {
+                if (!string.IsNullOrEmpty(word)) // Check if the word is not empty
+                {
+                    result += char.ToUpper(word[0]); // Append the uppercase first letter
+                }
+            }
+
+            return result;
         }
         private void HighlightMenuItem(string currentPageUrl)
         {

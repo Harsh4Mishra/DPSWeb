@@ -14,6 +14,7 @@
                     <h4><b>Add School Database</b></h4>
                     <br />
                 </div>
+                
                 <div class="col-md-4">
                     <label>Select School</label><span style="color: red">*</span><br />
                     <div class="form-group">

@@ -1,4 +1,5 @@
 ﻿using DPS.SuperAdmin.SchoolClassFile;
+using DPS.SuperAdmin.SchoolDatabaseClassFile;
 using iTextSharp.text;
 using iTextSharp.text.html.simpleparser;
 using iTextSharp.text.pdf;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
@@ -73,12 +75,12 @@ namespace DPS.SuperAdmin
         }
         protected void LinkButtonPublish_Click(object sender, EventArgs e)
         {
-            
+
 
             try
             {
                 List<int> checkedSchoolIds = new List<int>();
-                List<bool> isActives=new List<bool>();
+                List<bool> isActives = new List<bool>();
 
                 foreach (GridViewRow row in GridView1.Rows)
                 {
@@ -87,13 +89,13 @@ namespace DPS.SuperAdmin
 
                     if (chkSelect != null)
                     {
-                            // Retrieve the School ID from the DataKeys
-                            Label lblId = (Label)row.FindControl("lblId");
-                            int schoolId = Convert.ToInt32(lblId.Text);
-                            checkedSchoolIds.Add(schoolId);
-                            bool isActive = chkSelect.Checked == true ? true : false;
-                            isActives.Add(isActive);
-                        
+                        // Retrieve the School ID from the DataKeys
+                        Label lblId = (Label)row.FindControl("lblId");
+                        int schoolId = Convert.ToInt32(lblId.Text);
+                        checkedSchoolIds.Add(schoolId);
+                        bool isActive = chkSelect.Checked == true ? true : false;
+                        isActives.Add(isActive);
+
                     }
                 }
                 string updatedBy = "Admin"; // Example value for updatedBy
@@ -139,6 +141,87 @@ namespace DPS.SuperAdmin
             GridView1.PageSize = newSize;
             BindClient();
         }
+        protected void LinkButtonSync_Click(object sender, EventArgs e)
+        {
+            LinkButton btn = (LinkButton)sender;
+            string commandArgument = btn.CommandArgument;
+            Session["SyncClientID"] = commandArgument;
+
+            string timestamp = DateTime.Now.ToString("ddMMyyyyHHmmss");
+            string database = "CID" + timestamp;
+            SchoolDatabaseBLL schooldbBLL = new SchoolDatabaseBLL();
+            string academicYear = GetCurrentAcademicYear();
+            schooldbBLL.DeleteCurrentSchoolDatabase(int.Parse(commandArgument.ToString()), "SuperAdmin");
+            schooldbBLL.AddSchoolDatabase(int.Parse(commandArgument.ToString()), database, "SuperAdmin", academicYear, true);
+
+
+
+            string connectionString = "Server=DESKTOP-MB1QN8B\\SQLEXPRESS;Integrated Security=true;"; // Use appropriate connection string
+            string dbName = database; // Name of the database to create
+            /*string sqlFilePath = @"../Script/School.sql";*/ // Path to your .sql file
+            string sqlFilePath = Server.MapPath("~/Script/School.sql");
+
+
+            try
+            {
+                // Step 1: Create Database
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand createDbCommand = new SqlCommand($"CREATE DATABASE {dbName}", connection);
+                    createDbCommand.ExecuteNonQuery();
+                }
+
+                // Step 2: Execute .sql file
+                string sql = File.ReadAllText(sqlFilePath);
+                string[] sqlCommands = sql.Split(new[] { "GO" }, StringSplitOptions.RemoveEmptyEntries);
+
+                using (SqlConnection connection = new SqlConnection($"{connectionString}Database={dbName};"))
+                {
+                    connection.Open();
+                    foreach (var commandText in sqlCommands)
+                    {
+                        string trimmedCommand = commandText.Trim(); // Trim whitespace
+                        if (!string.IsNullOrEmpty(trimmedCommand)) // Check if not empty
+                        {
+                            using (SqlCommand executeSqlCommand = new SqlCommand(trimmedCommand, connection))
+                            {
+                                executeSqlCommand.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+                SchoolBLL scBLL = new SchoolBLL();
+                scBLL.UpdateSchoolDbSyncronized(int.Parse(commandArgument.ToString()), "SuperAdmin");
+                string successScript = "alert('Database Created and Syncronized successfully!');";
+                ClientScript.RegisterStartupScript(this.GetType(), "SuccessAlert", successScript, true);
+                BindClient();
+            }
+            catch (Exception ex)
+            {
+                string successScript = "alert('" + ex.Message + "');";
+                ClientScript.RegisterStartupScript(this.GetType(), "ErrorAlert", successScript, true);
+            }
+
+
+
+            // Handle the LinkButton click event as needed
+            // Response.Redirect("EditClient.aspx");
+        }
+        public string GetCurrentAcademicYear()
+        {
+            var currentDate = DateTime.Now;
+            int year = currentDate.Year;
+
+            if (currentDate.Month >= 4) // April or later
+            {
+                return $"{year}-{year + 1}";
+            }
+            else // Before April
+            {
+                return $"{year - 1}-{year}";
+            }
+        }
         protected void LinkButtonEdit_Click(object sender, EventArgs e)
         {
             LinkButton btn = (LinkButton)sender;
@@ -159,12 +242,12 @@ namespace DPS.SuperAdmin
             BindClient();
             //Response.Redirect("EditGroup.aspx");
         }
-        protected  void btnsave_Click(object sender, EventArgs e)
+        protected void btnsave_Click(object sender, EventArgs e)
         {
             try
             {
                 int schoolID = int.Parse(Session["DeleteClientID"].ToString());
-              
+
                 // Instantiate SchoolBLL and call the UpdateSchool method
                 SchoolBLL schoolBLL = new SchoolBLL();
                 int result = schoolBLL.DeleteSchool(schoolID, "Admin");
