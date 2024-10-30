@@ -14101,7 +14101,7 @@ input[type="button"].btn-block {
 .breadcrumb {
     display: flex;
     flex-wrap: wrap;
-    padding: 1.00rem 1.13rem;
+    padding: 0.50rem 1.13rem;
     font-size: 0.875rem;
     list-style: none;
     background-color: #028dce;

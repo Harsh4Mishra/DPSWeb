@@ -11,73 +11,88 @@ namespace DPS.Common
         {
 
         }
-
+        public bool IsTodayBeforeTargetDate(DateTime targetDate)
+        {
+            return DateTime.Today < targetDate;
+        }
         protected void Button1_Click(object sender, EventArgs e)
         {
             try
             {
-                SchoolBLL schoolBLL = new SchoolBLL();
-                DataTable dt = new DataTable();
-                dt = schoolBLL.GetSchoolDetailsByEmail(txtexampleInputEmail1.Text);
-                if (dt.Rows != null)
+                DateTime inputDate = new DateTime(2025, 10, 30); // Replace with your input date
+
+                if (!IsTodayBeforeTargetDate(inputDate))
                 {
-                    if (int.Parse(dt.Rows[0]["PASSWORD_ATTEMPTS"].ToString()) <= 5)
+                     string errorScript = $"alert('Please Pay AMU Charges');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "ErrorAlert", errorScript, true);
+                }
+                else
+                {
+                    SchoolBLL schoolBLL = new SchoolBLL();
+                    DataTable dt = new DataTable();
+                    dt = schoolBLL.GetSchoolDetailsByEmail(txtexampleInputEmail1.Text);
+                    if (dt.Rows != null)
                     {
-                        var hashKey = dt.Rows[0]["PASSWORD_HASH_KEY"].ToString();//mployeeList.PasswordHashKey;
-                        var saltKey = dt.Rows[0]["PASSWORD_SALT_KEY"].ToString();//employeeList.PasswordSaltKey;
-                        AesService aesCryptoService = new AesService();
-                        var UpdatedHashKey = aesCryptoService.EncryptString(saltKey, txtexampleInputPassword1.Text);
-                        if (UpdatedHashKey == hashKey)
+                        if (int.Parse(dt.Rows[0]["PASSWORD_ATTEMPTS"].ToString()) <= 5)
                         {
-                            string clientID= dt.Rows[0]["ID"].ToString();
-                            string schoolName = dt.Rows[0]["NAME"].ToString();
-                            string emailId = dt.Rows[0]["EMAIL_ID"].ToString();
-                            string logo = dt.Rows[0]["LOGO"].ToString();
-                            string databaseName = dt.Rows[0]["ID_DATABASE"].ToString();
-                            string academicYear = dt.Rows[0]["ACADEMIC_YEAR"].ToString();
-
-                            Session["schoolName"] = schoolName;
-                            Session["emailId"] = emailId;
-                            Session["logo"]= logo;
-                            Session["databaseName"] = databaseName;
-                            Session["academicYear"] = academicYear;
-                            Session["ClientID"] = clientID;
-
-                            if(schoolName == "DPS")
+                            var hashKey = dt.Rows[0]["PASSWORD_HASH_KEY"].ToString();//mployeeList.PasswordHashKey;
+                            var saltKey = dt.Rows[0]["PASSWORD_SALT_KEY"].ToString();//employeeList.PasswordSaltKey;
+                            AesService aesCryptoService = new AesService();
+                            var UpdatedHashKey = aesCryptoService.EncryptString(saltKey, txtexampleInputPassword1.Text);
+                            if (UpdatedHashKey == hashKey)
                             {
-                                Response.Redirect("../SuperAdmin/IndexPage.aspx");
+                                string clientID = dt.Rows[0]["ID"].ToString();
+                                string schoolName = dt.Rows[0]["NAME"].ToString();
+                                string emailId = dt.Rows[0]["EMAIL_ID"].ToString();
+                                string logo = dt.Rows[0]["LOGO"].ToString();
+                                string databaseName = dt.Rows[0]["ID_DATABASE"].ToString();
+                                string academicYear = dt.Rows[0]["ACADEMIC_YEAR"].ToString();
+
+                                Session["schoolName"] = schoolName;
+                                Session["emailId"] = emailId;
+                                Session["logo"] = logo;
+                                Session["databaseName"] = databaseName;
+                                Session["academicYear"] = academicYear;
+                                Session["ClientID"] = clientID;
+
+                                if (schoolName == "DPS")
+                                {
+                                    Response.Redirect("../SuperAdmin/IndexPage.aspx");
+                                }
+                                else
+                                {
+                                    Response.Redirect("../SchoolAdmin/SchoolDashboard.aspx");
+                                }
+
                             }
                             else
                             {
-                                Response.Redirect("../SchoolAdmin/SchoolDashboard.aspx");
-                            }
 
+                                int numberOfAttempts = int.Parse(dt.Rows[0]["PASSWORD_ATTEMPTS"].ToString());
+                                numberOfAttempts = numberOfAttempts + 1;
+                                string updatedBy = txtexampleInputEmail1.Text;
+
+                                var result = schoolBLL.UpdatePasswordAttemptsByEmail(txtexampleInputEmail1.Text, numberOfAttempts, updatedBy);
+
+                                string errorScript = $"alert('Invalid Credentials!');";
+                                ClientScript.RegisterStartupScript(this.GetType(), "ErrorAlert", errorScript, true);
+
+                            }
                         }
                         else
                         {
 
-                            int numberOfAttempts = int.Parse(dt.Rows[0]["PASSWORD_ATTEMPTS"].ToString());
-                            numberOfAttempts = numberOfAttempts + 1;
-                            string updatedBy = txtexampleInputEmail1.Text;
-
-                            var result = schoolBLL.UpdatePasswordAttemptsByEmail(txtexampleInputEmail1.Text, numberOfAttempts, updatedBy);
-
-                            string errorScript = $"alert('Invalid Credentials!');";
+                            string errorScript = $"alert('Attempts limit has exceeded please set new credential by clicking on forgot password.');";
                             ClientScript.RegisterStartupScript(this.GetType(), "ErrorAlert", errorScript, true);
-
                         }
                     }
                     else
                     {
-
-                        string errorScript = $"alert('Attempts limit has exceeded please set new credential by clicking on forgot password.');";
+                        string errorScript = $"alert('No such Employee Found. Please provide proper Employee Code');";
                         ClientScript.RegisterStartupScript(this.GetType(), "ErrorAlert", errorScript, true);
                     }
-                }
-                else
-                {
-                    string errorScript = $"alert('No such Employee Found. Please provide proper Employee Code');";
-                    ClientScript.RegisterStartupScript(this.GetType(), "ErrorAlert", errorScript, true);
+                   
+                    // Handle the else block
                 }
             }
             catch (Exception ex)
