@@ -24,7 +24,7 @@
                 <div class="col-md-4">
                     <label>Merchant Code</label><span style="color: red">*</span><br />
                     <div class="form-group">
-                        <asp:TextBox ID="txtName" CssClass="form-control" AutoCompleteType="Disabled" ValidationGroup="Employee" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtName" CssClass="form-control" ReadOnly="true" AutoCompleteType="Disabled" ValidationGroup="Employee" runat="server"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Provide Merchant Code" ControlToValidate="txtName" ForeColor="Red" ValidationGroup="Employee" ToolTip="Provide Merchant Code"></asp:RequiredFieldValidator>
                     </div>
                 </div>
