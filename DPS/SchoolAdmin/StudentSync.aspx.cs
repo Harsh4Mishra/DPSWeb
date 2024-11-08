@@ -87,7 +87,7 @@ namespace DPS.SchoolAdmin
 
             //string accessConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=your_access_file.accdb;";
             //string sqlServerConnectionString = @"Data Source=HSWW-S056\SQLEXPRESS;Initial Catalog=" + databaseName + ";Integrated Security=True;Trust Server Certificate=True;MultipleActiveResultSets=True";
-            string sqlServerConnectionString = @"Data Source=DESKTOP-MB1QN8B\SQLEXPRESS;Initial Catalog=" + databaseName + ";Integrated Security=True;MultipleActiveResultSets=True";
+            string sqlServerConnectionString = @"Data Source=150.242.203.229;Initial Catalog=" + databaseName + ";User Id=dpsuser;Password=dps@123;Integrated Security=False;MultipleActiveResultSets=True";
 
             using (OleDbConnection accessConnection = new OleDbConnection(accessConnectionString))
             using (SqlConnection sqlConnection = new SqlConnection(sqlServerConnectionString))
