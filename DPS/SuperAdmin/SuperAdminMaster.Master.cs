@@ -37,7 +37,7 @@ namespace DPS.SuperAdmin
             }
             else if (currentPageUrl.EndsWith("Page3.aspx"))
             {
-                activity.Attributes["class"] = "nav-item active";
+                //activity.Attributes["class"] = "nav-item active";
             }
         }
     }

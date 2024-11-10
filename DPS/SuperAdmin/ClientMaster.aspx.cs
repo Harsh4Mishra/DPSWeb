@@ -315,20 +315,21 @@ namespace DPS.SuperAdmin
             List<string> selectedColumns = new List<string> { "ID_DATABASE", "NAME", "CITY", "PHONE_NUMBER", "PINCODE", "EMAIL_ID", "IS_SYNCRONIZED" };
 
             // Convert GridView to DataTable
-            DataTable dt = dtFromSession;
+            GridViewToDataTableConverter dtConverter = new GridViewToDataTableConverter();
+            DataTable dt = dtConverter.GetSelectedColumnsDataTable(dtFromSession, selectedColumns);
 
             if (dt.Rows.Count>0)
             {
                 var columnNames = new List<string> { "ID Database", "Name", "City", "Phone Number", "Pin Code", "Email Id", "Is Syncronized" };
-                // var memoryStream = ExcelWorker.ConvertDataTableToExcelInMemory(dataTable, columnNames,"Harsh","Vehicle Master Report");
+                // var memoryStream = ExcelWorker.ConvertDataTableToExcelInMemory(dataTable, columnNames,"Harsh","School Master Report");
 
                 string generatedBy = "Harsh";
-                string reportTitle = "Vehicle Data Report"; // Custom title
+                string reportTitle = "School Data Report"; // Custom title
                 if (type == "Excel")
                 {
                     using (var excelStream = ExcelWorker.ConvertDataTableToExcelInMemory(dt, columnNames, generatedBy, reportTitle))
                     {
-                        string fileName = $"VehicleData_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx";
+                        string fileName = $"SchoolData_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx";
                         Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
                         Response.AddHeader("content-disposition", $"attachment; filename={fileName}");
                         Response.BinaryWrite(excelStream.ToArray());
@@ -339,7 +340,7 @@ namespace DPS.SuperAdmin
                 {
                     using (var pdfStream = PDFWorker.ConvertDataTableToPdfInMemory(dt, columnNames, selectedColumns, generatedBy, reportTitle))
                     {
-                        string fileName = $"VehicleData_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+                        string fileName = $"SchoolData_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
                         Response.ContentType = "application/pdf";
                         Response.AddHeader("content-disposition", $"attachment; filename={fileName}");
                         Response.BinaryWrite(pdfStream.ToArray());

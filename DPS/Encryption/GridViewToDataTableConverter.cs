@@ -100,5 +100,44 @@ namespace DPS.Encryption
 
             return null;
         }
+        public DataTable GetSelectedColumnsDataTable(DataTable originalDataTable, List<string> selectedColumns)
+        {
+            // Create a new DataTable to hold the selected columns
+            DataTable newDataTable = new DataTable();
+
+            // Add the selected columns to the new DataTable
+            foreach (string columnName in selectedColumns)
+            {
+                if (originalDataTable.Columns.Contains(columnName))
+                {
+                    newDataTable.Columns.Add(columnName, originalDataTable.Columns[columnName].DataType);
+                }
+                else
+                {
+                    // Handle the case where the column does not exist in the original DataTable
+                    throw new ArgumentException($"Column '{columnName}' does not exist in the original DataTable.");
+                }
+            }
+
+            // Populate the new DataTable with data from the original DataTable
+            foreach (DataRow row in originalDataTable.Rows)
+            {
+                // Create a new row for the new DataTable
+                DataRow newRow = newDataTable.NewRow();
+
+                // Add data to the new row for each selected column
+                foreach (string columnName in selectedColumns)
+                {
+                    newRow[columnName] = row[columnName];
+                }
+
+                // Add the new row to the new DataTable
+                newDataTable.Rows.Add(newRow);
+            }
+
+            // Return the new DataTable with only the selected columns
+            return newDataTable;
+        }
+
     }
 }

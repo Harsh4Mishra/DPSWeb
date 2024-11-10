@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DPS.SuperAdmin.PaymentConfigurationClassFIle;
+using DPS.Encryption;
 
 namespace DPS.SuperAdmin
 {
@@ -123,11 +124,11 @@ namespace DPS.SuperAdmin
         }
         protected void LinkButtonExportExcel_Click(object sender, EventArgs e)
         {
-            ExportGridToExcel();
+            ExportData("Excel");
         }
         protected void LinkButtonExportpdf_Click(object sender, EventArgs e)
         {
-            ExportToPDF();
+            ExportData("PDF");
         }
         protected void ddlentities_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -205,6 +206,7 @@ namespace DPS.SuperAdmin
             {
                 SchoolPaymentConfigurationBLL schoolBLL = new SchoolPaymentConfigurationBLL();
                 DataTable dt = schoolBLL.GetAllSchoolPaymentConfigurations();
+                Session["PaymentConfiguration"] = dt;
                 GridView1.DataSource = dt;
                 GridView1.DataBind();
             }
@@ -216,75 +218,55 @@ namespace DPS.SuperAdmin
 
         }
 
-        private void ExportGridToExcel()
+        public void ExportData(string type)
         {
-            //ExportUtility.ExportToExcel(GridView1, "Employee" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xls");
-            Response.Clear();
-            Response.Buffer = true;
-            Response.ClearContent();
-            Response.ClearHeaders();
-            Response.Charset = "";
-            string FileName = "Client" + DateTime.Now + ".xls";
-            StringWriter strwritter = new StringWriter();
-            HtmlTextWriter htmltextwrtter = new HtmlTextWriter(strwritter);
-            Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            Response.ContentType = "application/vnd.ms-excel";
-            Response.AddHeader("Content-Disposition", "attachment;filename=" + FileName);
-            GridView1.GridLines = GridLines.Both;
-            GridView1.HeaderStyle.Font.Bold = true;
-            GridView1.RenderControl(htmltextwrtter);
+            // Sample GridView
+            DataTable dtFromSession = Session["PaymentConfiguration"] as DataTable;
+            // Populated with data (example)
 
-            // Get the HTML string
-            string html = strwritter.ToString();
+            // List of selected columns you want to extract (based on your GridView's TemplateField names)
+            List<string> selectedColumns = new List<string> { "NAME", "MCC_CODE", "MERCHANT_ID", "USER_ID", "MERCHANT_PASSWORD", "PRODUCT_ID", "TRANSACTION_CURRENCY", "REQUEST_AES_KEY", "REQUEST_HASH_KEY", "RESPONSE_AES_KEY", "RESPONSE_HASH_KEY", "HASH_ALGORITHM" };
 
-            // Find and remove the last column from both header and data rows
-            int lastColumnIndex = html.LastIndexOf("<td");
-            if (lastColumnIndex != -1)
+            // Convert GridView to DataTable
+            GridViewToDataTableConverter dtConverter = new GridViewToDataTableConverter();
+            DataTable dt = dtConverter.GetSelectedColumnsDataTable(dtFromSession, selectedColumns);
+
+            if (dt.Rows.Count > 0)
             {
-                int endIndex = html.IndexOf("</tr>", lastColumnIndex);
-                if (endIndex != -1)
-                {
-                    // Remove the last column from the header row
-                    int headerEndIndex = html.IndexOf("</tr>", 0);
-                    html = html.Remove(lastColumnIndex, endIndex - lastColumnIndex);
+                var columnNames = new List<string> { "NAME", "MCC CODE", "MERCHANT ID", "USER ID", "MERCHANT PASSWORD", "PRODUCT ID", "TRANSACTION CURRENCY", "REQUEST AES KEY", "REQUEST HASH KEY", "RESPONSE AES KEY", "RESPONSE HASH KEY", "HASH ALGORITHM" };
+                // var memoryStream = ExcelWorker.ConvertDataTableToExcelInMemory(dataTable, columnNames,"Harsh","SchoolDataBase Master Report");
 
-                    // Remove the corresponding cell from each data row
-                    int dataIndex = html.IndexOf("<tr>", headerEndIndex);
-                    while (dataIndex != -1)
+                string generatedBy = "Harsh";
+                string reportTitle = "Payment Configuration Data Report"; // Custom title
+                if (type == "Excel")
+                {
+                    using (var excelStream = ExcelWorker.ConvertDataTableToExcelInMemory(dt, columnNames, generatedBy, reportTitle))
                     {
-                        int dataEndIndex = html.IndexOf("</tr>", dataIndex);
-                        if (dataEndIndex != -1)
-                        {
-                            html = html.Remove(lastColumnIndex, dataEndIndex - dataIndex);
-                        }
-                        dataIndex = html.IndexOf("<tr>", dataIndex + 1);
+                        string fileName = $"PaymentConfigurationData_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx";
+                        Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                        Response.AddHeader("content-disposition", $"attachment; filename={fileName}");
+                        Response.BinaryWrite(excelStream.ToArray());
+                        Response.End();
                     }
                 }
-            }
+                if (type == "PDF")
+                {
+                    using (var pdfStream = PDFWorker.ConvertDataTableToPdfInMemory(dt, columnNames, selectedColumns, generatedBy, reportTitle))
+                    {
+                        string fileName = $"PaymentConfigurationData_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+                        Response.ContentType = "application/pdf";
+                        Response.AddHeader("content-disposition", $"attachment; filename={fileName}");
+                        Response.BinaryWrite(pdfStream.ToArray());
+                        Response.End();
+                    }
+                }
 
-            Response.Write(html);
-            //Response.Write(strwritter.ToString());
-            Response.End();
-        }
-        protected void ExportToPDF()
-        {
-            Response.ContentType = "application/pdf";
-            Response.AddHeader("content-disposition", "attachment;filename=GridViewData.pdf");
-            Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            StringWriter sw = new StringWriter();
-            HtmlTextWriter hw = new HtmlTextWriter(sw);
-            GridView1.AllowPaging = false;
-            GridView1.DataBind();
-            GridView1.RenderControl(hw);
-            StringReader sr = new StringReader(sw.ToString());
-            Document pdfDoc = new Document(PageSize.A2, 7f, 7f, 7f, 0f);
-            HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
-            PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
-            pdfDoc.Open();
-            htmlparser.Parse(sr);
-            pdfDoc.Close();
-            Response.Write(pdfDoc);
-            Response.End();
+            }
+            else
+            {
+                // Handle the case where the session data is null.
+                ClientScript.RegisterStartupScript(this.GetType(), "ErrorMessage", $"showMessage('No data to export', 'error');", true);
+            }
         }
         public override void VerifyRenderingInServerForm(Control control)
         {
