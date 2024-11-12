@@ -157,7 +157,7 @@ namespace DPS.SuperAdmin
 
 
 
-            string connectionString = "Server=DESKTOP-MB1QN8B\\SQLEXPRESS;Integrated Security=true;"; // Use appropriate connection string
+            string connectionString = "Server=150.242.203.229;Integrated Security=False;User Id=dpsuser;Password=dps@123;"; // Use appropriate connection string
             string dbName = database; // Name of the database to create
             /*string sqlFilePath = @"../Script/School.sql";*/ // Path to your .sql file
             string sqlFilePath = Server.MapPath("~/Script/School.sql");
