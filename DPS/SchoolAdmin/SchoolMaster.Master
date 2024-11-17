@@ -127,7 +127,7 @@
                                 </div>
                             </li>
                             <li class="nav-item" runat="server" id="Li1">
-                                <a class="nav-link" href="../Common/LoginScreen.aspx">
+                                <a class="nav-link" href="../Common/LoginPage.aspx">
                                     <i class="icon-grid menu-icon"></i>
                                     <span class="menu-title">Sign Out</span>
                                 </a>

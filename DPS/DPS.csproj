@@ -107,10 +107,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Common\assets\BGPage.jpg" />
+    <Content Include="Common\assets\Card.jpg" />
+    <Content Include="Common\assets\Fav_icon.png" />
     <Content Include="Common\ErrorScreen.aspx" />
     <Content Include="Common\ForgotPassword.aspx" />
+    <Content Include="Common\LoginPage.aspx" />
     <Content Include="Common\LoginScreen.aspx" />
     <Content Include="Common\SetNewPassword.aspx" />
+    <Content Include="Common\style.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\Icon\icon.png" />
@@ -125,8 +130,12 @@
     <Content Include="SchoolAdmin\SchoolDashboard.aspx" />
     <Content Include="SchoolAdmin\StudentSync.aspx" />
     <Content Include="Script\School.sql" />
+    <Content Include="Student\assets\BGPage.jpg" />
+    <Content Include="Student\assets\Card.jpg" />
+    <Content Include="Student\assets\Fav_icon.png" />
     <Content Include="Student\FeeDetailList.aspx" />
     <Content Include="Student\FundTransferSuccess.aspx" />
+    <Content Include="Student\login_style.css" />
     <Content Include="Student\PaymentPage.aspx" />
     <Content Include="Student\Receipt.aspx" />
     <Content Include="Student\SchoolWithState.aspx" />
@@ -1427,6 +1436,13 @@
     </Compile>
     <Compile Include="Common\ForgotPassword.aspx.designer.cs">
       <DependentUpon>ForgotPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\LoginPage.aspx.cs">
+      <DependentUpon>LoginPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\LoginPage.aspx.designer.cs">
+      <DependentUpon>LoginPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Common\LoginScreen.aspx.cs">
       <DependentUpon>LoginScreen.aspx</DependentUpon>

@@ -100,44 +100,44 @@
                                     <ItemTemplate>
                                         <asp:Label ID="lblId" runat="server" Text='<%# Eval("ScholarNo") %>' />
                                     </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" Width="9%" />
+                                    <ItemStyle HorizontalAlign="Center" Width="12%" />
                                 </asp:TemplateField>
 
                                 <asp:TemplateField HeaderText="Student Name" SortExpression="StudentName">
                                     <ItemTemplate>
                                         <asp:Label ID="lblStudentName" runat="server" Text='<%# Eval("StudentName") %>' />
                                     </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="left" Width="9%" />
+                                    <ItemStyle HorizontalAlign="left" Width="12%" />
                                 </asp:TemplateField>
 
                                 <asp:TemplateField HeaderText="Class" SortExpression="ClassName">
                                     <ItemTemplate>
                                         <asp:Label ID="lblClassName" runat="server" Text='<%# Eval("ClassName") %>' />
                                     </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" Width="9%" />
+                                    <ItemStyle HorizontalAlign="Center" Width="12%" />
                                 </asp:TemplateField>
 
                                 <asp:TemplateField HeaderText="Section" SortExpression="SectionName">
                                     <ItemTemplate>
                                         <asp:Label ID="lblStudentName" runat="server" Text='<%# Eval("SectionName") %>' />
                                     </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" Width="9%" />
+                                    <ItemStyle HorizontalAlign="Center" Width="12%" />
                                 </asp:TemplateField>
 
                                 <asp:TemplateField HeaderText="Receipt No" SortExpression="ReceiptNo">
                                     <ItemTemplate>
                                         <asp:Label ID="lblReceiptNo" runat="server" Text='<%# Eval("ReceiptNo") %>' />
                                     </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" Width="9%" />
+                                    <ItemStyle HorizontalAlign="Center" Width="12%" />
                                 </asp:TemplateField>
 
                                 <asp:TemplateField HeaderText="Receipt Dt" SortExpression="ReceiptDt">
                                     <ItemTemplate>
                                         <asp:Label ID="lblReceiptDt" runat="server" Text='<%# Eval("ReceiptDt") %>' />
                                     </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" Width="9%" />
+                                    <ItemStyle HorizontalAlign="Center" Width="12%" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Fee Amt" SortExpression="TotFeeAmt">
+                                <%--<asp:TemplateField HeaderText="Fee Amt" SortExpression="TotFeeAmt">
                                     <ItemTemplate>
                                         <asp:Label ID="lblTotFeeAmt" runat="server" Text='<%# Eval("TotFeeAmt") %>' />
                                     </ItemTemplate>
@@ -148,30 +148,30 @@
                                         <asp:Label ID="lblFineAmt" runat="server" Text='<%# Eval("FineAmt") %>' />
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="9%" />
-                                </asp:TemplateField>
+                                </asp:TemplateField>--%>
                               <%--  <asp:TemplateField HeaderText="Discount Amt" SortExpression="TotDisAmt" Visible="false">
                                     <ItemTemplate>
                                         <asp:Label ID="lblTotDisAmt" runat="server" Text='<%# Eval("TotDisAmt") %>' />
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="9%" />
                                 </asp:TemplateField>--%>
-                                <asp:TemplateField HeaderText="Recived Amt" SortExpression="TotRecAmt">
+                               <%-- <asp:TemplateField HeaderText="Recived Amt" SortExpression="TotRecAmt">
                                     <ItemTemplate>
                                         <asp:Label ID="lblTotRecAmt" runat="server" Text='<%# Eval("TotRecAmt") %>' />
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="9%" />
-                                </asp:TemplateField>
+                                </asp:TemplateField>--%>
                                 <asp:TemplateField HeaderText="Cheque Amt" SortExpression="ChequeAmt">
                                     <ItemTemplate>
                                         <asp:Label ID="lblChequeAmt" runat="server" Text='<%# Eval("ChequeAmt") %>' />
                                     </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" Width="9%" />
+                                    <ItemStyle HorizontalAlign="Center" Width="12%" />
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Cash Amt" SortExpression="CashRecAmt">
                                     <ItemTemplate>
                                         <asp:Label ID="lblCashRecAmt" runat="server" Text='<%# Eval("CashRecAmt") %>' />
                                     </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" Width="9%" />
+                                    <ItemStyle HorizontalAlign="Center" Width="12%" />
                                 </asp:TemplateField>
                             </Columns>
                             <FooterStyle BackColor="#028dce" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
