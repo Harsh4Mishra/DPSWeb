@@ -68,13 +68,13 @@ namespace DPS.SuperAdmin
                     UserId = txtUserId.Text,
                     MerchantPassword = txtMerchantPassword.Text,
                     ProductId = txtProductId.Text,
-                    TransactionCurrency = txtTransactionCurrency.Text,
+                    TransactionCurrency = "INR",//txtTransactionCurrency.Text,
                     RequestAesKey = txtRequestAesKey.Text,
                     RequestHashKey = txtRequestHashKey.Text,
                     ResponseAesKey = txtResponseAesKey.Text,
                     ResponseHashKey = txtResponseHashKey.Text,
-                    HashAlgorithm = txtHashAlgorithm.Text,
-                    CustomerAccountNumber = txtCustomerAccountNumber.Text,
+                    HashAlgorithm = "SHA1",//txtHashAlgorithm.Text,
+                    CustomerAccountNumber = "12345678",
                     IsActive = chkActive.Checked,
                     CreatedBy = "Admin", // Set as needed
                     CreatedOn = DateTime.Now // Capture current timestamp

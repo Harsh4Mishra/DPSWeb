@@ -25,17 +25,17 @@ namespace DPS.SuperAdmin
                 {
                     txtName.Text = dt.Rows[0]["MCC_CODE"].ToString();
                     ddlSchool.SelectedValue = dt.Rows[0]["CLIENT_ID"].ToString();
-                    txtMerchantId.Text = dt.Rows[0]["MCC_CODE"].ToString();
-                    txtUserId.Text = dt.Rows[0]["MCC_CODE"].ToString();
-                    txtMerchantPassword.Text = dt.Rows[0]["MCC_CODE"].ToString();
-                    txtProductId.Text = dt.Rows[0]["MCC_CODE"].ToString();
-                    txtTransactionCurrency.Text = dt.Rows[0]["MCC_CODE"].ToString();
-                    txtRequestAesKey.Text = dt.Rows[0]["MCC_CODE"].ToString();
-                    txtRequestHashKey.Text = dt.Rows[0]["MCC_CODE"].ToString();
-                    txtResponseAesKey.Text = dt.Rows[0]["MCC_CODE"].ToString();
-                    txtResponseHashKey.Text = dt.Rows[0]["MCC_CODE"].ToString();
-                    txtHashAlgorithm.Text = dt.Rows[0]["MCC_CODE"].ToString();
-                    txtCustomerAccountNumber.Text = dt.Rows[0]["MCC_CODE"].ToString();
+                    txtMerchantId.Text = dt.Rows[0]["MERCHANT_ID"].ToString();
+                    txtUserId.Text = dt.Rows[0]["USER_ID"].ToString();
+                    txtMerchantPassword.Text = dt.Rows[0]["MERCHANT_PASSWORD"].ToString();
+                    txtProductId.Text = dt.Rows[0]["PRODUCT_ID"].ToString();
+                   // txtTransactionCurrency.Text = dt.Rows[0]["TRANSACTION_CURRENCY"].ToString();
+                    txtRequestAesKey.Text = dt.Rows[0]["REQUEST_AES_KEY"].ToString();
+                    txtRequestHashKey.Text = dt.Rows[0]["REQUEST_HASH_KEY"].ToString();
+                    txtResponseAesKey.Text = dt.Rows[0]["RESPONSE_AES_KEY"].ToString();
+                    txtResponseHashKey.Text = dt.Rows[0]["RESPONSE_HASH_KEY"].ToString();
+                    //txtHashAlgorithm.Text = dt.Rows[0]["HASH_ALGORITHM"].ToString();
+                    //txtCustomerAccountNumber.Text = dt.Rows[0]["CUSTOMER_ACCOUNT_NUMBER"].ToString();
                     chkActive.Checked = Boolean.Parse(dt.Rows[0]["IS_ACTIVE"].ToString());
                 }
             }
@@ -88,13 +88,13 @@ namespace DPS.SuperAdmin
                 schoolPaymentConfiguration.UserId = txtUserId.Text;
                 schoolPaymentConfiguration.MerchantPassword = txtMerchantPassword.Text;
                 schoolPaymentConfiguration.ProductId = txtProductId.Text;
-                schoolPaymentConfiguration.TransactionCurrency = txtTransactionCurrency.Text;
+                schoolPaymentConfiguration.TransactionCurrency = "INR";//txtTransactionCurrency.Text;
                 schoolPaymentConfiguration.RequestAesKey = txtRequestAesKey.Text;
                 schoolPaymentConfiguration.RequestHashKey = txtRequestHashKey.Text;
                 schoolPaymentConfiguration.ResponseAesKey = txtResponseAesKey.Text;
                 schoolPaymentConfiguration.ResponseHashKey = txtResponseHashKey.Text;
-                schoolPaymentConfiguration.HashAlgorithm = txtHashAlgorithm.Text;
-                schoolPaymentConfiguration.CustomerAccountNumber = txtCustomerAccountNumber.Text;
+                schoolPaymentConfiguration.HashAlgorithm = "SHA1";// txtHashAlgorithm.Text;
+                schoolPaymentConfiguration.CustomerAccountNumber = "12345678";//txtCustomerAccountNumber.Text;
                 schoolPaymentConfiguration.IsActive = ischecked;
                 schoolPaymentConfiguration.UpdatedBy = "Admin";
                 schoolPaymentConfiguration.UpdatedOn = DateTime.Now;

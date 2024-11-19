@@ -72,7 +72,7 @@ namespace DPS.SchoolAdmin
         {
             int lastInsertedReceiptNo = 0;
             string accessConnectionString = $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={mdfFilePath};";
-            string sqlServerConnectionString = @"Data Source=DESKTOP-MB1QN8B\SQLEXPRESS;Initial Catalog="+databaseName+";Integrated Security=True;MultipleActiveResultSets=True";
+            string sqlServerConnectionString = @"Data Source=DESKTOP-MB1QN8B\SQLEXPRESS;Initial Catalog="+databaseName+ ";Integrated Security=True;MultipleActiveResultSets=True;;Connect Timeout=120;";
             //string sqlServerConnectionString = @"Data Source=150.242.203.229;Initial Catalog="+databaseName+";User Id=dpsuser;Password=dps@123;Integrated Security=False;MultipleActiveResultSets=True";
 
             using (OleDbConnection accessConnection = new OleDbConnection(accessConnectionString))

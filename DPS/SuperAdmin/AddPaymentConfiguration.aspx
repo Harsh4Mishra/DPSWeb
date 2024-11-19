@@ -60,13 +60,13 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
+               <%-- <div class="col-md-4">
                     <label>Transaction Currency</label><span style="color: red">*</span><br />
                     <div class="form-group">
                         <asp:TextBox ID="txtTransactionCurrency" CssClass="form-control" AutoCompleteType="Disabled" ValidationGroup="PaymentConfig" runat="server"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidatorTransactionCurrency" runat="server" ErrorMessage="Provide Transaction Currency" ControlToValidate="txtTransactionCurrency" ForeColor="Red" ValidationGroup="PaymentConfig" ToolTip="Provide Transaction Currency"></asp:RequiredFieldValidator>
                     </div>
-                </div>
+                </div>--%>
 
                 <div class="col-md-4">
                     <label>Request AES Key</label><span style="color: red">*</span><br />
@@ -100,7 +100,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
+<%--                <div class="col-md-4">
                     <label>Hash Algorithm</label><span style="color: red">*</span><br />
                     <div class="form-group">
                         <asp:TextBox ID="txtHashAlgorithm" CssClass="form-control" AutoCompleteType="Disabled" ValidationGroup="PaymentConfig" runat="server"></asp:TextBox>
@@ -114,7 +114,7 @@
                         <asp:TextBox ID="txtCustomerAccountNumber" CssClass="form-control" AutoCompleteType="Disabled" ValidationGroup="PaymentConfig" runat="server"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidatorCustomerAccountNumber" runat="server" ErrorMessage="Provide Customer Account Number" ControlToValidate="txtCustomerAccountNumber" ForeColor="Red" ValidationGroup="PaymentConfig" ToolTip="Provide Customer Account Number"></asp:RequiredFieldValidator>
                     </div>
-                </div>
+                </div>--%>
                 <div class="col-md-4">
                     <label>Active</label><br />
                     <div class="form-group">

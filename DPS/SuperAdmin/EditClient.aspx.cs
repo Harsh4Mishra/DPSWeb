@@ -1,5 +1,6 @@
 ﻿using DPS.SuperAdmin.SchoolClassFile;
 using System;
+using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Web.UI.WebControls;
@@ -18,6 +19,7 @@ namespace DPS.SuperAdmin
                 DataTable dt = schoolBLL.GetSchoolById(schoolID);
                 if(dt.Rows.Count>0)
                 {
+                    string baseURL = ConfigurationManager.AppSettings["RedirectURL"].ToString();
                     txtName.Text = dt.Rows[0]["NAME"].ToString();
                     txtAddress.Text = dt.Rows[0]["ADDRESS"].ToString();
                     txtCity.Text = dt.Rows[0]["CITY"].ToString();
@@ -27,6 +29,9 @@ namespace DPS.SuperAdmin
                     txtPincode.Text = dt.Rows[0]["PINCODE"].ToString();
                     txtEmailId.Text = dt.Rows[0]["EMAIL_ID"].ToString();
                     chkActive.Checked = Boolean.Parse(dt.Rows[0]["ISACTIVE"].ToString());
+                    Image1.ImageUrl = baseURL + dt.Rows[0]["LOGO"].ToString();
+                    ViewState["LogoPath"]= dt.Rows[0]["LOGO"].ToString();
+                    ViewState["DatabaseName"]= dt.Rows[0]["ID_DATABASE"].ToString();
                 }
             }
         }
@@ -57,14 +62,7 @@ namespace DPS.SuperAdmin
         }
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            txtName.Text = "";
-            txtAddress.Text = "";
-            txtCity.Text = "";
-            ddlState.SelectedValue = "";
-            txtCountry.Text = "";
-            txtPhoneNumber.Text = "";
-            txtPincode.Text = "";
-            txtEmailId.Text = "";
+          
             Response.Redirect("Clientaster.aspx");
         }
 
@@ -85,6 +83,7 @@ namespace DPS.SuperAdmin
                     PhoneNumber = txtPhoneNumber.Text,
                     Pincode = txtPincode.Text,
                     EmailId = txtEmailId.Text,
+                    IdDatabase= ViewState["DatabaseName"].ToString(),
                     IsActive = chkActive.Checked==true?true:false // Assuming there's a checkbox for active/inactive status
                 };
 
@@ -122,6 +121,11 @@ namespace DPS.SuperAdmin
                         ClientScript.RegisterStartupScript(this.GetType(), "InvalidFileAlert", invalidFileScript, true);
                         return;
                     }
+                }
+                else
+                {
+                    string path = ViewState["LogoPath"].ToString();
+                    school.Logo = path;
                 }
 
                 // Set other properties of the SchoolMaster object

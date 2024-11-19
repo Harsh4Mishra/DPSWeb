@@ -123,24 +123,6 @@ namespace DPS.SuperAdmin
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorProductId;
 
         /// <summary>
-        /// txtTransactionCurrency control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTransactionCurrency;
-
-        /// <summary>
-        /// RequiredFieldValidatorTransactionCurrency control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorTransactionCurrency;
-
-        /// <summary>
         /// txtRequestAesKey control.
         /// </summary>
         /// <remarks>
@@ -211,42 +193,6 @@ namespace DPS.SuperAdmin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorResponseHashKey;
-
-        /// <summary>
-        /// txtHashAlgorithm control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtHashAlgorithm;
-
-        /// <summary>
-        /// RequiredFieldValidatorHashAlgorithm control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorHashAlgorithm;
-
-        /// <summary>
-        /// txtCustomerAccountNumber control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCustomerAccountNumber;
-
-        /// <summary>
-        /// RequiredFieldValidatorCustomerAccountNumber control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorCustomerAccountNumber;
 
         /// <summary>
         /// chkActive control.

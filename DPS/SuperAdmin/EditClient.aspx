@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SuperAdmin/SuperAdminMaster.Master" AutoEventWireup="true" CodeBehind="EditClient.aspx.cs" Inherits="DPS.SuperAdmin.EditClient" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SuperAdmin/SuperAdminMaster.Master" AutoEventWireup="true" CodeBehind="EditClient.aspx.cs" Inherits="DPS.SuperAdmin.EditClient" Async="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <!-- Include DHTMLX CSS -->
@@ -85,7 +85,8 @@
                     <label>Logo</label><span style="color: red">*</span><br />
                     <div class="form-group">
                         <asp:FileUpload ID="fuLogo" CssClass="form-control" ValidationGroup="Employee" runat="server" />
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorLogo" runat="server" ErrorMessage="Provide Logo" ControlToValidate="fuLogo" ForeColor="Red" ValidationGroup="Employee" ToolTip="Provide Logo"></asp:RequiredFieldValidator>
+                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidatorLogo" runat="server" ErrorMessage="Provide Logo" ControlToValidate="fuLogo" ForeColor="Red" ValidationGroup="Employee" ToolTip="Provide Logo"></asp:RequiredFieldValidator>--%><br />
+                        <asp:Image ID="Image1" runat="server" Height="100px" Width="100px" />
                     </div>
                 </div>
 
