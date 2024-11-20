@@ -25,20 +25,45 @@
             </div>
 
             <div class="input-box">
+                <%--  <asp:TextBox class="form-control" ID="txtexampleInputPassword1" runat="server" TextMode="Password" placeholder="Password"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Provide Password" ControlToValidate="txtexampleInputPassword1" ForeColor="Red" ValidationGroup="login" ToolTip="Provide Password">*</asp:RequiredFieldValidator>
+                <i class='bx bxs-lock-alt'></i>--%>
                 <asp:TextBox class="form-control" ID="txtexampleInputPassword1" runat="server" TextMode="Password" placeholder="Password"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Provide Password" ControlToValidate="txtexampleInputPassword1" ForeColor="Red" ValidationGroup="login" ToolTip="Provide Password">*</asp:RequiredFieldValidator>
-                <i class='bx bxs-lock-alt'></i>
+
+                <!-- Password Toggle Icon -->
+                <span id="togglePassword" style="position: absolute; right: 0px; top: 25px; cursor: pointer;">
+                    <i class='bx bxs-lock-alt'></i>
+                    <!-- You can replace this with any icon of your choice -->
+                </span>
             </div>
 
             <div class="remember-forget">
-                    <asp:CheckBox ID="CheckBox1" runat="server" Text="Remember me" />
+                <%--<asp:CheckBox ID="CheckBox1" runat="server" Text="Remember me" />--%>
                 <a href="ForgotPassword.aspx" class="auth-link text-black">Forgot password?</a>
             </div>
 
             <asp:Button ID="Button1" class="btn" runat="server" ValidationGroup="login" Text="Login" OnClick="Button1_Click" />
 
-           
+
         </div>
+        <!-- Add JavaScript to toggle password visibility -->
+        <script type="text/javascript">
+    document.getElementById("togglePassword").addEventListener("click", function () {
+        var passwordField = document.getElementById("<%= txtexampleInputPassword1.ClientID %>");
+        var icon = this.querySelector("i");
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text"; // Change to text to show password
+            icon.classList.remove('bxs-lock-alt'); // Replace the lock icon
+            icon.classList.add('bxs-lock-open'); // Show unlocked icon
+        } else {
+            passwordField.type = "password"; // Hide the password
+            icon.classList.remove('bxs-lock-open'); // Replace the open lock icon
+            icon.classList.add('bxs-lock-alt'); // Show the locked icon
+        }
+    });
+</script>
     </form>
 </body>
 </html>

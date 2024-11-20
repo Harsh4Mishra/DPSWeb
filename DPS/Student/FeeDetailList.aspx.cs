@@ -54,6 +54,11 @@ namespace DPS.Student
                 txtClass.Text = dt.Rows[0]["ClassName"].ToString();
                 txtSection.Text = dt.Rows[0]["SectionName"].ToString();
             }
+            DataTable newdt = new DataTable();
+            GridView1.DataSource = newdt;
+            GridView1.DataBind();
+            feelist.Visible = false;
+            proceedbutton.Visible = false;
         }
 
         protected void Button1_Click(object sender, EventArgs e)

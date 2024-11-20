@@ -17,6 +17,7 @@
     <div class="form-group">
         <asp:TextBox class="form-control form-control-lg" ID="txtexampleInputPassword1" runat="server" TextMode="Password" placeholder="Confirm Password"></asp:TextBox>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Provide Confirm Password" ControlToValidate="txtexampleInputPassword1" ForeColor="Red" ValidationGroup="login" ToolTip="Provide Confirm Password">*</asp:RequiredFieldValidator>
+        <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="new password and confirm password must be same." ControlToValidate="txtexampleInputPassword1" ControlToCompare="txtexampleInputEmail1" ForeColor="Red" ValidationGroup="login" ToolTip="new password should be same as confirm password">*</asp:CompareValidator>
     </div>
     <div class="mt-3">
         <%--<a  class="btn btn-block btn-aiut btn-lg font-weight-medium auth-form-btn"  href="../../index.html">SIGN IN</a>--%>

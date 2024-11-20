@@ -170,15 +170,15 @@
             </div>
             <div class="col-sm-12">
                 <div class="row" id="proceedbutton" runat="server" visible="false">
-                    <div class="col-sm-4"></div>
-                    <div class="col-sm-4 align-center justify-content-center text-center">
+                    <div class="col-sm-6"></div>
+                    
+                    <div class="col-sm-4 align-right justify-content-end text-right">
                         <br />
                         <br />
                         <asp:Button ID="Button1" Style="border-radius: 5px" Visible="false" class="btn btn-block btn-save font-weight-medium auth-form-btn" runat="server" Text="Proceed" OnClick="Button1_Click" />
                         <br />
                         <br />
                     </div>
-                    <div class="col-sm-4"></div>
                 </div>
             </div>
 

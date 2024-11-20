@@ -23,49 +23,57 @@ namespace DPS.Common
         {
             try
             {
-                string qValue = Request.QueryString["q"];
-                UTFService utfService = new UTFService();
-                var emailID = utfService.Decrypt(qValue);
-
-                SchoolBLL schoolBLL = new SchoolBLL();
-                DataTable dt = new DataTable();
-                dt = schoolBLL.GetSchoolDetailsByEmail(emailID);
-                if (dt.Rows.Count > 0)
+                if(txtexampleInputEmail1.Text==txtexampleInputPassword1.Text)
                 {
-                    bool isprevisited = bool.Parse(dt.Rows[0]["PASSWORD_LINK_VISITED"].ToString());
-                    if (!isprevisited)
+                    string qValue = Request.QueryString["q"];
+                    UTFService utfService = new UTFService();
+                    var emailID = utfService.Decrypt(qValue);
+
+                    SchoolBLL schoolBLL = new SchoolBLL();
+                    DataTable dt = new DataTable();
+                    dt = schoolBLL.GetSchoolDetailsByEmail(emailID);
+                    if (dt.Rows.Count > 0)
                     {
-                        AesService aesService = new AesService();
-                        var chipperText = aesService.GenerateRandomKey();
-                        var UpdatedHashKey = aesService.EncryptString(chipperText, txtexampleInputEmail1.Text);
-
-                        string schoolName = dt.Rows[0]["NAME"].ToString();
-
-                        var result = schoolBLL.UpdateNewPassword(emailID, UpdatedHashKey, chipperText, schoolName);
-                        //await _unitOfWork.CommitTransactionAsync(cancellationToken);
-
-                        if (result > 0)
+                        bool isprevisited = bool.Parse(dt.Rows[0]["PASSWORD_LINK_VISITED"].ToString());
+                        if (!isprevisited)
                         {
-                            string errorScript = $"alert('Password Updated successfully. Please visit on Login Screen.');";
-                            ClientScript.RegisterStartupScript(this.GetType(), "ErrorAlert", errorScript, true);
-                           // Response.Redirect("LoginScreen.aspx");
+                            AesService aesService = new AesService();
+                            var chipperText = aesService.GenerateRandomKey();
+                            var UpdatedHashKey = aesService.EncryptString(chipperText, txtexampleInputEmail1.Text);
+
+                            string schoolName = dt.Rows[0]["NAME"].ToString();
+
+                            var result = schoolBLL.UpdateNewPassword(emailID, UpdatedHashKey, chipperText, schoolName);
+                            //await _unitOfWork.CommitTransactionAsync(cancellationToken);
+
+                            if (result > 0)
+                            {
+                                string errorScript = $"alert('Password Updated successfully. Please visit on Login Screen.');";
+                                ClientScript.RegisterStartupScript(this.GetType(), "ErrorAlert", errorScript, true);
+                                // Response.Redirect("LoginScreen.aspx");
+                            }
+                            else
+                            {
+                                string errorScript = $"alert('Password Not Updated');";
+                                ClientScript.RegisterStartupScript(this.GetType(), "ErrorAlert", errorScript, true);
+                            }
                         }
                         else
                         {
-                            string errorScript = $"alert('Password Not Updated');";
+                            string errorScript = $"alert('Link is blocked please request it again.');";
                             ClientScript.RegisterStartupScript(this.GetType(), "ErrorAlert", errorScript, true);
                         }
+
                     }
                     else
                     {
-                        string errorScript = $"alert('Link is blocked please request it again.');";
+                        string errorScript = $"alert('No such School Found. Please provide proper School Mail ID');";
                         ClientScript.RegisterStartupScript(this.GetType(), "ErrorAlert", errorScript, true);
                     }
-
                 }
                 else
                 {
-                    string errorScript = $"alert('No such School Found. Please provide proper School Mail ID');";
+                    string errorScript = $"alert('New password and confirm password must be same');";
                     ClientScript.RegisterStartupScript(this.GetType(), "ErrorAlert", errorScript, true);
                 }
             }
