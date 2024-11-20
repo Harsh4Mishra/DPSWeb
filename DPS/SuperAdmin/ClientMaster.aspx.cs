@@ -156,7 +156,7 @@ namespace DPS.SuperAdmin
             schooldbBLL.AddSchoolDatabase(int.Parse(commandArgument.ToString()), database, "SuperAdmin", academicYear, true);
 
 
-            string connectionString = @"Data Source=DESKTOP-MB1QN8B\SQLEXPRESS;Integrated Security=True;";
+            string connectionString = @"Data Source=MSI\SQLEXPRESS;Integrated Security=True;";
             //string connectionString = "Server=150.242.203.229;Integrated Security=False;User Id=dpsuser;Password=dps@123;"; // Use appropriate connection string
             string dbName = database; // Name of the database to create
             /*string sqlFilePath = @"../Script/School.sql";*/ // Path to your .sql file
