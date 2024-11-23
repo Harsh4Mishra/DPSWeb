@@ -63,7 +63,7 @@ namespace DPS.SuperAdmin
         protected void btnCancel_Click(object sender, EventArgs e)
         {
           
-            Response.Redirect("Clientaster.aspx");
+            Response.Redirect("ClientMaster.aspx");
         }
 
         protected async void btnsave_Click(object sender, EventArgs e)

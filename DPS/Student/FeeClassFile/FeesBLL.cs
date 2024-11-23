@@ -41,6 +41,25 @@ namespace DPS.Student.FeeClassFile
                 throw new ApplicationException($"An error occurred: {ex.Message}.", ex);
             }
         }
+        public DataTable GetPaidFeeByScholarNo(string scholarNo)
+        {
+            try
+            {
+                // Instantiate SchoolDAL
+                FeesDAL schoolDAL = new FeesDAL();
+
+                // Call the method that retrieves the data
+                var result = schoolDAL.GetPaidFeeByScholarNo(scholarNo);
+
+                return result; // Return the tuple containing both DataTables
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (logging mechanism not shown here)
+                // LogException(ex);
+                throw new ApplicationException($"An error occurred: {ex.Message}.", ex);
+            }
+        }
         public DataTable GetFeeTransactionRequestById(int id)
         {
             try
