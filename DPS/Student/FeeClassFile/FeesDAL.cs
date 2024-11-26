@@ -83,6 +83,28 @@ namespace DPS.Student.FeeClassFile
 
             return dataSet;
         }
+        public DataTable GetPaidFeeByScholarNo(string scholarNo)
+        {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("GetPaidFeeByScholarNo", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    // Add parameters
+                    command.Parameters.AddWithValue("@ScholarNo", scholarNo);
+
+                    connection.Open();
+
+                    SqlDataAdapter sda = new SqlDataAdapter(command);
+                    sda.Fill(dt);
+                }
+            }
+
+            return dt;
+        }
         public int AddFeeTransactionRequest(FeeTransactionRequest feeTransaction)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))

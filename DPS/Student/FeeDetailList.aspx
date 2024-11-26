@@ -130,7 +130,7 @@
                         <div class="table-responsive">
                             <asp:GridView ID="GridView1" runat="server" AllowSorting="True" Width="100%" BackColor="White" BorderColor="#dbdade"
                                 BorderStyle="None" BorderWidth="1px" CellPadding="3" AutoGenerateColumns="false"
-                                EmptyDataText="No data found." ShowHeaderWhenEmpty="true">
+                                EmptyDataText="No data found." ShowHeaderWhenEmpty="true" OnRowDataBound="GridView1_RowDataBound">
                                 <Columns>
                                     <asp:TemplateField HeaderText="Select Fees">
                                         <ItemTemplate>
@@ -141,7 +141,7 @@
 
                                     <asp:TemplateField HeaderText="Fee Month">
                                         <ItemTemplate>
-                                            <asp:Label ID="lblIdDatabase" runat="server" Text='<%# Eval("FeeMonth") %>' />
+                                            <asp:Label ID="lblFeeMonth" runat="server" Text='<%# Eval("FeeMonth") %>' />
                                         </ItemTemplate>
                                         <ItemStyle HorizontalAlign="Center" Width="33%" />
                                     </asp:TemplateField>

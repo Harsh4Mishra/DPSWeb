@@ -140,41 +140,67 @@ namespace DPS.SchoolAdmin
         }
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
         {
+            // Reset totals at the start of each binding
+            if (e.Row.RowType == DataControlRowType.Header)
+            {
+                // Reset ViewState values to avoid stale data accumulation
+                ViewState["TotalChequeAmt"] = 0m;
+                ViewState["TotalCashRecAmt"] = 0m;
+            }
+
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 // Retrieve the values from the current row
-                //decimal totFeeAmt = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "TotFeeAmt"));
-                //decimal fineAmt = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "FineAmt"));
-                //decimal totRecAmt = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "TotRecAmt"));
                 decimal chequeAmt = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ChequeAmt"));
                 decimal cashRecAmt = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CashRecAmt"));
-                //decimal onlineAmt = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "OnlineAmt"));
 
-                // Store the values in ViewState or local variables to sum them
-                //if (ViewState["TotalFeeAmt"] == null) ViewState["TotalFeeAmt"] = 0m;
-                //if (ViewState["TotalFineAmt"] == null) ViewState["TotalFineAmt"] = 0m;
-                //if (ViewState["TotalRecAmt"] == null) ViewState["TotalRecAmt"] = 0m;
-                if (ViewState["TotalChequeAmt"] == null) ViewState["TotalChequeAmt"] = 0m;
-                if (ViewState["TotalCashRecAmt"] == null) ViewState["TotalCashRecAmt"] = 0m;
-                //if (ViewState["TotalOnlineAmt"] == null) ViewState["TotalOnlineAmt"] = 0m;
-
-                //ViewState["TotalFeeAmt"] = (decimal)ViewState["TotalFeeAmt"] + totFeeAmt;
-                //ViewState["TotalFineAmt"] = (decimal)ViewState["TotalFineAmt"] + fineAmt;
-                //ViewState["TotalRecAmt"] = (decimal)ViewState["TotalRecAmt"] + totRecAmt;
+                // Add to ViewState totals
                 ViewState["TotalChequeAmt"] = (decimal)ViewState["TotalChequeAmt"] + chequeAmt;
                 ViewState["TotalCashRecAmt"] = (decimal)ViewState["TotalCashRecAmt"] + cashRecAmt;
-                //ViewState["TotalOnlineAmt"] = (decimal)ViewState["TotalOnlineAmt"] + onlineAmt;
             }
             else if (e.Row.RowType == DataControlRowType.Footer)
             {
-                // Set the footer values
-                //e.Row.Cells[6].Text = ViewState["TotalFeeAmt"].ToString();
-                //e.Row.Cells[7].Text = ViewState["TotalFineAmt"].ToString();
-                //e.Row.Cells[8].Text = ViewState["TotalRecAmt"].ToString();
-                e.Row.Cells[6].Text = ViewState["TotalChequeAmt"].ToString();
-                e.Row.Cells[7].Text = ViewState["TotalCashRecAmt"].ToString();
-                //e.Row.Cells[11].Text = ViewState["TotalOnlineAmt"].ToString();
+                // Set the footer values to display the totals
+                e.Row.Cells[6].Text = ((decimal)ViewState["TotalChequeAmt"]).ToString("F2");
+                e.Row.Cells[7].Text = ((decimal)ViewState["TotalCashRecAmt"]).ToString("F2");
             }
+
+
+            //if (e.Row.RowType == DataControlRowType.DataRow)
+            //{
+            //    // Retrieve the values from the current row
+            //    //decimal totFeeAmt = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "TotFeeAmt"));
+            //    //decimal fineAmt = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "FineAmt"));
+            //    //decimal totRecAmt = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "TotRecAmt"));
+            //    decimal chequeAmt = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "ChequeAmt"));
+            //    decimal cashRecAmt = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "CashRecAmt"));
+            //    //decimal onlineAmt = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "OnlineAmt"));
+
+            //    // Store the values in ViewState or local variables to sum them
+            //    //if (ViewState["TotalFeeAmt"] == null) ViewState["TotalFeeAmt"] = 0m;
+            //    //if (ViewState["TotalFineAmt"] == null) ViewState["TotalFineAmt"] = 0m;
+            //    //if (ViewState["TotalRecAmt"] == null) ViewState["TotalRecAmt"] = 0m;
+            //    if (ViewState["TotalChequeAmt"] == null) ViewState["TotalChequeAmt"] = 0m;
+            //    if (ViewState["TotalCashRecAmt"] == null) ViewState["TotalCashRecAmt"] = 0m;
+            //    //if (ViewState["TotalOnlineAmt"] == null) ViewState["TotalOnlineAmt"] = 0m;
+
+            //    //ViewState["TotalFeeAmt"] = (decimal)ViewState["TotalFeeAmt"] + totFeeAmt;
+            //    //ViewState["TotalFineAmt"] = (decimal)ViewState["TotalFineAmt"] + fineAmt;
+            //    //ViewState["TotalRecAmt"] = (decimal)ViewState["TotalRecAmt"] + totRecAmt;
+            //    ViewState["TotalChequeAmt"] = (decimal)ViewState["TotalChequeAmt"] + chequeAmt;
+            //    ViewState["TotalCashRecAmt"] = (decimal)ViewState["TotalCashRecAmt"] + cashRecAmt;
+            //    //ViewState["TotalOnlineAmt"] = (decimal)ViewState["TotalOnlineAmt"] + onlineAmt;
+            //}
+            //else if (e.Row.RowType == DataControlRowType.Footer)
+            //{
+            //    // Set the footer values
+            //    //e.Row.Cells[6].Text = ViewState["TotalFeeAmt"].ToString();
+            //    //e.Row.Cells[7].Text = ViewState["TotalFineAmt"].ToString();
+            //    //e.Row.Cells[8].Text = ViewState["TotalRecAmt"].ToString();
+            //    e.Row.Cells[6].Text = ViewState["TotalChequeAmt"].ToString();
+            //    e.Row.Cells[7].Text = ViewState["TotalCashRecAmt"].ToString();
+            //    //e.Row.Cells[11].Text = ViewState["TotalOnlineAmt"].ToString();
+            //}
         }
         protected void OnPageIndexChanging(object sender, GridViewPageEventArgs e)
         {
