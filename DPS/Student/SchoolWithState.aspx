@@ -20,10 +20,10 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div class="container" width="100%">
-            <div class="row d-flex" style="display: flex;width:100%;padding-left:10%;margin:0px 100px">
+        <div class="container-fluid" width="100%">
+            <div class="row d-flex" style=""> <%--display: flex;width:100%;padding-left:10%;margin:0px 100px--%>
                 <div class="col-md-12 wrapper">
-                    <img src="./assets/Fav_icon.png" alt="" style="margin-left: 30%;">
+                    <img src="./assets/Fav_icon.png" alt="" style="margin-left: 0%;">
                     <div class="row">
                         <div class="col-md-6">
                             <h4 class="mt-3">How to initiate payment ?</h4>
