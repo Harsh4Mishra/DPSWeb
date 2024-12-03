@@ -71,7 +71,7 @@ namespace DPS.Student
                 CheckBox chkIsActive = (CheckBox)row.FindControl("chkIsActive");
                 Label lblFeeMonth = (Label)row.FindControl("lblFeeMonth");
                 string feeMonthText = lblFeeMonth.Text;
-                string[] splitFeeMonth = feeMonthText.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] splitFeeMonth = feeMonthText.Split(new[] { '(' }, StringSplitOptions.RemoveEmptyEntries);
 
                 if (chkIsActive != null && chkIsActive.Checked)
                 {
@@ -117,6 +117,7 @@ namespace DPS.Student
                 GridView1.DataBind();
                 Button1.Visible = true;
                 feelist.Visible = true;
+                feelist.Visible = true;
                 proceedbutton.Visible = true;
             }
             catch (ApplicationException ex)
@@ -135,7 +136,7 @@ namespace DPS.Student
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 // Retrieve the FeeMonth value from the data row
-                string feeMonth = DataBinder.Eval(e.Row.DataItem, "FeeMonth")?.ToString(); // Use null conditional operator to avoid null reference
+                string feeMonth = DataBinder.Eval(e.Row.DataItem, "FeeType")?.ToString(); // Use null conditional operator to avoid null reference
 
                 // Get the CheckBox and Label controls from the row
                 CheckBox chkIsActive = (CheckBox)e.Row.FindControl("chkIsActive");
@@ -148,7 +149,7 @@ namespace DPS.Student
                 if (paidFeeMonths != null && feeMonth != null && paidFeeMonths.Contains(feeMonth))
                 {
                     // If the FeeMonth is in the paidFeeMonths list, set the label text to "Paid"
-                    lblFeeMonth.Text = feeMonth + " (Paid)";
+                    lblFeeMonth.Text = feeMonth + "(Paid)";
 
                     // Disable the checkbox for paid months
                     chkIsActive.Enabled = false;
@@ -156,7 +157,7 @@ namespace DPS.Student
                 else
                 {
                     // If the FeeMonth is not in the paidFeeMonths list, set the label text to "Unpaid"
-                    lblFeeMonth.Text = feeMonth + " (Unpaid)";
+                    lblFeeMonth.Text = feeMonth + "(Unpaid)";
 
                     // Enable the checkbox for unpaid months
                     chkIsActive.Enabled = true;
