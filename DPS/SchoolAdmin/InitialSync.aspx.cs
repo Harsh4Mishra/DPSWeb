@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using System.IO;
 using DPS.Encryption;
 using System.Web.DynamicData;
+using System.Configuration;
 
 namespace DPS.SchoolAdmin
 {
@@ -30,52 +31,76 @@ namespace DPS.SchoolAdmin
                 // Step 4: Check if a file is uploaded and save it
                 if (fuDatabase.HasFile)
                 {
-
-                    string database = Session["databaseName"].ToString();
-                    // Define the main directory and subdirectory
-                    string mainDir = Server.MapPath("~/Databases");
-                    string subDir = Path.Combine(mainDir, database); // Replace with your desired subdirectory name
-                    /*string mdfFilePath = Path.Combine(subDir, fuDatabase.FileName ); */// Define the path for the .mdf file
-                    string fileName = Path.GetFileName(fuDatabase.FileName);
-                    string extension = Path.GetExtension(fileName);
-                    string mdfFilePath = Path.Combine(subDir, fileName);
-
-
-                    //string extension = Path.GetExtension(fuDatabase.FileName);
-                    if (extension.Equals(".mdb", StringComparison.OrdinalIgnoreCase))
+                    // Ensure Session["databaseName"] is not null
+                    if (Session["databaseName"] != null)
                     {
-                        // Step 1: Check if the "Databases" folder exists
-                        if (!Directory.Exists(mainDir))
+                        string database = Session["databaseName"].ToString();
+                        // Define the main directory and subdirectory
+                        string mainDir = Server.MapPath("~/Databases");
+                       // string networkPath = ConfigurationManager.AppSettings["DatabaseNetworkPath"];
+                        string subDir = Path.Combine(mainDir, database); // Replace with your desired subdirectory name
+                        /*string mdfFilePath = Path.Combine(subDir, fuDatabase.FileName ); */// Define the path for the .mdf file
+                        string fileName = Path.GetFileName(fuDatabase.FileName);
+                        string extension = Path.GetExtension(fileName);
+                        string mdfFilePath = Path.Combine(subDir, fileName);
+
+                        //string networkPath = ConfigurationManager.AppSettings["DatabaseNetworkPath"]; // Example: \\epay.dpserp.com\Databases
+                        //if (!networkPath.EndsWith("\\"))
+                        //{
+                        //    networkPath += "\\";
+                        //}
+                        ////// Get the database name from the session
+                        ////string database = Session["databaseName"].ToString();
+
+                        //// Directly concatenate the network path with the database folder (subdirectory) and the file name
+                        //string subDir2 = networkPath + "\\" + database; // Direct concatenation for network path
+
+
+                        //// Directly concatenate the full file path for the .mdb file
+                        //string mdfFilePath2 = subDir2 + "\\" + fileName; // Direct concatenation for file path
+
+
+
+
+                        //string extension = Path.GetExtension(fuDatabase.FileName);
+                        if (extension.Equals(".mdb", StringComparison.OrdinalIgnoreCase))
                         {
-                            Directory.CreateDirectory(mainDir);
-                        }
+                            // Step 1: Check if the "Databases" folder exists
+                            if (!Directory.Exists(mainDir))
+                            {
+                                Directory.CreateDirectory(mainDir);
+                            }
 
-                        // Step 2: Check if the subdirectory exists, if not, create it
-                        if (!Directory.Exists(subDir))
+                            // Step 2: Check if the subdirectory exists, if not, create it
+                            if (!Directory.Exists(subDir))
+                            {
+                                Directory.CreateDirectory(subDir);
+                            }
+
+                            // Step 3: Check if the .mdf file already exists, if yes, delete it
+                            if (File.Exists(mdfFilePath))
+                            {
+                                File.Delete(mdfFilePath);
+                            }
+
+
+                            fuDatabase.SaveAs(mdfFilePath);
+
+                           
+                            TransferData(mdfFilePath, database);
+                            string successScript = "alert('Database Syncronized Successfully');";
+                            ClientScript.RegisterStartupScript(this.GetType(), "SuccessAlert", successScript, true);
+                        }
+                        else
                         {
-                            Directory.CreateDirectory(subDir);
+                            string successScript = "alert('Please upload a .mdb file only.');";
+                            ClientScript.RegisterStartupScript(this.GetType(), "SuccessAlert", successScript, true);
                         }
-
-                        // Step 3: Check if the .mdf file already exists, if yes, delete it
-                        if (File.Exists(mdfFilePath))
-                        {
-                            File.Delete(mdfFilePath);
-                        }
-
-
-                        // Save the uploaded file
-                        fuDatabase.SaveAs(mdfFilePath);
-                        // Optionally inform the user that the upload was successful
-                        //string successScript = "alert('Database uploaded successfully.');";
-                        //ClientScript.RegisterStartupScript(this.GetType(), "SuccessAlert", successScript, true);
-                        TransferData(mdfFilePath, database);
-                        string successScript = "alert('Database Syncronized Successfully');";
-                        ClientScript.RegisterStartupScript(this.GetType(), "SuccessAlert", successScript, true);
                     }
                     else
                     {
-                        string successScript = "alert('Please upload a .mdb file only.');";
-                        ClientScript.RegisterStartupScript(this.GetType(), "SuccessAlert", successScript, true);
+                        string successScript = "alert('Database name not found in session.');";
+                        ClientScript.RegisterStartupScript(this.GetType(), "SessionError", successScript, true);
                     }
                 }
             }
@@ -91,8 +116,13 @@ namespace DPS.SchoolAdmin
             string accessConnectionString = $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={mdfFilePath};";
 
             //string accessConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=your_access_file.accdb;";
+<<<<<<< HEAD
             string sqlServerConnectionString = @"Data Source=DESKTOP-MB1QN8B\SQLEXPRESS;Initial Catalog=" + databaseName + ";Integrated Security=True;MultipleActiveResultSets=True;Connect Timeout=120;";
             //string sqlServerConnectionString = @"Data Source=150.242.203.229;Initial Catalog=" + databaseName + ";User Id=dpsuser;Password=dps@123;Integrated Security=False;MultipleActiveResultSets=True";
+=======
+            //string sqlServerConnectionString = @"Server=85.25.185.85\MSSQLSERVER2017;Initial Catalog=" + databaseName + ";User Id=DPSERP;Password=Dpstech@123;MultipleActiveResultSets=True;Connect Timeout=1200;";
+            string sqlServerConnectionString = @"Data Source=150.242.203.229;Initial Catalog=" + databaseName + ";User Id=dpsuser;Password=dps@123;Integrated Security=False;MultipleActiveResultSets=True;Connect Timeout=50000;";
+>>>>>>> Harsh
 
             using (OleDbConnection accessConnection = new OleDbConnection(accessConnectionString))
             using (SqlConnection sqlConnection = new SqlConnection(sqlServerConnectionString))

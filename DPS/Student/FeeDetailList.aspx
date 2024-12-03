@@ -141,14 +141,14 @@
 
                                     <asp:TemplateField HeaderText="Fee Month">
                                         <ItemTemplate>
-                                            <asp:Label ID="lblFeeMonth" runat="server" Text='<%# Eval("FeeMonth") %>' />
+                                            <asp:Label ID="lblFeeMonth" runat="server" Text='<%# Eval("FeeType") %>' />
                                         </ItemTemplate>
                                         <ItemStyle HorizontalAlign="Center" Width="33%" />
                                     </asp:TemplateField>
 
                                     <asp:TemplateField HeaderText="TotalFee">
                                         <ItemTemplate>
-                                            <asp:Label ID="lblName" runat="server" Text='<%# Eval("TotalFee") %>' />
+                                            <asp:Label ID="lblName" runat="server" Text='<%# Eval("FeeAmount") %>' />
                                         </ItemTemplate>
                                         <ItemStyle HorizontalAlign="Center" Width="33%" />
                                     </asp:TemplateField>

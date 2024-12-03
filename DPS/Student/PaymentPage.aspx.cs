@@ -27,12 +27,13 @@ namespace DPS.Student
             if (!IsPostBack)
             {
                 string selectedMonths = Request.QueryString["selectedMonths"];
+                string output = selectedMonths.Replace("+", " ");
 
-                if (!string.IsNullOrEmpty(selectedMonths))
+                if (!string.IsNullOrEmpty(output))
                 {
                     DataTable feedt = (DataTable)Session["MyDataTable"];
                     // Split the selected months into an array
-                    string[] monthsArray = selectedMonths.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] monthsArray = output.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                     DataTable dt = new DataTable();
                     string scholarno = Session["StudentPayFee"].ToString();
                     dt = fees.GetStudentDetailByScholarNo(scholarno);
@@ -56,7 +57,7 @@ namespace DPS.Student
                     foreach (DataRow row in feedt.Rows)
                     {
                         // Check if the FeeType is in the array and the FeeName is not "Fine"
-                        if (monthsArray.Contains(row["FeeType"].ToString()) && row["FeeName"].ToString() != "Fine")
+                        if (monthsArray.Contains(row["FeeType"].ToString()) && row["FeeName"].ToString() != "Total Fine")
                         {
                             feeSum += Convert.ToDecimal(row["FeeAmount"]);
                             // Import the row into the filtered DataTable
@@ -64,7 +65,7 @@ namespace DPS.Student
                         }
 
                         // Check if the FeeName is "Fine"
-                        if (monthsArray.Contains(row["FeeType"].ToString()) && row["FeeName"].ToString() == "Fine")
+                        if (monthsArray.Contains(row["FeeType"].ToString()) && row["FeeName"].ToString() == "Total Fine")
                         {
                             fineSum += Convert.ToDecimal(row["FeeAmount"]);
                         }
