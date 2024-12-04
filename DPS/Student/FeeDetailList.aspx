@@ -148,7 +148,7 @@
 
                                     <asp:TemplateField HeaderText="TotalFee">
                                         <ItemTemplate>
-                                            <asp:Label ID="lblName" runat="server" Text='<%# Eval("FeeAmount") %>' />
+                                            <asp:Label ID="lblName" runat="server" Text='<%# Eval("TotalFeeAmount") %>' />
                                         </ItemTemplate>
                                         <ItemStyle HorizontalAlign="Center" Width="33%" />
                                     </asp:TemplateField>
