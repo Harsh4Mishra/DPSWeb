@@ -4,10 +4,6 @@ using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Data;
 using System.IO;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace DPS.SchoolAdmin
 {
