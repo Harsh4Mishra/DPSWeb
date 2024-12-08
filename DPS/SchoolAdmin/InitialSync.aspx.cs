@@ -3,14 +3,8 @@ using System.Collections.Generic;
 using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.IO;
 using DPS.Encryption;
-using System.Web.DynamicData;
-using System.Configuration;
 
 namespace DPS.SchoolAdmin
 {
@@ -37,12 +31,13 @@ namespace DPS.SchoolAdmin
                         string database = Session["databaseName"].ToString();
                         // Define the main directory and subdirectory
                         string mainDir = Server.MapPath("~/Databases");
-                       // string networkPath = ConfigurationManager.AppSettings["DatabaseNetworkPath"];
+                       //string networkPath = ConfigurationManager.AppSettings["DatabaseNetworkPath"];
                         string subDir = Path.Combine(mainDir, database); // Replace with your desired subdirectory name
                         /*string mdfFilePath = Path.Combine(subDir, fuDatabase.FileName ); */// Define the path for the .mdf file
                         string fileName = Path.GetFileName(fuDatabase.FileName);
                         string extension = Path.GetExtension(fileName);
                         string mdfFilePath = Path.Combine(subDir, fileName);
+                        //string newFilePath= "http://epay.dpserp.com/Databases/"+ database + "/"+fileName;
 
                         //string networkPath = ConfigurationManager.AppSettings["DatabaseNetworkPath"]; // Example: \\epay.dpserp.com\Databases
                         //if (!networkPath.EndsWith("\\"))

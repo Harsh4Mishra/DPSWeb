@@ -110,7 +110,7 @@ namespace DPS.SchoolAdmin
                     using (OleDbCommand insertCommand = new OleDbCommand(insertSql, accessConnection))
                     {
                         insertCommand.Parameters.AddWithValue("?", int.Parse(onlineReceiptNumber));
-                        insertCommand.Parameters.AddWithValue("?", DateTime.Parse(receiptDt));
+                        insertCommand.Parameters.AddWithValue("?", Convert.ToDateTime(receiptDt).Date);
                         insertCommand.Parameters.AddWithValue("?", incrementedReceiptNo);
                         insertCommand.Parameters.AddWithValue("?", scholarNo);
                         insertCommand.ExecuteNonQuery();
@@ -284,16 +284,16 @@ namespace DPS.SchoolAdmin
                             insertTransactionCommand.Parameters[0].Value = row["AmtInWords"] == DBNull.Value ? (object)DBNull.Value : row["AmtInWords"].ToString();
                             insertTransactionCommand.Parameters[1].Value = row["BankAcTag"] == DBNull.Value ? (object)DBNull.Value : row["BankAcTag"].ToString();
                             insertTransactionCommand.Parameters[2].Value = row["BillBookNo"] == DBNull.Value ? (object)DBNull.Value : row["BillBookNo"].ToString();
-                            insertTransactionCommand.Parameters[3].Value = row["CancelDate"] == DBNull.Value ? (object)DBNull.Value : Convert.ToDateTime(row["CancelDate"]);
+                            insertTransactionCommand.Parameters[3].Value = row["CancelDate"] == DBNull.Value ? (object)DBNull.Value : Convert.ToDateTime(row["CancelDate"]).Date;
                             insertTransactionCommand.Parameters[4].Value = row["CancelReceipt"] == DBNull.Value ? (object)DBNull.Value : Convert.ToBoolean(row["CancelReceipt"]);
-                            insertTransactionCommand.Parameters[5].Value = row["CancelTime"] == DBNull.Value ? (object)DBNull.Value : Convert.ToDateTime(row["CancelTime"]);
+                            insertTransactionCommand.Parameters[5].Value = row["CancelTime"] == DBNull.Value ? (object)DBNull.Value : Convert.ToDateTime(row["CancelTime"]).Date;
                             insertTransactionCommand.Parameters[6].Value = row["CashAcTag"] == DBNull.Value ? (object)DBNull.Value : row["CashAcTag"].ToString();
                             insertTransactionCommand.Parameters[7].Value = row["CashRecAmt"] == DBNull.Value ? (object)DBNull.Value : Convert.ToDecimal(row["CashRecAmt"]);
                             insertTransactionCommand.Parameters[8].Value = row["ChequeAmt"] == DBNull.Value ? (object)DBNull.Value : Convert.ToDecimal(row["ChequeAmt"]);
-                            insertTransactionCommand.Parameters[9].Value = row["ChequeDt"] == DBNull.Value ? (object)DBNull.Value : Convert.ToDateTime(row["ChequeDt"]);
+                            insertTransactionCommand.Parameters[9].Value = row["ChequeDt"] == DBNull.Value ? (object)DBNull.Value : Convert.ToDateTime(row["ChequeDt"]).Date;
                             insertTransactionCommand.Parameters[10].Value = row["ChequeNo"] == DBNull.Value ? (object)DBNull.Value : row["ChequeNo"].ToString();
-                            insertTransactionCommand.Parameters[11].Value = row["CreatedOn"] == DBNull.Value ? (object)DBNull.Value : Convert.ToDateTime(row["CreatedOn"]);
-                            insertTransactionCommand.Parameters[12].Value = row["CreatedTime"] == DBNull.Value ? (object)DBNull.Value : Convert.ToDateTime(row["CreatedTime"]);
+                            insertTransactionCommand.Parameters[11].Value = row["CreatedOn"] == DBNull.Value ? (object)DBNull.Value : Convert.ToDateTime(row["CreatedOn"]).Date;
+                            insertTransactionCommand.Parameters[12].Value = row["CreatedTime"] == DBNull.Value ? (object)DBNull.Value : Convert.ToDateTime(row["CreatedTime"]).Date;
                             insertTransactionCommand.Parameters[13].Value = row["Data1"] == DBNull.Value ? (object)DBNull.Value : row["Data1"].ToString();
                             insertTransactionCommand.Parameters[14].Value = row["Data10"] == DBNull.Value ? (object)DBNull.Value : Convert.ToBoolean(row["Data10"]);
                             insertTransactionCommand.Parameters[15].Value = row["Data2"] == DBNull.Value ? (object)DBNull.Value : row["Data2"].ToString();
@@ -307,9 +307,9 @@ namespace DPS.SchoolAdmin
                             insertTransactionCommand.Parameters[23].Value = row["FineAmt"] == DBNull.Value ? (object)DBNull.Value : Convert.ToDecimal(row["FineAmt"]);
                             insertTransactionCommand.Parameters[24].Value = row["Narration"] == DBNull.Value ? (object)DBNull.Value : row["Narration"].ToString();
                             insertTransactionCommand.Parameters[25].Value = row["OnlineAmt"] == DBNull.Value ? (object)DBNull.Value : Convert.ToDecimal(row["OnlineAmt"]);
-                            insertTransactionCommand.Parameters[26].Value = row["OnlineDt"] == DBNull.Value ? (object)DBNull.Value : Convert.ToDateTime(row["OnlineDt"]);
+                            insertTransactionCommand.Parameters[26].Value = row["OnlineDt"] == DBNull.Value ? (object)DBNull.Value : Convert.ToDateTime(row["OnlineDt"]).Date;
                             insertTransactionCommand.Parameters[27].Value = row["OnlineRefNo"] == DBNull.Value ? (object)DBNull.Value : row["OnlineRefNo"].ToString();
-                            insertTransactionCommand.Parameters[28].Value = row["ReceiptDt"] == DBNull.Value ? (object)DBNull.Value : Convert.ToDateTime(row["ReceiptDt"]);
+                            insertTransactionCommand.Parameters[28].Value = row["ReceiptDt"] == DBNull.Value ? (object)DBNull.Value : Convert.ToDateTime(row["ReceiptDt"]).Date;
                             insertTransactionCommand.Parameters[29].Value = incrementedReceiptNumber; // ReceiptNo
                             insertTransactionCommand.Parameters[30].Value = row["ScholarNo"] == DBNull.Value ? (object)DBNull.Value : row["ScholarNo"].ToString();
                             insertTransactionCommand.Parameters[31].Value = row["TotDisAmt"] == DBNull.Value ? (object)DBNull.Value : Convert.ToDecimal(row["TotDisAmt"]);

@@ -57,7 +57,7 @@ namespace DPS.Student
                     foreach (DataRow row in feedt.Rows)
                     {
                         // Check if the FeeType is in the array and the FeeName is not "Fine"
-                        if (monthsArray.Contains(row["FeeType"].ToString()) && row["FeeName"].ToString() != "Total Fine")
+                        if (monthsArray.Contains(row["FeeType"].ToString()) && row["FeeName"].ToString() != "Fine")
                         {
                             feeSum += Convert.ToDecimal(row["FeeAmount"]);
                             // Import the row into the filtered DataTable
@@ -65,7 +65,7 @@ namespace DPS.Student
                         }
 
                         // Check if the FeeName is "Fine"
-                        if (monthsArray.Contains(row["FeeType"].ToString()) && row["FeeName"].ToString() == "Total Fine")
+                        if (monthsArray.Contains(row["FeeType"].ToString()) && row["FeeName"].ToString() == "Fine")
                         {
                             fineSum += Convert.ToDecimal(row["FeeAmount"]);
                         }
@@ -144,7 +144,7 @@ namespace DPS.Student
                     pd.txnCurrency = dt.Rows[0]["TRANSACTION_CURRENCY"].ToString();
 
                     cd.custEmail = "dps.epay@gmail.com";
-                    cd.custMobile = "9598487295";
+                    cd.custMobile = "7007146641";
 
                     ex.udf1 = requestTransactionresult.ToString();
                     ex.udf2 = txtScholarNo.Text;
@@ -393,7 +393,7 @@ namespace DPS.Student
                         ex.udf1 = tempResult.ToString();
                         string merchId = dt.Rows[0]["MERCHANT_ID"].ToString();// "8952";//txtmer.Text;
                         string custEmail = "dps.epay@gmail.com";
-                        string custMobile = txtFatherPhone.Text;
+                        string custMobile = "7007146641";//txtFatherPhone.Text;
                         //string returnUrl = ConfigurationManager.AppSettings["ResponseURL"].ToString() + "?id={" + tempResult +"}&q={"+encrypted+"}";
                         //string returnUrl = $"{ConfigurationManager.AppSettings["ResponseURL"].ToString()}?id={Uri.EscapeDataString(tempResult.ToString())}&q={Uri.EscapeDataString(encrypted)}";
                         string valueenc = tempResult.ToString() + "^" + schoolID.ToString();
