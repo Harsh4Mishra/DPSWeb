@@ -59,7 +59,7 @@ namespace DPS.Student
                         // Check if the FeeType is in the array and the FeeName is not "Fine"
                         if (monthsArray.Contains(row["FeeType"].ToString()) && row["FeeName"].ToString() != "Fine")
                         {
-                            feeSum += Convert.ToDecimal(row["FeeAmount"]);
+                            feeSum += Convert.ToDecimal(row["FeeAmount"].ToString()==""?0:row["FeeAmount"]);
                             // Import the row into the filtered DataTable
                             noFineDt.ImportRow(row);
                         }
@@ -67,7 +67,7 @@ namespace DPS.Student
                         // Check if the FeeName is "Fine"
                         if (monthsArray.Contains(row["FeeType"].ToString()) && row["FeeName"].ToString() == "Fine")
                         {
-                            fineSum += Convert.ToDecimal(row["FeeAmount"]);
+                            fineSum += Convert.ToDecimal(row["FeeAmount"].ToString() == ""?0:row["FeeAmount"]);
                         }
                     }
 
