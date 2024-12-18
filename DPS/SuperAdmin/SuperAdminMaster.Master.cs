@@ -31,7 +31,8 @@ namespace DPS.SuperAdmin
             }
             else if (currentPageUrl.EndsWith("ClientMaster.aspx") || currentPageUrl.EndsWith("AddClient.aspx") || currentPageUrl.EndsWith("EditClient.aspx") ||
                     currentPageUrl.EndsWith("DatabaseMaster.aspx") || currentPageUrl.EndsWith("AddDatabase.aspx") || currentPageUrl.EndsWith("EditDatabase.aspx") ||
-                    currentPageUrl.EndsWith("PaymentMaster.aspx") || currentPageUrl.EndsWith("AddPayment.aspx") || currentPageUrl.EndsWith("EditPayment.aspx"))
+                    currentPageUrl.EndsWith("PaymentMaster.aspx") || currentPageUrl.EndsWith("AddPayment.aspx") || currentPageUrl.EndsWith("EditPayment.aspx") ||
+                    currentPageUrl.EndsWith("ReVerifyPayment.aspx"))
             {
                 master.Attributes["class"] = "nav-item active";
             }

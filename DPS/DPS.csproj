@@ -1419,6 +1419,7 @@
     <Content Include="SuperAdmin\PaymentConfigurationMaster.aspx" />
     <Content Include="SuperAdmin\Profile.aspx" />
     <Content Include="SuperAdmin\ResetPassword.aspx" />
+    <Content Include="SuperAdmin\ReVerifyPayment.aspx" />
     <Content Include="SuperAdmin\SchoolDatabaseMaster.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -1672,6 +1673,26 @@
     <Compile Include="SuperAdmin\ResetPassword.aspx.designer.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SuperAdmin\ReVerifyPayment.aspx.cs">
+      <DependentUpon>ReVerifyPayment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SuperAdmin\ReVerifyPayment.aspx.designer.cs">
+      <DependentUpon>ReVerifyPayment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SuperAdmin\ReVerifyResult\BankDetails.cs" />
+    <Compile Include="SuperAdmin\ReVerifyResult\PayDetails.cs" />
+    <Compile Include="SuperAdmin\ReVerifyResult\PayInstrument.cs" />
+    <Compile Include="SuperAdmin\ReVerifyResult\PayInstrumentMapper.cs" />
+    <Compile Include="SuperAdmin\ReVerifyResult\PayModeSpecificData.cs" />
+    <Compile Include="SuperAdmin\ReVerifyResult\ResponseDetails.cs" />
+    <Compile Include="SuperAdmin\ReVerifyResult\SettlementDetails.cs" />
+    <Compile Include="SuperAdmin\ReVerifyResult\SubChannel.cs" />
+    <Compile Include="SuperAdmin\Reverify\HeadDetails.cs" />
+    <Compile Include="SuperAdmin\Reverify\MerchDetails.cs" />
+    <Compile Include="SuperAdmin\Reverify\PayDetails.cs" />
+    <Compile Include="SuperAdmin\Reverify\PayInstrument.cs" />
+    <Compile Include="SuperAdmin\Reverify\PayInstrumentWrapper.cs" />
     <Compile Include="SuperAdmin\SchoolClassFile\SchoolBLL.cs" />
     <Compile Include="SuperAdmin\SchoolClassFile\SchoolDAL.cs" />
     <Compile Include="SuperAdmin\SchoolClassFile\SchoolMaster.cs" />
