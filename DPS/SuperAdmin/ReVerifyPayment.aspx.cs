@@ -76,7 +76,7 @@ namespace DPS.SuperAdmin
                 {
                     con.Open();
                 }
-                string query = "SELECT [ID],[ScholarNumber],[StudentName],[Amount],[AtomID],[TransactionID],[TransactionDate],[IsReverified]  FROM [FeeTransactionRequest]";
+                string query = "SELECT [ID],[ScholarNumber],[StudentName],[Amount],[AtomID],[TransactionID],[TransactionDate],[IsReverified]  FROM [FeeTransactionRequest] where IsReverified=0";
                 SqlCommand com = new SqlCommand(query, con);
                 SqlDataAdapter sda = new SqlDataAdapter(com);
                 DataTable dt2 = new DataTable();
@@ -142,6 +142,7 @@ namespace DPS.SuperAdmin
 
 
                     string signature = "";
+                    //string strsignature = merchantID + password + transactionID + amount + transactionCurrency + api;
                     string strsignature = merchantID + password + transactionID + amount + transactionCurrency + api;
                     byte[] bytes = Encoding.UTF8.GetBytes(hashpassphrase);
                     byte[] bt = new System.Security.Cryptography.HMACSHA512(bytes).ComputeHash(Encoding.UTF8.GetBytes(strsignature));
@@ -155,19 +156,10 @@ namespace DPS.SuperAdmin
 
                     transactionDate = Regex.Replace(transactionDate, @"\s+", " "); // Replaces multiple spaces with a single space
 
-                    string inputFormat = "MMM dd yyyy h:mmtt";
+                    string inputFormat = "MMM d yyyy h:mmtt";
                     // DateTime parsedDate = DateTime.ParseExact(transactionDate, inputFormat, CultureInfo.InvariantCulture);
-                    DateTime parsedDate;
+                    DateTime parsedDate = DateTime.ParseExact(transactionDate, inputFormat, CultureInfo.InvariantCulture);
 
-                    if (DateTime.TryParseExact(transactionDate.Trim(), inputFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedDate))
-                    {
-                        // Parsing succeeded, you can use parsedDate here
-                    }
-                    else
-                    {
-                        // Handle the error, e.g., log it or show a message to the user
-                        // Example: throw new FormatException("Invalid date format.");
-                    }
 
                     // Convert the DateTime object to the desired format "yyyy-MM-dd"
                     string formattedDate = parsedDate.ToString("yyyy-MM-dd");

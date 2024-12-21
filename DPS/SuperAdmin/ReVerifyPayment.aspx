@@ -65,7 +65,7 @@
 
                                 <asp:TemplateField HeaderText="Transaction Date">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblTransactionDate" runat="server" Text='<%# Eval("TransactionDate") %>' />
+                                        <asp:Label ID="lblTransactionDate" runat="server" Text='<%# Eval("AtomID") %>' />
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="16%" />
                                 </asp:TemplateField>
