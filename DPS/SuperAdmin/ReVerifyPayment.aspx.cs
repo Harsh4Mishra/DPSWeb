@@ -156,8 +156,18 @@ namespace DPS.SuperAdmin
                     transactionDate = Regex.Replace(transactionDate, @"\s+", " "); // Replaces multiple spaces with a single space
 
                     string inputFormat = "MMM dd yyyy h:mmtt";
-                    DateTime parsedDate = DateTime.ParseExact(transactionDate, inputFormat, CultureInfo.InvariantCulture);
+                    // DateTime parsedDate = DateTime.ParseExact(transactionDate, inputFormat, CultureInfo.InvariantCulture);
+                    DateTime parsedDate;
 
+                    if (DateTime.TryParseExact(transactionDate.Trim(), inputFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedDate))
+                    {
+                        // Parsing succeeded, you can use parsedDate here
+                    }
+                    else
+                    {
+                        // Handle the error, e.g., log it or show a message to the user
+                        // Example: throw new FormatException("Invalid date format.");
+                    }
 
                     // Convert the DateTime object to the desired format "yyyy-MM-dd"
                     string formattedDate = parsedDate.ToString("yyyy-MM-dd");
