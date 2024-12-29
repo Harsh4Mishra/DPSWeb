@@ -5,6 +5,7 @@ using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DPS.Encryption;
+using System.Globalization;
 
 namespace DPS.SchoolAdmin
 {
@@ -85,14 +86,45 @@ namespace DPS.SchoolAdmin
             DateTime? fromDate = null;
             DateTime? toDate = null;
 
-            if (DateTime.TryParse(TextBox1.Text, out DateTime parsedFromDate))
+            DateTime? tillDate = null;
+            DateTime? parsedToDate = null;
+
+            string dateFormat = "dd/MM/yyyy";  // Expected date format (adjust if needed)
+
+            if (!string.IsNullOrEmpty(TextBox1.Text))
             {
-                fromDate = parsedFromDate;
+                //lblFromDate.Text = TextBox1.Text;
+
+                // Try parsing the 'from' date (nullable DateTime)
+                if (DateTime.TryParseExact(TextBox1.Text, dateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime tempFromDate))
+                {
+                    // Parsing succeeded, assign the value to fromDate
+                    fromDate = tempFromDate;
+                }
+                else
+                {
+                    // Handle invalid input for 'TextBox1'
+                    //Label1.Text = "Invalid date format in From Date. Please use dd/MM/yyyy.";
+                }
             }
 
-            if (DateTime.TryParse(TextBox2.Text, out DateTime parsedToDate))
+            if (!string.IsNullOrEmpty(TextBox2.Text))
             {
-                toDate = parsedToDate;
+                //lbltodate.Text = TextBox2.Text;
+
+                // Try parsing the 'till' date (nullable DateTime)
+                if (DateTime.TryParseExact(TextBox2.Text, dateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime tempTillDate))
+                {
+                    // Parsing succeeded, add 23 hours, 59 minutes, and 59 seconds to 'tillDate'
+                    parsedToDate = tempTillDate.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+                    tillDate = parsedToDate;
+                    toDate = parsedToDate;
+                }
+                else
+                {
+                    // Handle invalid input for 'TextBox2'
+                    //Label1.Text = "Invalid date format in To Date. Please use dd/MM/yyyy.";
+                }
             }
 
             // Call the BLL method with the retrieved parameters

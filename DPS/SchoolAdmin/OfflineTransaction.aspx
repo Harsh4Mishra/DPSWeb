@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SchoolAdmin/SchoolMaster.Master" AutoEventWireup="true" CodeBehind="OfflineTransaction.aspx.cs" Inherits="DPS.SchoolAdmin.OfflineTransaction" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SchoolAdmin/SchoolMaster.Master" AutoEventWireup="true" CodeBehind="OfflineTransaction.aspx.cs" Inherits="DPS.SchoolAdmin.OfflineTransaction" EnableViewState="true" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 

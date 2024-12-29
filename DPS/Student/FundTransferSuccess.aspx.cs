@@ -211,7 +211,7 @@ namespace DPS.Student
                                     fineSum += Convert.ToDecimal(row["FeeAmount"]);
                                 }
                             }
-
+                            Session["FineAmountTotal"] = fineSum;
                             Session["NoFineDataTable"] = noFineDt;
 
                             int receiptNo = feeBLL.AddFeeReceiptPrintOnline(DateTime.Now, ftr.ScholarNumber);

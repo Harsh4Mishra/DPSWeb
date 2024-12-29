@@ -1,4 +1,4 @@
-﻿n<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SchoolMaster.master.cs" Inherits="DPS.SchoolAdmin.SchoolMaster" %>
+﻿n<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SchoolMaster.master.cs" Inherits="DPS.SchoolAdmin.SchoolMaster" EnableViewState="true" %>
 
 <!DOCTYPE html>
 

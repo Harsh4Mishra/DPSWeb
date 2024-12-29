@@ -123,6 +123,7 @@
     <Content Include="SchoolAdmin\BothTransaction.aspx" />
     <Content Include="SchoolAdmin\FeeSync.aspx" />
     <Content Include="SchoolAdmin\InitialSync.aspx" />
+    <Content Include="SchoolAdmin\OfflineFeeTransaction.aspx" />
     <Content Include="SchoolAdmin\OfflineTransaction.aspx" />
     <Content Include="SchoolAdmin\OnlineTransaction.aspx" />
     <Content Include="SchoolAdmin\Profile.aspx" />
@@ -1497,6 +1498,13 @@
     </Compile>
     <Compile Include="SchoolAdmin\InitialSync.aspx.designer.cs">
       <DependentUpon>InitialSync.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SchoolAdmin\OfflineFeeTransaction.aspx.cs">
+      <DependentUpon>OfflineFeeTransaction.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SchoolAdmin\OfflineFeeTransaction.aspx.designer.cs">
+      <DependentUpon>OfflineFeeTransaction.aspx</DependentUpon>
     </Compile>
     <Compile Include="SchoolAdmin\OfflineTransaction.aspx.cs">
       <DependentUpon>OfflineTransaction.aspx</DependentUpon>

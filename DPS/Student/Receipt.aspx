@@ -93,6 +93,9 @@
                         <asp:BoundField DataField="FeeAmount" HeaderText="Fee Amount" />
                     </Columns>
                 </asp:GridView>
+                <br />
+                <br />
+                <p><strong>Fine Amount:</strong> <asp:Label ID="lblFineAmt" runat="server" Text="Label"></asp:Label></p>
             </div>
 
             <div class="footer">
