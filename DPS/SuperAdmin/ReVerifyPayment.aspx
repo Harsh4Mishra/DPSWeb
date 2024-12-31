@@ -19,7 +19,7 @@
                     <label>Select School</label><span style="color: red">*</span><br />
                     <div class="form-group">
                         <asp:DropDownList ID="ddlSchool" runat="server" ValidationGroup="Employee" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlSchool_SelectedIndexChanged"></asp:DropDownList>
-                        
+                        <asp:Label ID="Label1" runat="server" Text="Label" Visible="false"></asp:Label>
                     </div>
                 </div>
                 <div class="col-md-12">
