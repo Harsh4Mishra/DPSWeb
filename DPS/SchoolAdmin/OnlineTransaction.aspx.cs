@@ -1,13 +1,7 @@
 ﻿using DPS.SchoolAdmin.TransactionClassFile;
-using iTextSharp.text.html.simpleparser;
-using iTextSharp.text.pdf;
-using iTextSharp.text;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DPS.Encryption;
@@ -74,12 +68,12 @@ namespace DPS.SchoolAdmin
             }
 
         }
-        protected void ddlentities_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int newSize = Convert.ToInt32(ddlentities.SelectedValue);
-            GridView1.PageSize = newSize;
-            BindTransactionDetail();
-        }
+        //protected void ddlentities_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    int newSize = Convert.ToInt32(ddlentities.SelectedValue);
+        //    GridView1.PageSize = newSize;
+        //    BindTransactionDetail();
+        //}
         public void BindTransactionDetail()
         {
             DataTable dt = new DataTable();

@@ -62,7 +62,7 @@
                     <div class="row" style="padding: 5px">
                         <div class="col">
                             <div class="d-flex justify-content-start align-items-center">
-                                <span style="font-size: small; color: #aaaaaa">Show </span>&nbsp;&nbsp;
+                               <%-- <span style="font-size: small; color: #aaaaaa">Show </span>&nbsp;&nbsp;
                                 <asp:DropDownList ID="ddlentities" Style="font-size: small; color: #aaaaaa" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlentities_SelectedIndexChanged">
                                     <asp:ListItem Text="5" Value="5"></asp:ListItem>
                                     <asp:ListItem Text="10" Value="10"></asp:ListItem>
@@ -70,7 +70,7 @@
                                     <asp:ListItem Text="50" Value="50"></asp:ListItem>
                                     <asp:ListItem Text="100" Value="100"></asp:ListItem>
                                 </asp:DropDownList>
-                                &nbsp;&nbsp;<span style="font-size: small; color: #aaaaaa"> Rows</span>
+                                &nbsp;&nbsp;<span style="font-size: small; color: #aaaaaa"> Rows</span>--%>
                             </div>
                         </div>
                         <div class="col">
@@ -92,7 +92,7 @@
                     <div class="table-responsive">
                         <asp:GridView ID="GridView1" runat="server" AllowSorting="True" Width="100%" BackColor="White" BorderColor="#dbdade"
                             OnSorting="GridView1_Sorting" BorderStyle="None" BorderWidth="1px" CellPadding="3" AutoGenerateColumns="false"
-                            AllowPaging="true" OnPageIndexChanging="OnPageIndexChanging" PageSize="5" EmptyDataText="No data found." ShowHeaderWhenEmpty="true"
+                            AllowPaging="true" OnPageIndexChanging="OnPageIndexChanging"  EmptyDataText="No data found." ShowHeaderWhenEmpty="true"
                              ShowFooter="true" OnRowDataBound="GridView1_RowDataBound">
                             <Columns>
                                 <asp:TemplateField HeaderText="ScholarNo" SortExpression="ScholarNo">

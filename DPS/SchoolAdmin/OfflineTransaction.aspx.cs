@@ -69,12 +69,12 @@ namespace DPS.SchoolAdmin
             }
 
         }
-        protected void ddlentities_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int newSize = Convert.ToInt32(ddlentities.SelectedValue);
-            GridView1.PageSize = newSize;
-            BindTransactionDetail();
-        }
+        //protected void ddlentities_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    int newSize = Convert.ToInt32(ddlentities.SelectedValue);
+        //    GridView1.PageSize = newSize;
+        //    BindTransactionDetail();
+        //}
         public void BindTransactionDetail()
         {
             try
