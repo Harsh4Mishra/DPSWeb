@@ -51,7 +51,7 @@ namespace DPS.Student
                 
 
                 DataTable feedt = (DataTable)Session["NoFineDataTable"];
-
+                lblFineAmt.Text= Session["FineAmountTotal"].ToString();
                 // Bind data to GridView
                 GridViewFeeDetails.DataSource = feedt;
                 GridViewFeeDetails.DataBind();

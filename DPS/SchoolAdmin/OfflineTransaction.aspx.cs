@@ -1,16 +1,11 @@
-﻿using iTextSharp.text.html.simpleparser;
-using iTextSharp.text.pdf;
-using iTextSharp.text;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DPS.SchoolAdmin.TransactionClassFile;
 using DPS.Encryption;
+using System.Globalization;
 
 namespace DPS.SchoolAdmin
 {
@@ -21,6 +16,7 @@ namespace DPS.SchoolAdmin
         {
             if (!IsPostBack)
             {
+                this.EnableViewState = true;
                 BindClass();
                 BindTransactionDetail();
             }
@@ -73,44 +69,113 @@ namespace DPS.SchoolAdmin
             }
 
         }
-        protected void ddlentities_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int newSize = Convert.ToInt32(ddlentities.SelectedValue);
-            GridView1.PageSize = newSize;
-            BindTransactionDetail();
-        }
+        //protected void ddlentities_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    int newSize = Convert.ToInt32(ddlentities.SelectedValue);
+        //    GridView1.PageSize = newSize;
+        //    BindTransactionDetail();
+        //}
         public void BindTransactionDetail()
         {
-            DataTable dt = new DataTable();
-
-            // Retrieve the selected class and section values
-            string className = string.IsNullOrWhiteSpace(ddlClass.SelectedValue) ? null : ddlClass.SelectedValue;
-            string sectionName = string.IsNullOrWhiteSpace(ddlSection.SelectedValue) ? null : ddlSection.SelectedValue;
-
-            // Parse the dates from the text boxes, handling possible format issues
-            DateTime? fromDate = null;
-            DateTime? toDate = null;
-
-            if (DateTime.TryParse(TextBox1.Text, out DateTime parsedFromDate))
+            try
             {
-                fromDate = parsedFromDate;
-            }
+                DataTable dt = new DataTable();
 
-            if (DateTime.TryParse(TextBox2.Text, out DateTime parsedToDate))
+                // Retrieve the selected class and section values
+                string className = string.IsNullOrWhiteSpace(ddlClass.SelectedValue) ? null : ddlClass.SelectedValue;
+                string sectionName = string.IsNullOrWhiteSpace(ddlSection.SelectedValue) ? null : ddlSection.SelectedValue;
+
+                // Parse the dates from the text boxes, handling possible format issues
+                DateTime? fromDate = null;
+                DateTime? toDate = null;
+
+
+                DateTime? tillDate = null;
+                DateTime? parsedToDate = null;
+
+                string dateFormat = "dd/MM/yyyy";  // Expected date format (adjust if needed)
+
+                if (!string.IsNullOrEmpty(TextBox1.Text))
+                {
+                    //lblFromDate.Text = TextBox1.Text;
+
+                    // Try parsing the 'from' date (nullable DateTime)
+                    if (DateTime.TryParseExact(TextBox1.Text, dateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime tempFromDate))
+                    {
+                        // Parsing succeeded, assign the value to fromDate
+                        fromDate = tempFromDate;
+                    }
+                    else
+                    {
+                        // Handle invalid input for 'TextBox1'
+                        //Label1.Text = "Invalid date format in From Date. Please use dd/MM/yyyy.";
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(TextBox2.Text))
+                {
+                    //lbltodate.Text = TextBox2.Text;
+
+                    // Try parsing the 'till' date (nullable DateTime)
+                    if (DateTime.TryParseExact(TextBox2.Text, dateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime tempTillDate))
+                    {
+                        // Parsing succeeded, add 23 hours, 59 minutes, and 59 seconds to 'tillDate'
+                        parsedToDate = tempTillDate.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+                        tillDate = parsedToDate;
+                        toDate = parsedToDate;
+                    }
+                    else
+                    {
+                        // Handle invalid input for 'TextBox2'
+                        //Label1.Text = "Invalid date format in To Date. Please use dd/MM/yyyy.";
+                    }
+                }
+
+                // Call the BLL method with the retrieved parameters
+                dt = transactionBLL.GetFeeTransactionSummaryOffLine(className, sectionName, fromDate, toDate);
+
+                // Store the DataTable in ViewState for sorting
+                ViewState["TransactionData"] = dt;
+                Session["UserDataTable"] = dt;
+                // Bind the result to the GridView
+                GridView1.DataSource = dt;
+                GridView1.DataBind();
+            }
+            catch(Exception ex)
             {
-                parsedToDate = parsedToDate.AddHours(23).AddMinutes(59).AddSeconds(59);
-                toDate = parsedToDate;
+                ClientScript.RegisterStartupScript(this.GetType(), "ErrorMessage", $"showMessage('"+ex.Message+"', 'error');", true);
             }
+        }
+        public void BindTransactionDetaildate()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
 
-            // Call the BLL method with the retrieved parameters
-            dt = transactionBLL.GetFeeTransactionSummaryOffLine(className, sectionName, fromDate, toDate);
+                // Parse the dates from the text boxes, handling possible format issues
+                DateTime fromDate;
+                DateTime toDate;
 
-            // Store the DataTable in ViewState for sorting
-            ViewState["TransactionData"] = dt;
-            Session["UserDataTable"] = dt;
-            // Bind the result to the GridView
-            GridView1.DataSource = dt;
-            GridView1.DataBind();
+
+                    fromDate = DateTime.Parse(TextBox1.Text);
+               
+                    DateTime parsedToDate = DateTime.Parse(TextBox2.Text).AddHours(23).AddMinutes(59).AddSeconds(59);
+                    toDate = parsedToDate;
+                
+                // Call the BLL method with the retrieved parameters
+                dt = transactionBLL.GetFeeTransactionSummaryOffLine(null, null, fromDate, toDate);
+
+                // Store the DataTable in ViewState for sorting
+                ViewState["TransactionData"] = dt;
+                Session["UserDataTable"] = dt;
+                // Bind the result to the GridView
+                GridView1.DataSource = dt;
+                GridView1.DataBind();
+            }
+            catch (Exception ex)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "ErrorMessage", $"showMessage('" + ex.Message + "', 'error');", true);
+            }
         }
 
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
@@ -281,11 +346,33 @@ namespace DPS.SchoolAdmin
         {
             BindTransactionDetail();
         }
+       
 
         protected void linkButtonfilter_Click(object sender, EventArgs e)
         {
-            BindTransactionDetail();
+            if (!string.IsNullOrWhiteSpace(TextBox1.Text) || !string.IsNullOrWhiteSpace(TextBox2.Text))
+            {
+                 BindTransactionDetail();
+                //BindTransactionDetaildate();
+            }
+            else
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "ErrorMessage", $"showMessage('No data to export', 'error');", true);
+            }
 
         }
+
+        //protected void TextBox2_TextChanged(object sender, EventArgs e)
+        //{
+        //    if (!string.IsNullOrWhiteSpace(TextBox1.Text) || !string.IsNullOrWhiteSpace(TextBox2.Text))
+        //    {
+        //        BindTransactionDetail();
+        //        //BindTransactionDetaildate();
+        //    }
+        //    else
+        //    {
+        //        ClientScript.RegisterStartupScript(this.GetType(), "ErrorMessage", $"showMessage('No data to export', 'error');", true);
+        //    }
+        //}
     }
 }

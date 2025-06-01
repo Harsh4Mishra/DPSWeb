@@ -66,6 +66,9 @@
     <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.3.0.1\lib\netstandard2.0\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -123,6 +126,7 @@
     <Content Include="SchoolAdmin\BothTransaction.aspx" />
     <Content Include="SchoolAdmin\FeeSync.aspx" />
     <Content Include="SchoolAdmin\InitialSync.aspx" />
+    <Content Include="SchoolAdmin\OfflineFeeTransaction.aspx" />
     <Content Include="SchoolAdmin\OfflineTransaction.aspx" />
     <Content Include="SchoolAdmin\OnlineTransaction.aspx" />
     <Content Include="SchoolAdmin\Profile.aspx" />
@@ -139,6 +143,7 @@
     <Content Include="Student\PaymentPage.aspx" />
     <Content Include="Student\Receipt.aspx" />
     <Content Include="Student\SchoolWithState.aspx" />
+    <Content Include="Student\StudentFeeDetail.aspx" />
     <Content Include="StyleSheet\css\vertical-layout-light\style.css" />
     <Content Include="StyleSheet\font-awesome.min.css" />
     <Content Include="StyleSheet\js\ace.js" />
@@ -1419,6 +1424,7 @@
     <Content Include="SuperAdmin\PaymentConfigurationMaster.aspx" />
     <Content Include="SuperAdmin\Profile.aspx" />
     <Content Include="SuperAdmin\ResetPassword.aspx" />
+    <Content Include="SuperAdmin\ReVerifyPayment.aspx" />
     <Content Include="SuperAdmin\SchoolDatabaseMaster.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -1496,6 +1502,13 @@
     </Compile>
     <Compile Include="SchoolAdmin\InitialSync.aspx.designer.cs">
       <DependentUpon>InitialSync.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SchoolAdmin\OfflineFeeTransaction.aspx.cs">
+      <DependentUpon>OfflineFeeTransaction.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SchoolAdmin\OfflineFeeTransaction.aspx.designer.cs">
+      <DependentUpon>OfflineFeeTransaction.aspx</DependentUpon>
     </Compile>
     <Compile Include="SchoolAdmin\OfflineTransaction.aspx.cs">
       <DependentUpon>OfflineTransaction.aspx</DependentUpon>
@@ -1592,6 +1605,13 @@
     <Compile Include="Student\SchoolWithState.aspx.designer.cs">
       <DependentUpon>SchoolWithState.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Student\StudentFeeDetail.aspx.cs">
+      <DependentUpon>StudentFeeDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student\StudentFeeDetail.aspx.designer.cs">
+      <DependentUpon>StudentFeeDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SuperAdmin\AddClient.aspx.cs">
       <DependentUpon>AddClient.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1672,6 +1692,26 @@
     <Compile Include="SuperAdmin\ResetPassword.aspx.designer.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SuperAdmin\ReVerifyPayment.aspx.cs">
+      <DependentUpon>ReVerifyPayment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SuperAdmin\ReVerifyPayment.aspx.designer.cs">
+      <DependentUpon>ReVerifyPayment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SuperAdmin\ReVerifyResult\BankDetails.cs" />
+    <Compile Include="SuperAdmin\ReVerifyResult\PayDetails.cs" />
+    <Compile Include="SuperAdmin\ReVerifyResult\PayInstrument.cs" />
+    <Compile Include="SuperAdmin\ReVerifyResult\PayInstrumentMapper.cs" />
+    <Compile Include="SuperAdmin\ReVerifyResult\PayModeSpecificData.cs" />
+    <Compile Include="SuperAdmin\ReVerifyResult\ResponseDetails.cs" />
+    <Compile Include="SuperAdmin\ReVerifyResult\SettlementDetails.cs" />
+    <Compile Include="SuperAdmin\ReVerifyResult\SubChannel.cs" />
+    <Compile Include="SuperAdmin\Reverify\HeadDetails.cs" />
+    <Compile Include="SuperAdmin\Reverify\MerchDetails.cs" />
+    <Compile Include="SuperAdmin\Reverify\PayDetails.cs" />
+    <Compile Include="SuperAdmin\Reverify\PayInstrument.cs" />
+    <Compile Include="SuperAdmin\Reverify\PayInstrumentWrapper.cs" />
     <Compile Include="SuperAdmin\SchoolClassFile\SchoolBLL.cs" />
     <Compile Include="SuperAdmin\SchoolClassFile\SchoolDAL.cs" />
     <Compile Include="SuperAdmin\SchoolClassFile\SchoolMaster.cs" />

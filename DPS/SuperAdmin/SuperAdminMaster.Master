@@ -101,6 +101,7 @@
                                 <li class="nav-item"><a class="nav-link" href="ClientMaster.aspx">Client</a></li>
                                 <li class="nav-item"><a class="nav-link" href="SchoolDatabaseMaster.aspx">Database</a></li>
                                 <li class="nav-item"><a class="nav-link" href="PaymentConfigurationMaster.aspx">Payment</a></li>
+                                <li class="nav-item"><a class="nav-link" href="ReVerifyPayment.aspx">Re-Verify</a></li>
                             </ul>
                         </div>
                     </li>
