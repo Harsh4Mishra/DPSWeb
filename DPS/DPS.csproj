@@ -143,6 +143,7 @@
     <Content Include="Student\PaymentPage.aspx" />
     <Content Include="Student\Receipt.aspx" />
     <Content Include="Student\SchoolWithState.aspx" />
+    <Content Include="Student\StudentFeeDetail.aspx" />
     <Content Include="StyleSheet\css\vertical-layout-light\style.css" />
     <Content Include="StyleSheet\font-awesome.min.css" />
     <Content Include="StyleSheet\js\ace.js" />
@@ -1603,6 +1604,13 @@
     </Compile>
     <Compile Include="Student\SchoolWithState.aspx.designer.cs">
       <DependentUpon>SchoolWithState.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Student\StudentFeeDetail.aspx.cs">
+      <DependentUpon>StudentFeeDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student\StudentFeeDetail.aspx.designer.cs">
+      <DependentUpon>StudentFeeDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="SuperAdmin\AddClient.aspx.cs">
       <DependentUpon>AddClient.aspx</DependentUpon>
