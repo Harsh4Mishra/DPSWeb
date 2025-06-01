@@ -18,8 +18,8 @@ namespace DPS.SchoolAdmin.TransactionClassFile
                 if (!string.IsNullOrEmpty(databaseName))
                 {
                     // Provide a default connection string or handle the error
-                    connection = @"Data Source=DESKTOP-MB1QN8B\SQLEXPRESS;Initial Catalog=" + databaseName + ";Integrated Security=True;MultipleActiveResultSets=True;Connect Timeout=120;";
-                    //connection = "Data Source=150.242.203.229;Initial Catalog=" + databaseName+ ";User Id=dpsuser;Password=dps@123;Integrated Security=False;MultipleActiveResultSets=True"; // Replace with your default
+                    //connection = @"Server=85.25.185.85\MSSQLSERVER2017Initial Catalog=" + databaseName + ";User Id=DPSERP;Password=Dpstech@123;MultipleActiveResultSets=True;Connect Timeout=1200;";
+                    connection = "Data Source=150.242.203.229;Initial Catalog=" + databaseName + ";User Id=dpsuser;Password=dps@123;Integrated Security=False;MultipleActiveResultSets=True;Connect Timeout=60000;"; // Replace with your default
                 }
             }
 
