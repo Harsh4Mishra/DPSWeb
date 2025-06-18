@@ -8,6 +8,7 @@ namespace DPS.Student.FeeClassFile
         public string ScholarNumber { get; set; }
         public string StudentName { get; set; }
         public int Amount { get; set; }
+        public int FineAmount { get; set; }
         public string TransactionID { get; set; }
         public DateTime TransactionDate { get; set; }
         public string AtomId { get; set; }

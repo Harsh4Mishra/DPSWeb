@@ -80,6 +80,7 @@ namespace DPS.Student
                             ftr.ScholarNumber = dt2.Rows[0]["ScholarNumber"].ToString();
                             ftr.StudentName = dt2.Rows[0]["StudentName"].ToString();
                             ftr.Amount = int.Parse(dt2.Rows[0]["Amount"].ToString());
+                            ftr.FineAmount = int.Parse(dt2.Rows[0]["FineAmount"].ToString());
                             ftr.TransactionID = dt2.Rows[0]["TransactionID"].ToString();
                             ftr.TransactionDate = DateTime.Parse(dt2.Rows[0]["TransactionDate"].ToString());
                             ftr.AtomId = dt2.Rows[0]["AtomID"].ToString();
@@ -219,6 +220,7 @@ namespace DPS.Student
                             {
                                 Session["ReceiptNo"] = receiptNo.ToString();
                                 decimal amountDecimaln = Convert.ToDecimal(amount);
+                                int fineAmount= Convert.ToInt32(ftr.FineAmount.ToString());
                                 int amountIntn = Convert.ToInt32(amountDecimaln);
                                 var amountInwords = "Rupees " + ConvertNumbertoWords(amountIntn) + " Only.";
                                 FeeTransactionModel ftm = new FeeTransactionModel();
@@ -227,7 +229,7 @@ namespace DPS.Student
                                 ftm.ScholarNo = ftr.ScholarNumber;
                                 ftm.BillBookNo = "";
                                 ftm.TotFeeAmt = feeSum;
-                                ftm.FineAmt = fineSum;
+                                ftm.FineAmt = fineAmount;
                                 ftm.TotDisAmt = 0;
                                 ftm.TotRecAmt = feeSum + fineSum;
                                 ftm.OnlineAmt = feeSum + fineSum;

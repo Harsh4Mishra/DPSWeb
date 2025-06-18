@@ -360,6 +360,7 @@ namespace DPS.Student
                     ftr.ScholarNumber = txtScholarNo.Text;
                     ftr.StudentName = txtStudentName.Text;
                     ftr.Amount = int.Parse(txtfinalAmount.Text);
+                    ftr.FineAmount = int.Parse(txtFineAmount.Text == "" ? "0" : txtFineAmount.Text);
                     ftr.TransactionID = md.merchTxnId;
                     ftr.TransactionDate = DateTime.Now;
                     ftr.AtomId = Tok_id;
