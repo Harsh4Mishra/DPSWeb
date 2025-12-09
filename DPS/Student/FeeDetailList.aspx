@@ -134,7 +134,7 @@
                                 <Columns>
                                     <asp:TemplateField HeaderText="Select Fees">
                                         <ItemTemplate>
-                                            <asp:CheckBox ID="chkIsActive" runat="server" Enabled="true" />
+                                            <asp:CheckBox ID="chkIsActive" runat="server" Enabled="true" onclick="handleSequence(this)" />
                                         </ItemTemplate>
                                         <ItemStyle HorizontalAlign="Center" Width="33%" />
                                     </asp:TemplateField>
@@ -184,6 +184,43 @@
 
 
         </div>
+
+        <script>
+            function handleSequence(thisChk) {
+
+                var grid = document.getElementById('<%= GridView1.ClientID %>');
+                var checkboxes = grid.querySelectorAll("input[type='checkbox']");
+
+                let index = -1;
+
+                // find index of clicked checkbox
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i] === thisChk) {
+                        index = i;
+                        break;
+                    }
+                }
+
+                // If user checks the checkbox:
+                if (thisChk.checked) {
+                    // Enable ONLY the next checkbox
+                    if (index + 1 < checkboxes.length) {
+                        checkboxes[index + 1].disabled = false;
+                    }
+                }
+                else {
+                    // If user UNCHECKS: uncheck & disable ALL below rows
+                    for (var j = index + 1; j < checkboxes.length; j++) {
+                        checkboxes[j].checked = false;
+                        checkboxes[j].disabled = true;
+                    }
+                }
+            }
+        </script>
+
+
+
+
         <script src="../StyleSheet/vendors/js/vendor.bundle.base.js"></script>
         <!-- endinject -->
         <!-- Plugin js for this page -->

@@ -157,7 +157,7 @@ namespace DPS.SuperAdmin
 
 
             //string connectionString = @"Server=85.25.185.85\MSSQLSERVER2017;User Id=DPSERP;Password=Dpstech@123;Connect Timeout=1200;";
-            string connectionString = "Data Source=150.242.203.229;Integrated Security=False;User Id=dpsuser;Password=dps@123;Connect Timeout=5000;"; // Use appropriate connection string
+            string connectionString = "Data Source=150.242.203.229,9144;Integrated Security=False;User Id=dpsuser;Password=dps@123;Connect Timeout=5000;"; // Use appropriate connection string
             string dbName = database; // Name of the database to create
             /*string sqlFilePath = @"../Script/School.sql";*/ // Path to your .sql file
             string sqlFilePath = Server.MapPath("~/Script/School.sql");

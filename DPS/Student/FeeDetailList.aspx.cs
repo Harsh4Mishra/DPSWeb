@@ -153,6 +153,7 @@ namespace DPS.Student
 
                     // Disable the checkbox for paid months
                     chkIsActive.Enabled = false;
+                    chkIsActive.InputAttributes["disabled"] = "disabled";
                 }
                 else
                 {
@@ -160,7 +161,30 @@ namespace DPS.Student
                     lblFeeMonth.Text = feeMonth + "(Unpaid)";
 
                     // Enable the checkbox for unpaid months
-                    chkIsActive.Enabled = true;
+                    chkIsActive.Enabled = false;
+                    chkIsActive.InputAttributes["disabled"] = "disabled";
+                }
+            }
+
+            // After all rows are bound → enable only first unpaid row
+            if (e.Row.RowType == DataControlRowType.Footer)
+            {
+                EnableOnlyFirstUnpaidRow();
+            }
+        }
+
+        private void EnableOnlyFirstUnpaidRow()
+        {
+            foreach (GridViewRow row in GridView1.Rows)
+            {
+                CheckBox chk = (CheckBox)row.FindControl("chkIsActive");
+                Label lbl = (Label)row.FindControl("lblFeeMonth");
+
+                if (chk != null && lbl.Text.Contains("(Unpaid)"))
+                {
+                    chk.Enabled = true;
+                    chk.InputAttributes.Remove("disabled");
+                    break;
                 }
             }
         }
