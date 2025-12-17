@@ -195,7 +195,7 @@ namespace DPS.Student
                             string[] monthsArray = selectedMonths.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                             DataTable noFineDt = feedt.Clone();
                             decimal feeSum = 0;
-                            decimal fineSum = 0;
+                            //decimal fineSum = 0;
                             foreach (DataRow row in feedt.Rows)
                             {
                                 // Check if the FeeType is in the array and the FeeName is not "Fine"
@@ -209,10 +209,10 @@ namespace DPS.Student
                                 // Check if the FeeName is "Fine"
                                 if (monthsArray.Contains(row["FeeType"].ToString()) && row["FeeName"].ToString() == "Fine")
                                 {
-                                    fineSum += Convert.ToDecimal(row["FeeAmount"]);
+                                   // fineSum += Convert.ToDecimal(row["FeeAmount"]);
                                 }
                             }
-                            Session["FineAmountTotal"] = fineSum;
+                            // = fineSum;
                             Session["NoFineDataTable"] = noFineDt;
 
                             int receiptNo = feeBLL.AddFeeReceiptPrintOnline(DateTime.Now, ftr.ScholarNumber);
@@ -221,6 +221,7 @@ namespace DPS.Student
                                 Session["ReceiptNo"] = receiptNo.ToString();
                                 decimal amountDecimaln = Convert.ToDecimal(amount);
                                 int fineAmount= Convert.ToInt32(ftr.FineAmount.ToString());
+                                Session["FineAmountTotal"] = fineAmount;
                                 int amountIntn = Convert.ToInt32(amountDecimaln);
                                 var amountInwords = "Rupees " + ConvertNumbertoWords(amountIntn) + " Only.";
                                 FeeTransactionModel ftm = new FeeTransactionModel();
@@ -231,8 +232,8 @@ namespace DPS.Student
                                 ftm.TotFeeAmt = feeSum;
                                 ftm.FineAmt = fineAmount;
                                 ftm.TotDisAmt = 0;
-                                ftm.TotRecAmt = feeSum + fineSum;
-                                ftm.OnlineAmt = feeSum + fineSum;
+                                ftm.TotRecAmt = feeSum + fineAmount;
+                                ftm.OnlineAmt = feeSum + fineAmount;
                                 ftm.OnlineRefNo = ftr.TransactionID;
                                 ftm.OnlineDt = ftr.TransactionDate;
                                 ftm.AmtInWords = amountInwords;
@@ -300,7 +301,7 @@ namespace DPS.Student
                                         Session["ScholarNo"] = ftr.ScholarNumber;
                                         Session["SchoolId"] = schoolID;
                                         Response.Redirect(ConfigurationManager.AppSettings["ReceiptURL"].ToString() + "", false);
-                                        HttpContext.Current.ApplicationInstance.CompleteRequest(); // Stop further processing
+                                        //HttpContext.Current.ApplicationInstance.CompleteRequest(); // Stop further processing
                                         Label1.Text = "Payment Done Successfully";
                                     }
                                     else
@@ -312,6 +313,7 @@ namespace DPS.Student
                                 }
 
                             }
+                            int deleterow = feeBLL.DeleteOrphanFeeReceiptPrintOnline();
                         }
                         else
                         {

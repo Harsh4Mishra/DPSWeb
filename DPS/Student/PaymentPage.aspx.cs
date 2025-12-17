@@ -91,7 +91,14 @@ namespace DPS.Student
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            MakePaymentThroughNTTDATA();
+            try
+            {
+                MakePaymentThroughNTTDATA();
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
         public void MakePaymentThroughNTTDATA()
         {

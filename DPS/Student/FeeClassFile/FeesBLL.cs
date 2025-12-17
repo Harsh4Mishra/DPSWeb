@@ -127,6 +127,23 @@ namespace DPS.Student.FeeClassFile
                 throw new ApplicationException("An error occurred while adding the new school.", ex);
             }
         }
+
+        public int DeleteOrphanFeeReceiptPrintOnline()
+        {
+            try
+            {
+                // Instantiate SchoolDAL and call the method
+                FeesDAL schoolDAL = new FeesDAL();
+                int result = schoolDAL.DeleteOrphanFeeReceiptPrintOnline();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (logging mechanism not shown here)
+                // LogException(ex);
+                throw new ApplicationException("An error occurred while adding the new school.", ex);
+            }
+        }
         public int AddFeeTransactionOnline(FeeTransactionModel model)
         {
             try

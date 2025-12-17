@@ -73,13 +73,13 @@
             </div>
             <div class="col-sm-6">
                 <div class="row">
-                    <div class="col-md-6">
+                    <%--<div class="col-md-6">
                         <label>Scholar Number</label><span style="color: red">*</span><br />
                         <div class="form-group">
                             <asp:TextBox ID="txtScholarNo" CssClass="form-control" AutoCompleteType="Disabled" ValidationGroup="Employee" runat="server"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Provide Scholar Number" ControlToValidate="txtScholarNo" ForeColor="Red" ValidationGroup="Employee" ToolTip="Provide Scholar Number"></asp:RequiredFieldValidator>
                         </div>
-                    </div>
+                    </div>--%>
                     <div class="col-sm-6">
                         <%--<asp:Button ID="btnsave" Style="border-radius: 5px; margin-top: 30px" class="btn btn-block btn-save font-weight-medium auth-form-btn" runat="server" ValidationGroup="Employee" Text="Search" OnClick="btnsave_Click" />--%>
                     </div>

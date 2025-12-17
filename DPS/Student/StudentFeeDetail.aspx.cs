@@ -105,13 +105,14 @@ namespace DPS.Student
         {
             try
             {
-                Session["StudentPayFee"] = txtScholarNo.Text;
+                string scholarno = Request.QueryString["scholarno"];
+                Session["StudentPayFee"] = scholarno;//txtScholarNo.Text;
                 FeesBLL fees = new FeesBLL();
                 // Call the method to get the FeeDetails and MonthlyFees
-                DataSet ds = fees.StudentFeeParameterDetail(txtScholarNo.Text);
+                DataSet ds = fees.StudentFeeParameterDetail(scholarno);
 
                 DataTable paidFeedt = new DataTable();
-                paidFeedt = fees.GetPaidFeeByScholarNo(txtScholarNo.Text);
+                paidFeedt = fees.GetPaidFeeByScholarNo(scholarno);
                 List<string> paidList = new List<string>();
                 foreach (DataRow dr in paidFeedt.Rows)
                 {

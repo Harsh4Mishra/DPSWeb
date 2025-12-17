@@ -131,6 +131,8 @@ namespace DPS.Student
                 Console.WriteLine($"An unexpected error occurred: {ex.Message}");
             }
         }
+
+
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -153,6 +155,7 @@ namespace DPS.Student
 
                     // Disable the checkbox for paid months
                     chkIsActive.Enabled = false;
+                    chkIsActive.InputAttributes["disabled"] = "disabled";
                 }
                 else
                 {
@@ -160,10 +163,67 @@ namespace DPS.Student
                     lblFeeMonth.Text = feeMonth + "(Unpaid)";
 
                     // Enable the checkbox for unpaid months
-                    chkIsActive.Enabled = true;
+                    chkIsActive.Enabled = false;
+                    chkIsActive.InputAttributes["disabled"] = "disabled";
+                }
+            }
+
+            // After all rows are bound → enable only first unpaid row
+            if (e.Row.RowType == DataControlRowType.Footer)
+            {
+                EnableOnlyFirstUnpaidRow();
+            }
+        }
+
+        private void EnableOnlyFirstUnpaidRow()
+        {
+            foreach (GridViewRow row in GridView1.Rows)
+            {
+                CheckBox chk = (CheckBox)row.FindControl("chkIsActive");
+                Label lbl = (Label)row.FindControl("lblFeeMonth");
+
+                if (chk != null && lbl.Text.Contains("(Unpaid)"))
+                {
+                    chk.Enabled = true;
+                    chk.InputAttributes.Remove("disabled");
+                    break;
                 }
             }
         }
+
+        //protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        //{
+        //    if (e.Row.RowType == DataControlRowType.DataRow)
+        //    {
+        //        // Retrieve the FeeMonth value from the data row
+        //        string feeMonth = DataBinder.Eval(e.Row.DataItem, "FeeType")?.ToString(); // Use null conditional operator to avoid null reference
+
+        //        // Get the CheckBox and Label controls from the row
+        //        CheckBox chkIsActive = (CheckBox)e.Row.FindControl("chkIsActive");
+        //        Label lblFeeMonth = (Label)e.Row.FindControl("lblFeeMonth");
+
+        //        // Check if the session value exists and is valid
+        //        List<string> paidFeeMonths = (List<string>)Session["PaidFeeMonths"];
+
+        //        // Check if paidFeeMonths list is null or empty
+        //        if (paidFeeMonths != null && feeMonth != null && paidFeeMonths.Contains(feeMonth))
+        //        {
+        //            // If the FeeMonth is in the paidFeeMonths list, set the label text to "Paid"
+        //            lblFeeMonth.Text = feeMonth + "(Paid)";
+
+        //            // Disable the checkbox for paid months
+        //            chkIsActive.Enabled = false;
+        //        }
+        //        else
+        //        {
+        //            // If the FeeMonth is not in the paidFeeMonths list, set the label text to "Unpaid"
+        //            lblFeeMonth.Text = feeMonth + "(Unpaid)";
+
+        //            // Enable the checkbox for unpaid months
+        //            chkIsActive.Enabled = true;
+        //        }
+        //    }
+        //}
 
 
     }

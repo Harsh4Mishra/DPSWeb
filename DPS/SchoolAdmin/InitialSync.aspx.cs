@@ -112,7 +112,7 @@ namespace DPS.SchoolAdmin
 
             //string accessConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=your_access_file.accdb;";
             //string sqlServerConnectionString = @"Server=85.25.185.85\MSSQLSERVER2017;Initial Catalog=" + databaseName + ";User Id=DPSERP;Password=Dpstech@123;MultipleActiveResultSets=True;Connect Timeout=1200;";
-            string sqlServerConnectionString = @"Data Source=150.242.203.229;Initial Catalog=" + databaseName + ";User Id=dpsuser;Password=dps@123;Integrated Security=False;MultipleActiveResultSets=True;Connect Timeout=50000;";
+            string sqlServerConnectionString = @"Data Source=150.242.203.229,9144;Initial Catalog=" + databaseName + ";User Id=dpsuser;Password=dps@123;Integrated Security=False;MultipleActiveResultSets=True;Connect Timeout=50000;";
 
             using (OleDbConnection accessConnection = new OleDbConnection(accessConnectionString))
             using (SqlConnection sqlConnection = new SqlConnection(sqlServerConnectionString))

@@ -71,7 +71,7 @@ namespace DPS.SuperAdmin
             {
                 string databaseName = dt.Rows[0]["ID_DATABASE"].ToString();
                 Session["databaseName"] = databaseName;
-                string sqlServerConnectionString = @"Data Source=150.242.203.229;Initial Catalog=" + databaseName + ";User Id=dpsuser;Password=dps@123;Integrated Security=False;MultipleActiveResultSets=True;Connect Timeout=50000;";
+                string sqlServerConnectionString = @"Data Source=150.242.203.229,9144;Initial Catalog=" + databaseName + ";User Id=dpsuser;Password=dps@123;Integrated Security=False;MultipleActiveResultSets=True;Connect Timeout=50000;";
                 SqlConnection con = new SqlConnection(sqlServerConnectionString);
                 if (con.State == ConnectionState.Closed)
                 {
@@ -522,6 +522,7 @@ namespace DPS.SuperAdmin
                                         }
 
                                     }
+                                    //int deleterow = feeBLL.DeleteOrphanFeeReceiptPrintOnline();
                                 }
                             }
                             else
@@ -546,7 +547,7 @@ namespace DPS.SuperAdmin
         public DataTable GetPaymentTransactionBYTransactionID(string transactionId)
         {
             string databaseName=Session["databaseName"].ToString();
-            string sqlServerConnectionString = @"Data Source=150.242.203.229;Initial Catalog=" + databaseName + ";User Id=dpsuser;Password=dps@123;Integrated Security=False;MultipleActiveResultSets=True;Connect Timeout=50000;";
+            string sqlServerConnectionString = @"Data Source=150.242.203.229,9144;Initial Catalog=" + databaseName + ";User Id=dpsuser;Password=dps@123;Integrated Security=False;MultipleActiveResultSets=True;Connect Timeout=50000;";
             SqlConnection con = new SqlConnection(sqlServerConnectionString);
             if (con.State == ConnectionState.Closed)
             {
@@ -566,7 +567,7 @@ namespace DPS.SuperAdmin
         public int UpdateRequestedPaymentTempAsync(int id)
         {
             string databaseName = Session["databaseName"].ToString();
-            string sqlServerConnectionString = @"Data Source=150.242.203.229;Initial Catalog=" + databaseName + ";User Id=dpsuser;Password=dps@123;Integrated Security=False;MultipleActiveResultSets=True;Connect Timeout=50000;";
+            string sqlServerConnectionString = @"Data Source=150.242.203.229,9144;Initial Catalog=" + databaseName + ";User Id=dpsuser;Password=dps@123;Integrated Security=False;MultipleActiveResultSets=True;Connect Timeout=50000;";
             SqlConnection con = new SqlConnection(sqlServerConnectionString);
             if (con.State == ConnectionState.Closed)
             {

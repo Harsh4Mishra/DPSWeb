@@ -205,6 +205,23 @@ namespace DPS.Student.FeeClassFile
 
             return receiptNo;
         }
+        public int DeleteOrphanFeeReceiptPrintOnline()
+        {
+            int rowsAffected = 0;
+
+            string query = @"DELETE FROM FeeReceiptPrintOnline WHERE ReceiptNo NOT IN (SELECT ReceiptNo FROM FeeTransactionOnline);";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    connection.Open();
+                    rowsAffected = command.ExecuteNonQuery(); // Number of rows deleted
+                }
+            }
+
+            return rowsAffected;
+        }
         public int AddFeeTransactionOnline(FeeTransactionModel model)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
